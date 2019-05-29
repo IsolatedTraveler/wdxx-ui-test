@@ -1,18 +1,21 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div id="app" :class="{pc: $judgeMobile}">
+    <wd-mask v-show="load" shape="loading"/>
+    <router-view class="wd_flex content"/>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    load() {
+      return this.$store.getters.load
+    },
+    user() {
+      return this.$store.getters.userInfo
+    }
+  }
 }
 </script>
-
-<style>
-#app {
-  width: 100%;
-  height: 100%;
-}
+<style lang='scss'>
 </style>

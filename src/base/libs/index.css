@@ -24,7 +24,7 @@ input{
   box-sizing: content-box;
 }
 /* 布局设置 */
-.wd_flex,.wd_flex>.auto,.close,.wd_switch,.wd_circle{
+.wd_flex,.wd_flex>.wd_auto{
   position: relative;
 }
 .wd_flex{
@@ -50,10 +50,6 @@ input{
 .wd_row>.wd_auto{
   width: auto;
   height: 100%;
-}
-.wd_scroll{
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 /* 自定义font-icon */
 .wd_close,.wd_close::before,.wd_close::after,.wd_switch,.wd_switch:after,.wd_triangle{
@@ -398,3 +394,5 @@ input{
   color: #26a2ff;
   border-right: none;
 }
+
+

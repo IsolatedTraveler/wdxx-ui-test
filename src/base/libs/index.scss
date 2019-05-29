@@ -1,0 +1,151 @@
+// 去除默认样式
+html{
+  body,input,p,button{
+    padding: 0;
+    margin: 0;
+  }
+  button,input{
+    outline: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    background: transparent;
+  }
+  input{
+    border-radius: 0;
+    min-width: 0;
+    box-sizing: content-box;
+    line-height: 1.4em;
+  }
+}
+// 布局设置
+html{
+  .wd_flex{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    >*{
+      flex-shrink: 0;
+    }
+    &[row]{
+      flex-direction: row;
+    }
+    &[wrap]{
+      flex-wrap: wrap;
+    }
+    >.wd_auto{
+      flex: 1;
+    }
+  }
+  [scroll]{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+// Form 组件
+html{
+  // input
+  .wd_input{
+    width: 100%;
+    &.wd_error{
+      outline: 1px solid red;
+      font-size: red;
+    }
+    >[right]{
+      order: 10;
+    }
+    >.wd_icon{
+      text-align: center;
+      border-radius: 50%;
+      &.wd_close{
+        background-color: #ccc;
+        color: #fff;
+      }
+    }
+  }
+  // button
+  .wd_button{
+    text-align: center;
+    border-radius: 5px;
+    background-color: #abc1f4;
+    border: 1px solid transparent;
+    vertical-align: middle;
+    justify-content: center;
+    &[default]{
+      border-color: #6b8eff;
+      background-color: transparent;
+      color: #6b8eff;
+    }
+    &[blank]{
+      border-color: #eee;
+      background-color: transparent;
+      color: #2ba245;
+    }
+    &[disabled]{
+      border-color: #ccc;
+      background-color: #ccc;
+      color: #fff;
+    }
+  }
+  // progress
+  .wd_progress{
+    width: 100%;
+    .wd_bar{
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      background: #ccc;
+      margin: 0.8em 0;
+      .wd_fill{
+        background: #177fcb;
+        width: 0%;
+        height: 100%;
+        border-radius: 6px;
+        transition: width 0.2s linear 0;
+      }
+    }
+  }
+}
+
+/* 自定义图标样式 */
+@font-face {
+  font-family: 'iconfont';
+  src: url('font/iconfont.eot');
+  src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('font/iconfont.woff2') format('woff2'),
+    url('font/iconfont.woff') format('woff'),
+    url('font/iconfont.ttf') format('truetype'),
+    url('font/iconfont.svg#iconfont') format('svg');
+}
+.wd_icon{
+  font-family: "iconfont";
+  font-style: normal;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.wd_close::before {
+  content: "\e65c";
+}
+.wd_arrow::before {
+  content: "\e639";
+}
+.wd_password::before{
+  content: "\e601";
+}
+.wd_eye::before{
+  content: "\e723";
+}
+.wd_user::before{
+  content: "\e63c";
+}
+.wd_wx::before{
+  content: "\e63b";
+}
+.wd_pwd::before{
+  content: "\e63d";
+}

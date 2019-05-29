@@ -1,10 +1,10 @@
 <template>
-  <div class="wd_flex wd_row wd_input" :class="{wd_error:error}">
+  <div class="wd_flex wd_input" row :class="{wd_error:error}" @click.stop="clickEvent">
     <slot>
       <label>{{label}}</label>
     </slot>
-    <input class="wd_auto" :autocomplete="type==='password'?'new-password':'off'" :type="type" ref="input" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" :value="value" @focus="onFocus" @blur.stop="judge=false" @input="$emit('input', $event.target.value)">
-    <span v-if="close" @click.stop="clearVal" @mousedown.stop="stopPrevent" v-show="value && judge" class="wd_close"></span>
+    <input class="wd_auto" :autocomplete="pwd?'new-password':'off'" :type="typeVal || type" ref="input" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" :value="value" @blur.stop="judge=false" @input="commit($event.target.value)">
+    <span v-if="close && eye" @click.stop="clearVal" class="wd_icon" @mousedown.stop="stopPrevent" v-show="value && judge" :class="pwd ? typeVal ? 'wd_password' : 'wd_eye' : 'wd_close'"></span>
   </div>
 </template>
 <script>
@@ -42,12 +42,6 @@ export default {
     isVerify: {
       type: String,
       default: ''
-    },
-    clear: {
-      type: Boolean,
-      default() {
-        return this.type === 'password'
-      }
     }
   },
   data() {
@@ -63,12 +57,43 @@ export default {
           reg: /^1(3\d|4[1,4,5,6,7,8,9]|5[012356789]|66|7[01345678]|8\d|9[89])\d{8}$/,
           msg: '手机号格式不正确'
         }
-      }
+      },
+      typeVal: '',
+      eye: true
+    }
+  },
+  computed: {
+    pwd() {
+      return this.type === 'password'
     }
   },
   methods: {
+    clickEvent() {
+      if (!(this.readonly || this.disabled)) {
+        if (this.pwd) {
+          this.onFocus()
+        }
+        this.$refs.input.focus()
+        this.judge = true
+        this.$emit('click')
+      }
+    },
+    onFocus() {
+      this.eye = false
+      this.$refs.input.selectionStart = 0
+      this.$refs.input.selectionEnd = this.value.length
+      return false
+    },
+    commit(val) {
+      this.$emit('input', val)
+      this.eye = true
+    },
     clearVal() {
-      this.$emit('input', '')
+      if (this.pwd) {
+        this.typeVal = this.typeVal ? '' : 'text'
+      } else {
+        this.$emit('input', '')
+      }
     },
     stopPrevent(e) {
       e.preventDefault()
@@ -106,22 +131,9 @@ export default {
         this.error = false
       })
       return false
-    },
-    onFocus() {
-      this.judge = true
-      if (this.clear) {
-        this.$refs.input.selectionStart = 0
-        this.$refs.input.selectionEnd = this.value.length
-      }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-input,.wd_close{
-  order: 5;
-}
-[right]{
-  order: 6;
-}
 </style>
