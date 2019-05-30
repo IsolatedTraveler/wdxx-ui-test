@@ -1,9 +1,9 @@
 <template>
-  <div class="wd_flex wd_input" row :class="{wd_error:error}" @click.stop="clickEvent">
+  <div class="wd_flex wd_input" row :class="{wd_error:error}" @click.stop="disabled || clickEvent()">
     <slot>
       <label>{{label}}</label>
     </slot>
-    <input class="wd_auto" :autocomplete="pwd?'new-password':'off'" :type="typeVal || type" ref="input" :placeholder="placeholder" :readonly="readonly" :disabled="disabled" :value="value" @blur.stop="judge=false" @input="commit($event.target.value)">
+    <input class="wd_auto" :autocomplete="pwd?'new-password':'off'" :type="typeVal || type" ref="input" :placeholder="placeholder" :disabled="disabled" :value="value" @blur.stop="judge=false" @input="commit($event.target.value)">
     <span v-if="close && eye" @click.stop="clearVal" class="wd_icon" @mousedown.stop="stopPrevent" v-show="value && judge" :class="pwd ? typeVal ? 'wd_password' : 'wd_eye' : 'wd_close'"></span>
   </div>
 </template>
@@ -27,10 +27,6 @@ export default {
       type: String,
       default: ''
     },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -38,10 +34,6 @@ export default {
     close: {
       type: Boolean,
       default: true
-    },
-    isVerify: {
-      type: String,
-      default: ''
     }
   },
   data() {
@@ -69,14 +61,12 @@ export default {
   },
   methods: {
     clickEvent() {
-      if (!(this.readonly || this.disabled)) {
-        if (this.pwd) {
-          this.onFocus()
-        }
-        this.$refs.input.focus()
-        this.judge = true
-        this.$emit('click')
+      if (this.pwd) {
+        this.onFocus()
       }
+      this.$refs.input.focus()
+      this.judge = true
+      this.$emit('click')
     },
     onFocus() {
       this.eye = false

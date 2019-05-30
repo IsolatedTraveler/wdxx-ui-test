@@ -1,6 +1,8 @@
 import input from '@/components/input'
 import button from '@/components/button'
 import progress from '@/components/progress'
+import wdswitch from '@/components/switch'
+import select from '@/components/select'
 export default [
   {
     path: '/input',
@@ -14,5 +16,13 @@ export default [
     path: '/progress',
     name: 'progress',
     component: progress
+  }, {
+    path: '/switch',
+    name: 'switch',
+    component: wdswitch
+  }, {
+    path: '/select',
+    name: 'select',
+    component: select
   }
 ]

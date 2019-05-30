@@ -1,88 +1,85 @@
 <template>
-  <div class="wd_treeSelect" @click.stop="showData">
-    <wd-input class="wd_select" :readonly="readonly" mold="triangle" ref="input" :value="valText" :label="label" :placeholder="placeholder" :close="false">
-      <slot></slot>
-    </wd-input>
-    <wd-pop v-if="load" :title="label.replace(/[:：]$/, '')" v-show="show" @close="hide">
-      <wd-input class="search" v-model="searchVal" placeholder="请输入检索信息">
-        <slot name="search"></slot>
-      </wd-input>
-      <wd-list class="auto" :val="val" :showId="showId || id" :data="dataList" @click="selected" type='circle' style="background: #fff"/>
-    </wd-pop>
+  <div class="wd_select wd_flex" :class="{wd_error:error}">
+    <div class="wd_flex wd_input" row @click.stop="disabled || showData()">
+      <slot>
+        <label>{{label}}</label>
+      </slot>
+      <input class="wd_auto" ref="input" :placeholder="placeholder" disabled v-model="valText">
+      <span class="wd_icon wd_arrow"></span>
+    </div>
+    <div class="wd_pop wd_content" v-if="load" v-show="show">
+       <div class="wd_flex wd_top" row v-if="label">
+        <span class="wd_icon wd_arrow" @click.stop="back" right></span>
+        <span class="wd_auto">{{label.replace(/[:：]$/, '')}}</span>
+      </div>
+      <div class="wd_flex wd_input wd_search" row v-if="search">
+        <input class="wd_auto" ref="search" :placeholder="searchPlaceholder" v-model="searchVal">
+        <span v-show="searchVal && judge" class="wd_icon wd_close"></span>
+      </div>
+      <tree :data="data" v-model="value" :showId="showId" :id="id"/>
+    </div>
   </div>
 </template>
 <script>
+import tree from '../data/tree'
 export default {
   name: 'WdSelect',
+  components: {
+    tree
+  },
   props: {
-    data: {
+    data: {// 列表数据
       type: Array,
       default() {
         return []
       }
     },
-    value: {
+    value: {// 选中值
       type: String,
       default: ''
     },
-    label: {
+    label: {// 选择框标题
       type: String,
       default: ''
     },
-    placeholder: {
+    placeholder: {// 选项提示信息
       type: String,
       default: ''
     },
-    readonly: {
-      type: Boolean,
-      default: true
+    searchPlaceholder: {// 检索提示信息
+      type: String,
+      default: '请输入检索数据进行检索'
     },
-    disabled: {
+    disabled: {// 是否可操作
       type: Boolean,
       default: false
     },
-    close: {
-      type: Boolean,
-      default: true
-    },
-    isVerify: {
+    showId: {// 数据展示id
       type: String,
-      default: ''
+      default: 'mc'
     },
-    rules: {
-      type: Object,
-      default() {
-        return {
-          reg: '',
-          rule: null
-        }
-      }
-    },
-    showId: {
+    id: {// 赋值id
       type: String,
-      default: ''
+      default: 'id'
     },
-    id: {
-      type: String,
-      default: ''
-    },
-    filter: {
+    filter: {// 自定义过滤规则
       type: Function,
       default: null
     },
-    search: {
+    search: {// 是否开启检索功能
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data() {
     return {
-      show: false,
-      load: false,
-      valText: '',
-      judge: false,
-      val: [],
-      searchVal: ''
+      valText: '', // 选中值对应展示的数据
+      error: false, // 表单验证成功与否
+      load: true, // 是否加载列表数据
+      show: true, // 是否显示列表数据
+      searchVal: '', // 检索数据
+      judge: false, // 检索框是否获取到焦点
+      val: []
     }
   },
   computed: {
@@ -123,13 +120,17 @@ export default {
       }
     },
     validate(rules, data) {
-      return this.$refs.input.validate(rules || this.rules, data)
+      return this.$refs.input.validate(rules, data)
     },
     showData() {
       this.load = true
-      this.show = true
-      this.$emit('getData', this.hide)
-      this.$store.commit('back', this.hide)
+      if (this.show) {
+        this.hide()
+      } else {
+        this.show = true
+        this.$emit('getData', this.hide)
+        this.$store.commit('back', this.hide)
+      }
     },
     hide() {
       this.show = false

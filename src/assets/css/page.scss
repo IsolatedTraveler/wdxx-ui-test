@@ -15,6 +15,10 @@ html,body{
     width: 20px;
   }
 }
+.wd_top{
+  background: linear-gradient(to right, #5c8bff, #9a95f3);
+  color: #fff;
+}
 // 单页样式
 #app{
   // 登录 + 注册页面
@@ -28,11 +32,14 @@ html,body{
       padding: 0 30px;
       font-size: 14px;
       width: 100%;
-      .wd_button{
-        width: 45%;
-        height: 35px;
-        margin: 20px 0;
-        margin-right: 10%;
+      .button{
+        justify-content: space-between;
+        width: 100%;
+        .wd_button{
+          width: 45%;
+          height: 35px;
+          margin: 20px 0;
+        }
       }
       .icon{
         color: #5A8BFF;
@@ -60,7 +67,9 @@ html,body{
     }
     // 注册页面
     .register{
-      font-size: 14px;
+      .yzm{
+        border-radius: 1em;
+      }
     }
     >.bottom{
       justify-content: flex-end;

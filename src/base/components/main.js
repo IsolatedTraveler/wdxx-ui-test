@@ -1,38 +1,39 @@
 // form 表单
-import form from './form/form'
-import input from './form/input'
-import treeSelect from './form/treeSelect'
-import select from './form/select'
-import progress from './form/progress'
-import wdSwitch from './form/switch'
-import button from './form/button'
+import WdForm from './form/form'
+import WdInput from './form/input'
+import WdTreeSelect from './form/treeSelect'
+import WdSelect from './form/select'
+import WdProgress from './form/progress'
+import WdSwitch from './form/switch'
+import WdButton from './form/button'
 // 弹出层
-import pop from './pop/pop'
-import mask from './pop/mask'
-import msg from './pop/main'
+import WdPop from './pop/pop'
+import WdMask from './pop/mask'
+import WdMsg from './pop/main'
 // 数据展示
-import list from './data/list'
-import tree from './data/tree'
+import WdList from './data/list'
+import WdTree from './data/tree'
 // 布局
-import top from './layout/top'
-import grid from './layout/grid'
-export default {
-  components: [
-    input,
-    form,
-    treeSelect,
-    select,
-    progress,
-    wdSwitch,
-    pop,
-    mask,
-    list,
-    tree,
-    top,
-    grid,
-    button
-  ],
-  props: [
-    msg
+import WdTop from './layout/top'
+import WdGrid from './layout/grid'
+let components = [
+    WdInput,
+    WdForm,
+    WdTreeSelect,
+    WdSelect,
+    WdProgress,
+    WdSwitch,
+    WdPop,
+    WdMask,
+    WdList,
+    WdTree,
+    WdTop,
+    WdGrid,
+    WdButton
+  ], props = [
+    WdMsg
   ]
+export {
+  components,
+  props
 }

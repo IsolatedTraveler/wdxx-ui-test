@@ -50,10 +50,6 @@ export default {
       type: Boolean,
       default: true
     },
-    isVerify: {
-      type: String,
-      default: ''
-    },
     rules: {
       type: Object,
       default() {
@@ -115,7 +111,7 @@ export default {
       this.showVal.push(item)
     },
     validate(rules, data) {
-      return this.$refs.input.validate(rules || this.rules, data)
+      return this.$refs.input.validate(rules, data)
     },
     showData() {
       this.$emit('getData', this.showVal.length > 1 ? this.showVal.slice(-2)[0] : '')

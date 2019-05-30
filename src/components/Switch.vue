@@ -1,22 +1,22 @@
 <template>
   <div>
-    <span class="comment">默认样式</span>
-    <wd-switch v-model="value" content="记住密码"/>
-    <span class="comment">更改默认颜色</span>
-    <wd-switch v-model="val" content="记住密码" :color="color"/>
+    <wd-switch v-model="val" text="记住密码"/>
+    <wd-switch v-model="value" text="记住密码"/>
   </div>
 </template>
 <script>
 export default {
-  name: 'Switch',
+  name: 'CSwitch',
   data() {
     return {
-      value: true,
-      color: ['red', 'blue'],
-      val: false
+      val: false,
+      value: true
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+  .wd_switch{
+    margin-top: 20px;
+  }
 </style>

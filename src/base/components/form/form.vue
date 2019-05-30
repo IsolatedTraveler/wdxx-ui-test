@@ -1,5 +1,5 @@
 <template>
-  <form autocomplete="off">
+  <form class="wd_form" autocomplete="off">
     <slot></slot>
   </form>
 </template>
@@ -22,8 +22,10 @@ export default {
   },
   computed: {
     files() {
+      let rules = this.rules
       return this.$slots.default.filter(item => {
-        return item.componentInstance && (item.componentInstance.isVerify || item.componentInstance.rules.reg || item.componentInstance.rules.rule)
+        let key = item.key
+        return key && rules[key]
       })
     }
   },

@@ -1,8 +1,8 @@
 <template>
-  <span @click="change" class="flex row" :style="'color:'+_color+';'">
-    <span ref="switch" class="wd_switch" :class="{'selected':value}"></span>
+  <span @click="change" class="wd_flex wd_switch" row :style="{height: height}" :selected="value">
+    <span ref="switch" class="switch" :style="{fontSize: height}" row></span>
     <slot>
-      {{content}}
+      {{text}}
     </slot>
   </span>
 </template>
@@ -10,21 +10,11 @@
 export default {
   name: 'WdSwitch',
   props: {
-    content: String,
+    text: String,
     value: Boolean,
-    color: {
-      default() {
-        return ['#ccc', '#fff']
-      }
-    }
-  },
-  mounted() {
-    let elem = this.$refs.switch, hei = elem.offsetHeight
-    elem.style.width = hei * 1.6 + 'px'
-  },
-  computed: {
-    _color() {
-      return this.color[this.value ? 1 : 0]
+    height: {
+      type: String,
+      default: '20px'
     }
   },
   methods: {
@@ -34,5 +24,3 @@ export default {
   }
 }
 </script>
-<style>
-</style>

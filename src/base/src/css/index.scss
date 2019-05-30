@@ -1,8 +1,11 @@
 // 去除默认样式
 html{
-  body,input,p,button{
+  body,input,p,button,ul,li{
     padding: 0;
     margin: 0;
+  }
+  ul{
+    list-style: none;
   }
   button,input{
     outline: none;
@@ -16,34 +19,6 @@ html{
     min-width: 0;
     box-sizing: content-box;
     line-height: 1.4em;
-  }
-}
-// 布局设置
-html{
-  .wd_flex{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
-    box-sizing: border-box;
-    overflow: hidden;
-    >*{
-      flex-shrink: 0;
-    }
-    &[row]{
-      flex-direction: row;
-    }
-    &[wrap]{
-      flex-wrap: wrap;
-    }
-    >.wd_auto{
-      flex: 1;
-    }
-  }
-  [scroll]{
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
   }
 }
 // Form 组件
@@ -75,6 +50,9 @@ html{
     border: 1px solid transparent;
     vertical-align: middle;
     justify-content: center;
+    box-sizing: border-box;
+    padding: 0.1em 0.5em;
+    color: #fff;
     &[default]{
       border-color: #6b8eff;
       background-color: transparent;
@@ -109,6 +87,108 @@ html{
       }
     }
   }
+  .wd_switch{
+    color: #ccc;
+    >.switch{
+      height: 1em;
+      width: 2em;
+      display: inline-block;
+      border-radius: 0.5em;
+      background-color: #ccc;
+      margin-right: 5px;
+      position: relative;
+      &::before{
+        display: inline-block;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1em;
+        border-radius: 0.5em;
+        background-color: #fdfdfd;
+        box-shadow: 0 1px 3px rgba(0,0,0,.4);
+        left: 0;
+        transition: all 0.20s;
+      }
+    }
+    &[selected]{
+      color: #6b8eff;
+      >.switch{
+        background-color: #6b8eff;
+        &::before{
+          transform: translateX(100%)
+        }
+      }
+    }
+  }
+  .wd_select{
+    width: 100%;
+    .wd_icon{
+      font-size: 1.6em;
+    }
+    .wd_search{
+      padding: 0 8px;
+    }
+  }
+}
+// 布局设置
+html{
+  // grid 布局形式
+  .wd_flex{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    >*{
+      flex-shrink: 0;
+    }
+    &[row]{
+      flex-direction: row;
+    }
+    &[wrap]{
+      flex-wrap: wrap;
+    }
+    >.wd_auto{
+      flex: 1;
+    }
+  }
+  [scroll]{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .wd_content{
+    background-color: #fff;
+  }
+  // 顶部设置
+  .wd_top{
+    width: 100%;
+    padding-top: 25px;
+    line-height: 30px;
+    height: 55px;
+    align-items: flex-end;
+    .wd_icon{
+      height: 30px;
+      width: 30px;
+      font-size: 28px;
+    }
+    .wd_auto{
+      text-align: center;
+    }
+  }
+}
+// 弹出层
+html{
+  .wd_pop{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
 }
 
 /* 自定义图标样式 */
@@ -127,6 +207,10 @@ html{
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+}
+.wd_icon[right]{
+  transform: rotate(180deg);
 }
 .wd_close::before {
   content: "\e65c";
@@ -148,4 +232,10 @@ html{
 }
 .wd_pwd::before{
   content: "\e63d";
+}
+.wd_yzm::before{
+  content: "\e63f";
+}
+.wd_tel::before{
+  content: "\e63e";
 }

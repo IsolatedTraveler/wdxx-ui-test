@@ -1,4 +1,4 @@
-import main from './components/main'
+import main from '../components/main'
 let obj = {
   install(vue) {
     main.components.forEach(item => {

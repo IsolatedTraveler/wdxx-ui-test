@@ -18,8 +18,8 @@ if (judgeMobile) {
   require('@/assets/css/pc.scss')
 }
 // 引入自定义组件
-import wd from '@/base/index'
-import '@/base/libs/index.scss'
+import wd from '@/base/src/index'
+import '@/base/src/css/index.scss'
 Vue.use(wd)
 
 // 引入数据交互处理公共方法

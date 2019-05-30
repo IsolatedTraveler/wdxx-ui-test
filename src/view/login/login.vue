@@ -2,13 +2,13 @@
   <div class="login">
     <wd-form :data="data" :rules="rules" ref="form">
       <span v-if="$judgeMobile" class="title">用户登录</span>
-      <wd-input v-model="data.yhm" isVerify='yhm' placeholder="请输入手机号">
+      <wd-input v-model="data.yhm" key='yhm' placeholder="请输入手机号">
         <span class="wd_icon icon wd_user"></span>
       </wd-input>
-      <wd-input v-model="data.pwd" isVerify='pwd' type='password' placeholder="请输入密码">
+      <wd-input v-model="data.pwd" key='pwd' type='password' placeholder="请输入密码">
         <span class="wd_icon icon wd_pwd"></span>
       </wd-input>
-      <wd-grid row>
+      <wd-grid row class="button">
         <wd-button @click="login" v-html="exist ? '登 &nbsp; 录' : '绑定（有账号）'"></wd-button>
         <wd-button default @click="$emit('change', 'register')" v-html="exist ? '注 &nbsp; 册' : '添加（无账号）'"></wd-button>
       </wd-grid>

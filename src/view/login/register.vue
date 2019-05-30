@@ -1,22 +1,22 @@
 <template>
   <wd-form class="register" :data="data" :rules="rules" ref="form">
-    <wd-input v-model="data.tel" isVerify='tel' placeholder="请输入手机号">
-      <!-- <icon name="tell" class="icon-svg"/> -->
+    <wd-input v-model="data.tel" key='tel' placeholder="请输入手机号">
+      <span class="wd_icon icon wd_tel"></span>
     </wd-input>
-    <wd-input v-model="data.xm" isVerify='xm' placeholder="请输入用户名">
-      <!-- <icon name="user" class="icon-svg"/> -->
+    <wd-input v-model="data.xm" key='xm' placeholder="请输入用户名">
+      <span class="wd_icon icon wd_user"></span>
     </wd-input>
-    <wd-input v-model="data.pwd" isVerify='pwd' type='password' placeholder="请输入密码">
-      <!-- <icon name="pwd" class="icon-svg"/> -->
+    <wd-input v-model="data.pwd" key='pwd' type='password' placeholder="请输入密码">
+      <span class="wd_icon icon wd_pwd"></span>
     </wd-input>
-    <wd-input v-model="data.pwd1" isVerify='pwd1' type='password' placeholder="请再次输入密码">
-      <!-- <icon name="pwd" class="icon-svg"/> -->
+    <wd-input v-model="data.pwd1" key='pwd1' type='password' placeholder="请再次输入密码">
+      <span class="wd_icon icon wd_pwd"></span>
     </wd-input>
-    <wd-input v-model="data.yzm" isVerify='yzm' placeholder="请输入验证码">
-      <!-- <icon name="yzm" class="icon-svg"/> -->
-      <button class="yzm blue wd_button" :disabled='codeDisabled' @click.stop="sendCode" slot="right">{{fsyzm}}</button>
+    <wd-input v-model="data.yzm" key='yzm' :close="false" placeholder="请输入验证码">
+      <span class="wd_icon icon wd_yzm"></span>
+      <wd-button class="yzm" right :disabled='codeDisabled' @click="sendCode">{{fsyzm}}</wd-button>
     </wd-input>
-    <wd-grid row>
+    <wd-grid row class="button">
       <wd-button @click="register" v-html="exist ? '注 &nbsp; 册' : '绑定（有账号）'"></wd-button>
       <wd-button default @click="$emit('change', 'login')" v-html="exist ? '密码登陆' : '绑定（有账号）'"></wd-button>
     </wd-grid>
@@ -88,7 +88,6 @@ export default {
       this.verifies.pwd1.rule.push({reg: new RegExp('^' + this.data.pwd + '$'), msg: '两次密码输入不一致'})
       this.verifies.yzm.rule[1].reg = new RegExp('^' + this.yzm + '$')
       this.rules = Object.assign({}, this.phoneYzm, this.verifies)
-      this.rules.pwd1.rule.push({reg: new RegExp(this.data.pwd), msg: '两次密码输入不一致'})
       this.$refs.form.validate().then(res => {
         this.$emit('login', {yhm: this.data.tel, pwd: this.data.pwd, fs: '2'})
       }).catch(e => {})
