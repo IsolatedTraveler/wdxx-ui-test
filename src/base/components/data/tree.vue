@@ -1,12 +1,16 @@
 <template>
-  <ul class="wd_tree auto">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex">
-      <div class="wd_flex" row @click.stop="selected(i,item)">
-        <img v-if="item[img]" :src="item[img]"/>
-        <span class="auto">{{item[showId] || item}}</span>
-        <span v-if="right" :class="type"></span>
+  <ul class="wd_tree" :class="'wd_tree_'+level">
+    <li v-for="(item,i) in data" :key="i" class="wd_flex" :class="'wd_tree_item_'+level+'_'+i">
+      <div @click.stop="index === i ? index = '' : index =i,$emit('selected',item)" class="wd_flex wd_tree_item" row :class="{wd_selected: index === i}">
+        <slot :data="item">
+        </slot>
       </div>
-      <wd-tree v-if="item.child" :img="img" :site="site" :tier="tier + 1" v-show="selectedIndex === i" :data="item.child" :judge="selectedIndex === i" :type="type" :showId="showId" :value="value" :id="id" @selected="treeSelected(i, $event)"/>
+      <wd-tree v-if="item.child" v-show="index===i || expand" :expand="expand " :level="level+1" :data="item.child" :showId="showId" :value="value" :id="id" @selected="$emit('selected')">
+        <template slot-scope="item">
+          <slot :data="item.data">
+          </slot>
+        </template>
+      </wd-tree>
     </li>
   </ul>
 </template>
@@ -20,84 +24,32 @@ export default {
         return []
       }
     },
-    img: {
-      type: String,
-      default: 'img'
-    },
-    type: {
-      type: String,
-      default: 'triangle'
-    },
-    tier: {
-      type: Number,
-      default: 0
-    },
-    site: {
-      type: String,
-      default: 'right'
+    value: {
+      type: String | Array,
+      default() {
+        return []
+      }
     },
     showId: {
       type: String,
       default: 'xtmc'
     },
-    right: {
-      type: Boolean,
-      default: true
-    },
-    value: {
-      type: String,
-      default: ''
-    },
     id: {
       type: String,
       default: 'id'
     },
-    judge: {
+    level: {
+      type: Number,
+      default: 0
+    },
+    expand: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data() {
     return {
-      selectedIndex: ''
-    }
-  },
-  watch: {
-    data() {
-      this.init()
-    },
-    judge(val) {
-      if (!val) {
-        this.selectedIndex = ''
-      }
-    }
-  },
-  created() {
-    this.init()
-  },
-  methods: {
-    init() {
-      if (this.value) {
-        let data = this.data, value = this.value, id = this.id
-        data.forEach((item, index) => {
-          if (item[id] === value) {
-            this.selectedIndex = index
-            this.$emit('selected')
-          }
-        })
-      }
-    },
-    selected(index, item) {
-      if (this.selectedIndex === index) {
-        this.selectedIndex = ''
-      } else {
-        this.selectedIndex = index
-      }
-      item.child || this.$emit('selected', item)
-    },
-    treeSelected(index, item) {
-      this.selectedIndex = index
-      this.$emit('selected', item)
+      index: '' // 被选中数据
     }
   }
 }

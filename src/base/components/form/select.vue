@@ -16,7 +16,11 @@
         <input class="wd_auto" ref="search" :placeholder="searchPlaceholder" v-model="searchVal">
         <span v-show="searchVal && judge" class="wd_icon wd_close"></span>
       </div>
-      <tree :data="data" v-model="value" :showId="showId" :id="id"/>
+      <tree :data="data" v-model="value" :showId="showId" :id="id">
+        <template slot-scope="item">
+          <span>{{item.data.mc}}</span>
+        </template>
+      </tree>
     </div>
   </div>
 </template>
@@ -35,8 +39,10 @@ export default {
       }
     },
     value: {// 选中值
-      type: String,
-      default: ''
+      type: Array,
+      default() {
+        return []
+      }
     },
     label: {// 选择框标题
       type: String,

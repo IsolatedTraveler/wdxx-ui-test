@@ -15,7 +15,13 @@ export default {
           child: [
             {
               id: 11,
-              mc: '列表11'
+              mc: '列表11',
+              child: [
+                {
+                  id: 111,
+                  mc: '列表111'
+                }
+              ]
             }
           ]
         }, {

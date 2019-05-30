@@ -190,7 +190,29 @@ html{
     z-index: 99;
   }
 }
-
+// 数据展示组件
+html{
+  // 树
+  .wd_tree{
+    width: 100%;
+  }
+  // 树子项
+  .wd_tree_item{
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    &::before{
+      display: inline-block;
+      width: 100%;
+      height: 0;
+      position: absolute;
+      border-bottom: 1px solid #ccc;
+      right: 0;
+      bottom: 0;
+      content: '';
+    }
+  }
+}
 /* 自定义图标样式 */
 @font-face {
   font-family: 'iconfont';
