@@ -3,6 +3,7 @@ import button from '@/components/button'
 import progress from '@/components/progress'
 import wdswitch from '@/components/switch'
 import select from '@/components/select'
+import tree from '@/components/tree'
 export default [
   {
     path: '/input',
@@ -24,5 +25,9 @@ export default [
     path: '/select',
     name: 'select',
     component: select
+  }, {
+    path: '/tree',
+    name: 'tree',
+    component: tree
   }
 ]
