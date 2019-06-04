@@ -1,34 +1,35 @@
 <template>
-  <ul class="wd_tree" :class="'wd_tree_'+level">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex" :class="{wd_selected: index === i}">
-      <div @click.stop="index === i ? index = '' : index =i,parent ? $emit('selected',item) : (item.child || $emit('selected',item))" class="wd_flex wd_tree_item" row :class="'wd_tree_item_'+level+'_'+i">
-        <slot :data="item">
-          {{item.mc}}
-        </slot>
-      </div>
-      <wd-tree v-if="item.child" v-show="index===i || expand" :expand="expand" :level="level+1" :data="item.child" :showId="showId" :value="value" :id="id" @selected="selected">
+  <div class="wd_tree">
+    <div class="wd_auto" scroll >
+      <component :is="multi?'wd-multi':'wd-single'" :left="left" @selected="selected" :right="right" :only="only" ref="tree" :data="data" :parent="parent" :showId="showId" :id="id">
         <template slot-scope="item">
           <slot :data="item.data">
-            {{item.data.mc}}
+            <span>{{item.data[showId]}}</span>
           </slot>
         </template>
-      </wd-tree>
-    </li>
-  </ul>
+      </component>
+    </div>
+    <div v-if="multi||button" class="wd_flex" row>
+      <button class="wd_button" @click.stop="cancel" default>取消</button>
+      <button class="wd_button" @click.stop="submit" >确定</button>
+    </div>
+  </div>
 </template>
 <script>
+import wdSingle from './single'
+import wdMulti from './multi'
 export default {
   name: 'WdTree',
+  components: {
+    wdSingle,
+    wdMulti
+  },
   props: {
     data: {
       type: Array,
       default() {
         return []
       }
-    },
-    value: {
-      type: String,
-      default: ''
     },
     showId: {
       type: String,
@@ -38,27 +39,68 @@ export default {
       type: String,
       default: 'id'
     },
-    level: {
-      type: Number,
-      default: 0
+    value: {
+      type: String | Array,
+      default: ''
     },
-    expand: {
+    multi: {
       type: Boolean,
       default: false
     },
     parent: {
       type: Boolean,
       default: false
+    },
+    left: {
+      type: Boolean,
+      default: false
+    },
+    right: {
+      type: Boolean,
+      default: false
+    },
+    only: {
+      type: Boolean,
+      default: false
+    },
+    button: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      index: '' // 被选中数据
+      val: null
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    init(val) {
+      val = val || this.value
+      if (this.data.length && val && (!this.multi || val.length)) {
+        this.$refs.tree.init(val)
+      }
+    },
+    cancel() {
+
+    },
+    submit() {
+      if (this.multi) {
+        this.$refs.tree.getValue().then(res => {
+          this.$emit('selected', res)
+        })
+      } else {
+        this.$emit('selected', this.val)
+      }
+    },
     selected(data) {
-      console.log(1)
+      if (!this.multi && this.button) {
+        this.val = data
+      } else {
+        this.$emit('selected', this.val)
+      }
     }
   }
 }
