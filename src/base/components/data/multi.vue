@@ -1,14 +1,14 @@
 <template>
   <ul class="wd_list" :class="'wd_list_'+level">
     <li v-for="(item,i) in data" :key="i" class="wd_flex">
-      <div class="wd_flex wd_list_item" row :class="{wd_parent: item.child,wd_child: !item.child, wd_selected: (parent || !item.child) && index[i] && index[i] ===true && index[i] === '1'}" @click.stop="select(i,item)">
+      <div class="wd_flex wd_list_item" row :class="{wd_parent: item.child,wd_child: !item.child, wd_selected: (parent || !item.child) && (index[i] === true || index[i] ==='1') }" @click.stop="select(i,item)">
         <span v-if="left" class="wd_icon" left></span>
         <span class="wd_auto">
           <slot :data="item">
             {{item[showId]}}
           </slot>
         </span>
-        <span v-if="right" class="wd_icon" right></span>
+        <span v-if="right" class="wd_icon" @click.stop="only?select(i,item):onlySelect(i, item)" right></span>
       </div>
       <wd-multi v-if="item.child" :left="left" :right="right" :only="only" :parent="parent" :level="level+1" @getParent="getParent(i, ...$event)" :ref="'list'+i" :data="item.child" :showId="showId" :id="id">
         <template slot-scope="item">
@@ -67,35 +67,58 @@ export default {
   },
   methods: {
     init(val) {
-      let id = this.id, index = []
+      let id = this.id, index = [], a = [], b = []
       this.data.map((item, i) => {
+        let a = false
         if (val.indexOf(item[id]) !== -1) {
           if (this.parent || !item.child) {
-            index[i] = '1'
+            a = item.child ? '1' : true
           } else {
             console.warn('./wdxx-ui/components/data/multi.vue项目初始化值不能包含子项目，加上parent属性以解决该问题')
           }
         }
-        item.child && this.$refs['list' + i][0].init(val)
+        if (item.child) {
+          let b = this.$refs['list' + i][0].init(val)
+          if (b === true) {
+            a = a ? true : '3'
+          } else if (b) {
+            a = a ? '4' : '2'
+          }
+        }
+        index[i] = a
       })
       this.index = index
       this.backups = index
+      a = index.filter(item => item)
+      b = a.filter(i => {
+        return i === true
+      })
+      return b.length === this.data.length ? true : a.length
     },
-    select(i, item, judge) {
+    onlySelect(i, item) {
       let index = [].concat(this.index), a = index[i]
-      if (this.parent && !this.only && item.child) {
-        if (a === '1' || a === '3') {
-          index[i] = true
-        } else if (a) {
-          index[i] = false
-        } else {
-          index[i] = '1'
-        }
+      if (a === true) {
+        a = item.child ? '3' : false
+      } else if (a === '3') {
+        a = true
+      } else if (a === '1') {
+        a = false
+      } else if (a === '4') {
+        a = '2'
+      } else if (a === '2') {
+        a = '4'
       } else {
-        index[i] = !index[i]
+        a = '1'
       }
+      index[i] = a
       this.index = index
-      item.child && this.$refs['list' + i][0].selectedAll(index[i] === true)
+      this.setParent()
+    },
+    select(i, item) {
+      let index = [].concat(this.index)
+      index[i] = index[i] !== true
+      this.index = index
+      item.child && this.$refs['list' + i][0].selectedAll(index[i])
       this.setParent()
     },
     selectedAll(judge) {
@@ -109,45 +132,44 @@ export default {
       this.index = index
     },
     setParent() {
-      let index = this.index.filter(item => item)
-      this.$emit('getParent', [index.length === this.data.length, index.length])
+      let a = this.index, b = a.filter(item => item), c = b.filter(item => {
+        return item === true
+      })
+      this.$emit('getParent', [c.length === this.data.length, b.length])
     },
     getParent(i, judge, val) {
-      let index = [].concat(this.index)
-      if (this.only) {
-        if (judge) {
-          index[i] = true
-        } else {
-          index[i] = val ? '2' : false
-        }
+      let index = [].concat(this.index), a = index[i]
+      if (judge) {
+        index[i] = (a === '1' || a === '4') ? true : '3'
       } else {
-        if (judge) {
-          index[i] = '3'
+        if (val) {
+          index[i] = (a === '1' || a === '4' || a === true) ? '4' : '2'
         } else {
-          index[i] = val ? '2' : false
+          index[i] = (a === '1' || a === '4' || a === true) ? '1' : false
         }
       }
       this.index = index
       this.setParent()
     },
-    getValue() {
-      new Promise((resolve, reject) => {
-        let d = [], exe = [], data = this.data
-        this.index.forEach(i => {
-          if (i) {
-            let item = data[i]
-            (i === true || i === '1') && d.push(item)
-            item.child && exe.push(this.$refs['list' + i][0].getValue())
-          }
-        })
-        if (exe.length) {
-          Promise.all(exe).then(res => {
-            d.concat(...res)
-            resolve(d)
-          })
-        } else {
-          resolve(d)
+    getValue(a) {
+      let data = this.data, vals = this.index
+      vals.forEach((i, k) => {
+        let item = data[k]
+        if (i === true || i === '1' || i === '4') {
+          a.push(item)
         }
+        if (item.child) {
+          a = this.$refs['list' + k][0].getValue(a)
+        }
+      })
+      this.backups = this.index
+      return a
+    },
+    reset() {
+      this.index = this.backups
+      let elems = this.$refs, keys = Object.keys(elems)
+      keys.forEach(i => {
+        elems[i][0].reset()
       })
     }
   }

@@ -88,9 +88,8 @@ export default {
     },
     submit() {
       if (this.multi) {
-        this.$refs.tree.getValue().then(res => {
-          this.$emit('selected', res)
-        })
+        let res = this.$refs.tree.getValue([])
+        this.$emit('selected', res)
       } else {
         this.$emit('selected', this.val)
       }

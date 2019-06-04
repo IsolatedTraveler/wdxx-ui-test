@@ -1,10 +1,13 @@
 <template>
 <div scroll>
   <div class="fg">多选树插件不可选父路径</div>
-  <wd-tree :data="data"  :value="[2,1]" multi @selected="getVal">
+  <wd-tree :data="data" :value="[2,1]" multi @selected="getVal">
   </wd-tree>
   <div class="fg">多选树插件可选父路径可单选父路径</div>
-  <wd-tree :data="data" parent :value="[2,1]" multi @selected="getVal">
+  <wd-tree :data="data" parent :value="[2,111]" multi @selected="getVal">
+  </wd-tree>
+  <div class="fg">多选树插件可选父路径可单选父路径</div>
+  <wd-tree :data="data" parent multi @selected="getVal">
   </wd-tree>
   <div class="fg">多选树插件可选父路径不可单选父路径</div>
   <wd-tree :data="data" parent :value="[2,1]" only multi @selected="getVal">
