@@ -10,19 +10,19 @@
         </span>
         <span v-if="right" class="wd_icon" right></span>
       </div>
-      <wd-single v-if="item.child" :left="left" :right="right" :level="level+1" :parent="parent" :judge="judge && order===i" :ref="'list'+i" :data="item.child" :showId="showId" :id="id" @selected="selected(i, $event)">
+      <wd-single-tree v-if="item.child" :left="left" :right="right" :level="level+1" :parent="parent" :judge="judge && order===i" :ref="'list'+i" :data="item.child" :showId="showId" :id="id" @selected="selected(i, $event)">
         <template slot-scope="item">
           <slot :data="item.data">
             <span>{{item.data[showId]}}</span>
           </slot>
         </template>
-      </wd-single>
+      </wd-single-tree>
     </li>
   </ul>
 </template>
 <script>
 export default {
-  name: 'WdSingle',
+  name: 'WdSingleTree',
   props: {
     data: {
       type: Array,
@@ -72,9 +72,10 @@ export default {
         if (val === item[id]) {
           if (this.parent || !item.child) {
             this.index = i
+            this.order = i
             this.$emit('selected', item)
           } else {
-            console.warn('./wdxx-ui/components/data/single.vue项目初始化值不能包含子项目，加上parent属性以解决该问题')
+            console.warn('[wdxx-ui Warn][Tree] value is not include parent level!')
           }
         }
         item.child && this.$refs['list' + i][0].init(val)

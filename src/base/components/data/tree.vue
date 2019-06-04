@@ -16,8 +16,8 @@
   </div>
 </template>
 <script>
-import wdSingle from './single'
-import wdMulti from './multi'
+import wdSingle from './singleTree'
+import wdMulti from './multiTree'
 export default {
   name: 'WdTree',
   components: {
@@ -70,7 +70,8 @@ export default {
   },
   data() {
     return {
-      val: null
+      val: null,
+      backup: null
     }
   },
   mounted() {
@@ -82,20 +83,29 @@ export default {
       if (this.data.length && val && (!this.multi || val.length)) {
         this.$refs.tree.init(val)
       }
+      this.multi || (this.backup = val)
     },
     cancel() {
-
+      this.$emit('hide')
+      if (this.multi) {
+        this.$refs.tree.reset()
+      } else {
+        if (this.val[this.id] !== this.value) {
+          this.$refs.tree.init(this.backup)
+        }
+      }
     },
     submit() {
       if (this.multi) {
         let res = this.$refs.tree.getValue([])
         this.$emit('selected', res)
       } else {
+        this.backup = this.val
         this.$emit('selected', this.val)
       }
     },
     selected(data) {
-      if (!this.multi && this.button) {
+      if (this.button) {
         this.val = data
       } else {
         this.$emit('selected', this.val)

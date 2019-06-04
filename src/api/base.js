@@ -6,7 +6,6 @@ let Base64 = require('js-base64').Base64
 axios.defaults.timeout = 10000
 window.wxAddress = ''
 axios.defaults.baseURL = window.ajaxConfig.baseURL
-console.log(axios.defaults.baseURL)
 axios.interceptors.request.use(config => {
   store.commit('load', true)
   return config

@@ -16,7 +16,7 @@
   <wd-tree :data="data" :value='2' @selected="getVal">
   </wd-tree>
   <div class="fg">单选树插件可选父路径</div>
-  <wd-tree :data="data" :value="2" parent @selected="getVal">
+  <wd-tree :data="data" :value="2" button parent @selected="getVal">
   </wd-tree>
 </div>
 </template>

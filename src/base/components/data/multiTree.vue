@@ -10,19 +10,19 @@
         </span>
         <span v-if="right" class="wd_icon" @click.stop="only?select(i,item):onlySelect(i, item)" right></span>
       </div>
-      <wd-multi v-if="item.child" :left="left" :right="right" :only="only" :parent="parent" :level="level+1" @getParent="getParent(i, ...$event)" :ref="'list'+i" :data="item.child" :showId="showId" :id="id">
+      <wd-multi-tree v-if="item.child" :left="left" :right="right" :only="only" :parent="parent" :level="level+1" @getParent="getParent(i, ...$event)" :ref="'list'+i" :data="item.child" :showId="showId" :id="id">
         <template slot-scope="item">
           <slot :data="item.data">
             <span>{{item.data[showId]}}</span>
           </slot>
         </template>
-      </wd-multi>
+      </wd-multi-tree>
     </li>
   </ul>
 </template>
 <script>
 export default {
-  name: 'WdMulti',
+  name: 'WdMultiTree',
   props: {
     data: {
       type: Array,
@@ -74,7 +74,7 @@ export default {
           if (this.parent || !item.child) {
             a = item.child ? '1' : true
           } else {
-            console.warn('./wdxx-ui/components/data/multi.vue项目初始化值不能包含子项目，加上parent属性以解决该问题')
+            console.warn('[wdxx-ui Warn][Tree] value is not include parent level!')
           }
         }
         if (item.child) {
