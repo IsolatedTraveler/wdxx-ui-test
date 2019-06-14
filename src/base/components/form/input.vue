@@ -34,6 +34,10 @@ export default {
     close: {
       type: Boolean,
       default: true
+    },
+    isVerify: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -89,7 +93,8 @@ export default {
       e.preventDefault()
       return false
     },
-    validate(rules, data) {
+    validate(rules) {
+      console.log(rules)
       let regs = rules.reg, rule = rules.rule
       if (regs) {
         regs = regs.split(',')
@@ -108,7 +113,7 @@ export default {
       }
       return true
     },
-    verify(rule, data) {
+    verify(rule) {
       let val = this.value || ''
       if (rule.reg.test(val)) {
         return true

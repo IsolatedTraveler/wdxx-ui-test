@@ -13,6 +13,7 @@ import WdMsg from './pop/main'
 // 数据展示
 import WdList from './data/list'
 import WdTree from './data/tree'
+import WdSwipe from './data/swipe'
 // 布局
 import WdTop from './layout/top'
 import WdGrid from './layout/grid'
@@ -27,6 +28,7 @@ let components = [
     WdMask,
     WdList,
     WdTree,
+    WdSwipe,
     WdTop,
     WdGrid,
     WdButton

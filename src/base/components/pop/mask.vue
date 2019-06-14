@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show" class="wd_mask" @click.stop="$emit('close')">
+  <div v-show="show" class="wd_mask wd_flex" @click.stop="$emit('close')">
     <div :class="shape">
       <span></span>
       <span></span>
@@ -24,5 +24,3 @@ export default {
   }
 }
 </script>
-<style>
-</style>

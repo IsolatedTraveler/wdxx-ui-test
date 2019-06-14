@@ -1,98 +1,112 @@
 <template>
-  <div class="wd_select wd_flex" :class="{wd_error:error}">
-    <div class="wd_flex wd_input" row @click.stop="disabled || showData()">
-      <slot>
-        <label>{{label}}</label>
-      </slot>
-      <input class="wd_auto" ref="input" :placeholder="placeholder" disabled v-model="valText">
-      <span class="wd_icon wd_arrow"></span>
+  <div class="wd_select wd_flex" row @click.stop="showData" :class="{wd_error:error}">
+    <slot>
+      <label>{{label}}</label>
+    </slot>
+    <div class="wd_auto" v-if="valShow" :class="{wd_multi: multi}">
+      <span v-for="(item,index) in valText" :key="index">{{item}}</span>
+       <input class="wd_auto" autocomplete="off" type="text" :placeholder="placeholder">
     </div>
-    <div class="wd_pop wd_content" v-if="load" v-show="show">
-       <div class="wd_flex wd_top" row v-if="label">
-        <span class="wd_icon wd_arrow" @click.stop="back" right></span>
+    <span class="wd_icon wd_arrow"></span>
+    <div class="wd_pop wd_flex" v-show="show">
+      <div class="wd_flex wd_top" row v-if="topShow">
+        <div class="left" @click.stop="hide">
+          <span class="wd_icon wd_arrow"></span>
+        </div>
         <span class="wd_auto">{{label.replace(/[:：]$/, '')}}</span>
       </div>
-      <div class="wd_flex wd_input wd_search" row v-if="search">
-        <input class="wd_auto" ref="search" :placeholder="searchPlaceholder" v-model="searchVal">
-        <span v-show="searchVal && judge" class="wd_icon wd_close"></span>
+      <div class="wd_flex wd_input" row @click.stop="">
+        <input class="wd_auto" autocomplete="off" type="text" ref="input" @focus.stop="showSearchClear=true" @blur.stop="showSearchClear=false" placeholder="请输入检索码" v-model="searchVal">
+        <span @click.stop="clearVal" class="wd_icon wd_close" v-show="searchVal && showSearchClear"></span>
       </div>
-      <tree :data="data" v-model="value" :showId="showId" :id="id">
-        <template slot-scope="item">
-          <span>{{item.data.mc}}</span>
-        </template>
-      </tree>
+      <component :is="multi?'wd-multi':'wd-single'" :left="left" @selected="selected" :right="right" :only="only" ref="tree" :data="data" :parent="parent" :showId="showId" :id="id"/>
     </div>
   </div>
 </template>
 <script>
-import tree from '../data/tree'
+import wdSingle from '../data/singleTree'
+import wdMulti from '../data/multiTree'
+import wdInput from './input'
 export default {
   name: 'WdSelect',
   components: {
-    tree
+    wdInput,
+    wdSingle,
+    wdMulti
   },
   props: {
-    data: {// 列表数据
-      type: Array,
-      default() {
-        return []
-      }
+    valShow: {
+      type: Boolean,
+      default: true
     },
-    value: {// 选中值
-      type: Array,
-      default() {
-        return []
-      }
+    topShow: {
+      type: Boolean,
+      default: true
     },
-    label: {// 选择框标题
-      type: String,
-      default: ''
-    },
-    placeholder: {// 选项提示信息
-      type: String,
-      default: ''
-    },
-    searchPlaceholder: {// 检索提示信息
-      type: String,
-      default: '请输入检索数据进行检索'
-    },
-    disabled: {// 是否可操作
+    buttonShow: {
       type: Boolean,
       default: false
     },
-    showId: {// 数据展示id
-      type: String,
-      default: 'mc'
+    multi: {
+      type: Boolean,
+      default: false
     },
-    id: {// 赋值id
-      type: String,
-      default: 'id'
+    data: {
+      type: Array,
+      default() {
+        return []
+      }
     },
-    filter: {// 自定义过滤规则
+    value: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    isVerify: {
+      type: String,
+      default: ''
+    },
+    showId: {
+      type: String,
+      default: ''
+    },
+    id: {
+      type: String,
+      default: ''
+    },
+    filter: {
       type: Function,
       default: null
     },
-    search: {// 是否开启检索功能
+    search: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data() {
     return {
-      valText: '', // 选中值对应展示的数据
-      error: false, // 表单验证成功与否
-      load: true, // 是否加载列表数据
-      show: true, // 是否显示列表数据
-      searchVal: '', // 检索数据
-      judge: false, // 检索框是否获取到焦点
-      val: []
+      error: false,
+      show: false,
+      valText: [],
+      val: [],
+      searchVal: '',
+      showSearchClear: false
     }
   },
   computed: {
-    dataList() {
-      return this.data.filter((item) => {
-        return this.filter ? this.filter(item, this.searchVal) : true
-      })
+    showButton() {
+      return this.buttonShow || this.multi
     }
   },
   watch: {
@@ -104,37 +118,14 @@ export default {
     }
   },
   created() {
-    this.init()
   },
   methods: {
-    init() {
-      let data = this.dataList
-      this.valText = ''
-      this.val = []
-      if (this.value && data.length) {
-        for (let index in data) {
-          let item = data[index]
-          if (item[this.id] === this.value) {
-            this.valText = item[this.showId || this.id]
-            this.val[index] = true
-            break
-          }
-        }
-        if (!this.val.length) {
-          this.$emit('input', '')
-        }
-      }
-    },
-    validate(rules, data) {
-      return this.$refs.input.validate(rules, data)
-    },
     showData() {
-      this.load = true
-      if (this.show) {
+      if (!this.showButton && this.show) {
         this.hide()
       } else {
         this.show = true
-        this.$emit('getData', this.hide)
+        this.$emit('getData')
         this.$store.commit('back', this.hide)
       }
     },
@@ -142,21 +133,61 @@ export default {
       this.show = false
       this.$store.commit('back', null)
     },
-    selected(data, index) {
-      let judge = !this.val[index], val = []
-      if (judge) {
-        this.valText = data[this.showId || this.id]
-        this.$emit('input', data[this.id])
-      } else {
-        this.valText = ''
-        this.$emit('input', '')
+    validate(rules) {
+      console.log(rules)
+      let regs = rules.reg, rule = rules.rule
+      if (regs) {
+        regs = regs.split(',')
+        for (let reg of regs) {
+          if (!this.verify(this.defaultRules[reg])) {
+            return false
+          }
+        }
       }
-      val[index] = judge
-      this.val = val
-      this.hide()
+      if (rule) {
+        for (let reg of rule) {
+          if (!this.verify(reg)) {
+            return false
+          }
+        }
+      }
+      return true
+    },
+    verify(rule) {
+      let val = this.value || ''
+      if (rule.reg.test(val)) {
+        return true
+      }
+      this.error = true
+      this.$msg.toast(rule.msg, '警告').then(res => {
+        this.error = false
+        this.refs.input.onfoucs()
+      }).catch(e => {
+        this.error = false
+      })
+      return false
     }
   }
 }
 </script>
-<style>
+<style lang="scss">
+.wd_select{
+  .wd_icon{
+    font-size: 1.5em;
+  }
+  >.wd_pop{
+    background: #fff;
+    .wd_input{
+      width: 90%;
+      border-radius: 1em;
+      border: 1px solid #ccc;
+      line-height: 2em;
+      height: 2em;
+      margin: 0.5em 0;
+      input{
+        padding: 0 1em;
+      }
+    }
+  }
+}
 </style>

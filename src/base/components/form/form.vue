@@ -1,5 +1,5 @@
 <template>
-  <form class="wd_form" autocomplete="off">
+  <form class="wd_form" action="" onsubmit="return false" autocomplete="off">
     <slot></slot>
   </form>
 </template>
@@ -7,12 +7,6 @@
 export default {
   name: 'WdForm',
   props: {
-    data: {
-      type: Object,
-      default() {
-        return null
-      }
-    },
     rules: {
       type: Object,
       default() {
@@ -22,16 +16,15 @@ export default {
   },
   computed: {
     files() {
-      let rules = this.rules
       return this.$slots.default.filter(item => {
-        let key = item.key
-        return key && rules[key]
+        return item.componentInstance && (item.componentInstance.isVerify)
       })
     }
   },
   methods: {
     validate() {
       return new Promise((resolve, reject) => {
+        this.$store.commit('load', true)
         this.resolve = resolve
         this.reject = reject
         setTimeout(this.validating, 0)
@@ -39,14 +32,11 @@ export default {
     },
     validating() {
       let judge = true
-      if (!this.data) {
-        console.warn('[wd Warn][Form]data is required for validate to work!')
-        judge = false
-      } else if (this.files && this.files.length) {
+      if (this.files && this.files.length) {
         for (let file of this.files) {
           let id = file.componentInstance.isVerify
           if (id) {
-            if (!file.componentInstance.validate(this.rules[id], this.data)) {
+            if (!file.componentInstance.validate(this.rules[id])) {
               judge = false
               break
             }
@@ -54,6 +44,7 @@ export default {
         }
       }
       judge ? this.resolve() : this.reject(new Error())
+      this.$store.commit('load')
     }
   }
 }
