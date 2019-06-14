@@ -1,5 +1,5 @@
 <template>
-  <div class="wd_pop flex">
+  <div class="wd_pop wd_flex">
     <wd-mask v-if="mask" @close="close" :shape="shape"/>
     <wd-top v-if="top" :title="title" :close="close"/>
     <slot></slot>

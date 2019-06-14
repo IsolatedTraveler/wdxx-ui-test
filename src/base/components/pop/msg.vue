@@ -1,17 +1,17 @@
 <template>
-  <wd-pop v-show="showJudge" class="wd_msg" :title="title" @close="shadeClose && hide()" :shape="shape" :mask="true" :top="false">
-    <div class="msg flex" :class="type" v-if="content">
-      <div v-show="title" class="title flex row">
-        <span class="auto">{{title}}</span>
+  <div v-show="showJudge" class="wd_msg wd_pop wd_flex" @click.stop="shadeClose && $emit('close')">
+    <div class="wd_flex" :class="'wd_'+type" v-if="content">
+      <div v-show="title" class="wd_title wd_flex" row>
+        <span>{{title}}</span>
       </div>
-      <div class="content">
+      <div class="wd_content">
         {{message}}
       </div>
-      <div v-show="button" class="bottom flex row">
+      <div v-show="button" row class="wd_bottom wd_flex">
         <button class="wd_button" v-for="(item,index) in button" @click="submit(index)" :key="index">{{button[index]}}</button>
       </div>
     </div>
-  </wd-pop>
+  </div>
 </template>
 <script>
 export default {
@@ -46,10 +46,6 @@ export default {
         return null
       }
     },
-    shape: {
-      type: String,
-      default: ''
-    },
     reject: {
       type: Function,
       default() {
@@ -81,9 +77,9 @@ export default {
         }, this.delary)
       }
     },
-    submit(index) {
+    submit(i) {
       this.showJudge = false
-      this.resolve && this.resolve(!index)
+      i ? this.reject(true) : this.resolve()
     }
   }
 }
