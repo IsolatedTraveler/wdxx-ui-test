@@ -98,6 +98,7 @@ export default {
     submit() {
       if (this.multi) {
         let res = this.$refs.tree.getValue([])
+        this.backup = res
         this.$emit('selected', res)
       } else {
         this.backup = this.val
