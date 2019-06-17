@@ -221,32 +221,5 @@ export default {
 }
 </script>
 <style lang="scss">
-.wd_select{
-  .wd_icon{
-    font-size: 1.5em;
-  }
-  >.wd_pop{
-    background: #fff;
-    .wd_input{
-      width: 90%;
-      border-radius: 1em;
-      border: 1px solid #ccc;
-      line-height: 2em;
-      height: 2em;
-      margin: 0.5em 0;
-      input{
-        padding: 0 1em;
-      }
-    }
-    .wd_buttons{
-      width: 100%;
-      justify-content: space-around;
-    }
-    .wd_button{
-      width: 45%;
-      height: 35px;
-      margin: 0.5em 0;
-    }
-  }
-}
+
 </style>

@@ -1,11 +1,15 @@
 <template>
   <ul class="wd_list">
-    <li v-for="(item,index) in data" :key="index" @click.stop="$emit('click', item, index)" class="flex" :class="{row: row, col: !row,'selected':val[index]}">
-      <slot :data="item">
-        <img v-if="item[img]" :src="item[img]"/>
-        <span class="auto">{{item[showId] || item}}</span>
-        <span v-if="right" :class="type"></span>
-      </slot>
+    <li v-for="(item,i) in data" :key="i" class="wd_flex">
+      <div class="wd_flex wd_list_item" row :class="{wd_selected:index[i]}" @click.stop="select(i,item)">
+        <slot :data="item">
+          <span v-if="left" class="wd_icon" left></span>
+          <span class="wd_auto">
+            {{item[showId]}}
+          </span>
+          <span v-if="right" class="wd_icon" right></span>
+        </slot>
+      </div>
     </li>
   </ul>
 </template>
@@ -19,34 +23,49 @@ export default {
         return []
       }
     },
-    img: {
+    showId: {
       type: String,
-      default: 'img'
+      default: 'mc'
     },
-    val: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    type: {
+    id: {
       type: String,
-      default: 'triangle'
+      default: 'id'
+    },
+    left: {
+      type: Boolean,
+      default: false
     },
     right: {
       type: Boolean,
-      default: true
+      default: false
+    }
+  },
+  data() {
+    return {
+      index: [],
+      backups: []
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init(val) {
+      let id = this.id, index = []
+      this.data.map((item, i) => {
+        if (val.indexOf(item[id]) !== -1) {
+          index[i] = true
+        }
+      })
+      this.index = index
+      this.backups = index
     },
-    row: {
-      type: Boolean,
-      default: true
-    },
-    showId: {
-      type: String,
-      default: 'label'
+    select(i, item) {
+      let index = [].concat(this.index)
+      index[i] = !index[i]
+      this.index = index
+      this.$emit('selected', index[i] ? this.data[i] : '')
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-</style>
