@@ -133,10 +133,6 @@ export default {
   },
   mounted() {
     this.init()
-    if (!this.valShow) {
-      let elem = this.$refs.select
-      console.log(elem)
-    }
   },
   methods: {
     init(val) {
@@ -144,8 +140,7 @@ export default {
       if (this.data.length && val && (!this.multi || val.length)) {
         this.$refs.tree.init(val)
       }
-      this.backup = val
-      this.multi && (this.val = this.$refs.tree.getValue([]))
+      this.multi ? (this.val = this.$refs.tree.getValue([])) : this.backup = val
     },
     cancel() {
       this.hide()
@@ -153,7 +148,7 @@ export default {
         this.$refs.tree.reset()
       } else {
         if (this.val[this.id] !== this.value) {
-          this.$refs.tree.init(this.backup[0])
+          this.$refs.tree.init(this.backup)
         }
       }
     },
@@ -161,18 +156,17 @@ export default {
       this.hide()
       if (this.multi) {
         let res = this.$refs.tree.getValue([])
-        this.backup = res
+        this.val = res
         this.$emit('input', res.map(item => { return item[this.id] }))
       } else {
-        this.backup = this.val[0]
         this.$emit('input', (this.val[0] || {})[this.id])
+        this.backup = (this.val[0] || {})[this.id]
       }
     },
     selected(data) {
       if (this.showButton) {
         this.val = [data]
       } else {
-        this.val = [data]
         this.$emit('input', data[this.id])
         this.hide()
       }

@@ -167,7 +167,6 @@ html{
     width: 100%;
     &.wd_error{
       outline: 1px solid red;
-      font-size: red;
     }
     >[right]{
       order: 10;
@@ -175,6 +174,8 @@ html{
     >.wd_icon{
       text-align: center;
       border-radius: 50%;
+      height: 1.2em;
+      line-height: 1.2em;
       &.wd_close{
         background-color: #ccc;
         color: #fff;
