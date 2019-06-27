@@ -1,5 +1,6 @@
 // 去除默认样式
 html{
+  overflow: hidden;
   body,input,p,button,ul,li{
     padding: 0;
     margin: 0;
@@ -19,6 +20,59 @@ html{
     min-width: 0;
     box-sizing: content-box;
     line-height: 1.4em;
+  }
+}
+// 布局设置
+html{
+  // grid 布局形式
+  .wd_flex{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    >*{
+      flex-shrink: 0;
+    }
+    &[row]{
+      flex-direction: row;
+    }
+    &[wrap]{
+      flex-wrap: wrap;
+    }
+    >.wd_auto{
+      flex: 1;
+    }
+  }
+  [scroll]{
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .wd_content{
+    background-color: #fff;
+  }
+  // 顶部设置
+  .wd_top{
+    width: 100%;
+    padding-top: 25px;
+    height: 55px;
+    background: linear-gradient(to right, #5c8bff, #9a95f3);
+    color: #fff;
+    .wd_icon{
+      height: 30px;
+      width: 30px;
+      font-size: 28px;
+      transform: rotate(180deg);
+      line-height: 30px;
+      &::before{
+        content: "\e639";
+      }
+    }
+    .wd_auto{
+      text-align: center;
+    }
   }
 }
 // Form 组件
@@ -49,7 +103,7 @@ html{
   .wd_button{
     text-align: center;
     border-radius: 5px;
-    background-color: #abc1f4;
+    background-color: #679df6;
     border: 1px solid transparent;
     vertical-align: middle;
     justify-content: center;
@@ -57,9 +111,9 @@ html{
     padding: 0.1em 0.5em;
     color: #fff;
     &[default]{
-      border-color: #6b8eff;
+      border-color: #679df6;
       background-color: transparent;
-      color: #6b8eff;
+      color: #679df6;
     }
     &[blank]{
       border-color: #eee;
@@ -153,54 +207,6 @@ html{
     }
   }
 }
-// 布局设置
-html{
-  // grid 布局形式
-  .wd_flex{
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
-    box-sizing: border-box;
-    overflow: hidden;
-    >*{
-      flex-shrink: 0;
-    }
-    &[row]{
-      flex-direction: row;
-    }
-    &[wrap]{
-      flex-wrap: wrap;
-    }
-    >.wd_auto{
-      flex: 1;
-    }
-  }
-  [scroll]{
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .wd_content{
-    background-color: #fff;
-  }
-  // 顶部设置
-  .wd_top{
-    width: 100%;
-    padding-top: 25px;
-    line-height: 30px;
-    height: 55px;
-    align-items: flex-end;
-    .wd_icon{
-      height: 30px;
-      width: 30px;
-      font-size: 28px;
-    }
-    .wd_auto{
-      text-align: center;
-    }
-  }
-}
 // 弹出层
 html{
   .wd_pop,.wd_mask,.wd_msg{
@@ -223,11 +229,12 @@ html{
       transition: opacity .3s linear;
       font-size: 14px;
       .wd_title{
-        justify-content: center;
         width: 100%;
         height: 35px;
         line-height: 20px;
+        box-sizing: border-box;
         font-weight: bolder;
+        text-align: center;
         font-size: 16px;
         padding-top: 15px;
       }
@@ -235,6 +242,7 @@ html{
         padding: 10px;
         width: 100%;
         box-sizing: border-box;
+        background-color: transparent;
       }
       .wd_bottom{
         width:100%;
@@ -245,11 +253,12 @@ html{
           height: 40px;
           border-radius: unset;
           background: transparent;
+          color: #888888;
           &:last-child{
             border-left: 1px solid #ddd;
           }
           &:first-child{
-            color: #26a2ff;
+            color: #679df6;
           }
         }
       }
@@ -259,11 +268,13 @@ html{
       background: #fff;
       align-items: flex-start;
       text-align: left;
-      text-indent: 2em;
+      .wd_content{
+        text-indent: 2em;
+      }
     }
     .wd_toast{
       background: rgba(0, 0, 0, 0.7);
-      color: red;
+      color: #fff;
     }
   }
   .wd_mask{
@@ -441,4 +452,7 @@ html{
 }
 .wd_tel::before{
   content: "\e63e";
+}
+.wd_address::before{
+  content: "\e656";
 }

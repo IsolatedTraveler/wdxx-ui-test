@@ -1,8 +1,8 @@
 <template>
   <div v-show="showJudge" class="wd_msg wd_pop wd_flex" @click.stop="shadeClose && $emit('close')">
     <div class="wd_flex" :class="'wd_'+type" v-if="content">
-      <div v-show="title" class="wd_title wd_flex" row>
-        <span>{{title}}</span>
+      <div v-show="title" class="wd_title">
+        {{title}}
       </div>
       <div class="wd_content">
         {{message}}

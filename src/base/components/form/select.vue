@@ -15,7 +15,7 @@
         </div>
         <span class="wd_auto">{{label.replace(/[:：]$/, '')}}</span>
       </div>
-      <div class="wd_flex wd_input" row @click.stop="">
+      <div class="wd_flex wd_input" v-if="searchShow" row @click.stop="">
         <input class="wd_auto" autocomplete="off" type="text" ref="input" @focus.stop="showSearchClear=true" @blur.stop="showSearchClear=false" placeholder="请输入检索码" v-model="searchVal">
         <span @click.stop="clearVal" class="wd_icon wd_close" v-show="searchVal && showSearchClear"></span>
       </div>
@@ -30,11 +30,9 @@
 <script>
 import wdSingle from '../data/singleTree'
 import wdMulti from '../data/multiTree'
-import wdInput from './input'
 export default {
   name: 'WdSelect',
   components: {
-    wdInput,
     wdSingle,
     wdMulti
   },
@@ -46,6 +44,10 @@ export default {
     topShow: {
       type: Boolean,
       default: true
+    },
+    searchShow: {
+      type: Boolean,
+      default: false
     },
     buttonShow: {
       type: Boolean,
@@ -62,6 +64,10 @@ export default {
     right: {
       type: String,
       default: ''
+    },
+    filter: {
+      type: Function,
+      default: null
     },
     only: {
       type: Boolean,
@@ -105,10 +111,6 @@ export default {
       type: String,
       default: ''
     },
-    filter: {
-      type: Function,
-      default: null
-    },
     search: {
       type: Boolean,
       default: false
@@ -133,6 +135,9 @@ export default {
   },
   mounted() {
     this.init()
+    document.addEventListener('click', () => {
+      this.hide()
+    }, false)
   },
   methods: {
     init(val) {
@@ -167,11 +172,27 @@ export default {
       if (this.showButton) {
         this.val = [data]
       } else {
-        this.$emit('input', data[this.id])
+        this.val = [data]
+        this.value === data[this.id] || this.$emit('input', data[this.id])
         this.hide()
       }
     },
+    fireEvent(element, event) {
+      if (document.createEventObject) {
+        // IE浏览器支持fireEvent方法
+        let evt = document.createEventObject()
+        return element.fireEvent('on' + event, evt)
+      } else {
+        // 其他标准浏览器使用dispatchEvent方法
+        let evt = document.createEvent('HTMLEvents')
+        // initEvent接受3个参数：
+        // 事件类型，是否冒泡，是否阻止浏览器的默认行为
+        evt.initEvent(event, true, true)
+        return !element.dispatchEvent(evt)
+      }
+    },
     showData() {
+      this.fireEvent(document, 'click')
       if (!this.showButton && this.show) {
         this.hide()
       } else {
@@ -220,6 +241,63 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-
+<style lang="scss" scope>
+.wd_top{
+  .wd_arrow{
+    transform: rotate(180deg);
+  }
+  .wd_auto{
+    text-align: center;
+  }
+}
+ .wd_input,.wd_select{
+    width: 100%;
+    &.wd_error{
+      outline: 1px solid red;
+    }
+    >[right]{
+      order: 10;
+    }
+    >.wd_icon{
+      text-align: center;
+      border-radius: 50%;
+      height: 1.2em;
+      width: 1.2em;
+      line-height: 1.2em;
+      &.wd_close{
+        background-color: #ccc;
+        color: #fff;
+        padding: 2px;
+        margin: 0 0.5em;
+      }
+    }
+  }
+.wd_select{
+  .wd_icon{
+    font-size: 1.5em;
+  }
+  >.wd_pop{
+    background: #fff;
+    .wd_input{
+      width: 90%;
+      border-radius: 1em;
+      border: 1px solid #ccc;
+      line-height: 2em;
+      height: 2em;
+      margin: 0.5em 0;
+      input{
+        padding: 0 1em;
+      }
+    }
+    .wd_buttons{
+      width: 100%;
+      justify-content: space-around;
+    }
+    .wd_button{
+      width: 45%;
+      height: 35px;
+      margin: 0.5em 0;
+    }
+  }
+}
 </style>
