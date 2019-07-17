@@ -1,0 +1,61 @@
+
+/* 自定义图标样式 */
+@font-face {
+  font-family: 'iconfont';
+  src: url('font/iconfont.eot');
+  src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('font/iconfont.woff2') format('woff2'),
+    url('font/iconfont.woff') format('woff'),
+    url('font/iconfont.ttf') format('truetype'),
+    url('font/iconfont.svg#iconfont') format('svg');
+}
+.wd_icon{
+  font-family: "iconfont";
+  font-style: normal;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  &[right]{
+    transform: rotate(90deg);
+  }
+  &[top]{
+    transform: rotate(180deg);
+  }
+  &[left]{
+    transform: rotate(270deg);
+  }
+  &.wd_close::before {
+    content: "\e65c";
+  }
+  &.wd_arrow::before {
+    content: "\e639";
+  }
+  &.wd_password::before{
+    content: "\e601";
+  }
+  &.wd_eye::before{
+    content: "\e723";
+  }
+  &.wd_user::before{
+    content: "\e63c";
+  }
+  &.wd_wx::before{
+    content: "\e63b";
+  }
+  &.wd_pwd::before{
+    content: "\e63d";
+  }
+  &.wd_yzm::before{
+    content: "\e63f";
+  }
+  &.wd_tel::before{
+    content: "\e63e";
+  }
+  &.wd_address::before{
+    content: "\e656";
+  }
+  &.wd_crumb::before{
+    content: "\e724";
+  }
+}

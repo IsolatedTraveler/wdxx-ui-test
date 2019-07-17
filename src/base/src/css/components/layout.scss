@@ -1,0 +1,61 @@
+// grid 布局形式
+.wd_flex{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  >*{
+    flex-shrink: 0;
+    position: relative;
+  }
+  &[row]{
+    flex-direction: row;
+  }
+  &[wrap]{
+    flex-wrap: wrap;
+  }
+  >.wd_auto{
+    flex: 1;
+  }
+}
+// 滚动样式
+[scroll]{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+// 层级设置
+.wd_abs{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+}
+// 顶部设置
+.wd_top{
+  width: 100%;
+  padding-top: 25px;
+  height: 55px;
+  background: linear-gradient(to right, #5c8bff, #9a95f3);
+  color: #fff;
+  .wd_icon{
+    height: 30px;
+    width: 30px;
+    font-size: 28px;
+    transform: rotate(180deg);
+    line-height: 30px;
+  }
+  .wd_auto{
+    text-align: center;
+  }
+}
+// 标题栏设置
+.wd_title{
+  text-align: center;
+  border-bottom: 1px solid #dcdcdc;
+}

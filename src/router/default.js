@@ -1,21 +1,14 @@
-import login from '@/view/login'
-import notFound from '@/view/notFound'
-import test from './test'
+import index from '@/view/index'
 export default [
   {
     path: '',
-    redirect: '/login-exit'
+    redirect: '/index'
   }, {
-    path: '/login-exit',
-    name: 'login',
-    component: login
-  }, {
-    path: '/home-exit',
-    name: 'home',
-    component: login
+    path: '/index',
+    name: 'index',
+    component: index
   }, {
     path: '*',
-    component: notFound
-  },
-  ...test
+    redirect: '/index'
+  }
 ]

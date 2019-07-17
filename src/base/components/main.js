@@ -1,8 +1,9 @@
 // form 表单
 import WdForm from './form/form'
-import WdInput from './form/input'
+import WdInput from './form/input/input'
 import WdTreeSelect from './form/treeSelect'
 import WdSelect from './form/select'
+import WdAddress from './form/select/address'
 import WdProgress from './form/progress'
 import WdSwitch from './form/switch'
 import WdButton from './form/button'
@@ -22,6 +23,7 @@ let components = [
     WdForm,
     WdTreeSelect,
     WdSelect,
+    WdAddress,
     WdProgress,
     WdSwitch,
     WdPop,

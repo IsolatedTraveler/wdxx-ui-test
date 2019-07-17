@@ -1,7 +1,6 @@
 <template>
   <div class="wd_pop wd_flex">
-    <wd-mask v-if="mask" @close="close" :shape="shape"/>
-    <wd-top v-if="top" :title="title" :close="close"/>
+    <div v-if="mask" class="wd_mask" @click.stop="$emit('close')"></div>
     <slot></slot>
   </div>
 </template>
@@ -9,21 +8,9 @@
 export default {
   name: 'WdPop',
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    top: {
-      type: Boolean,
-      default: true
-    },
     mask: {
       type: Boolean,
       default: false
-    },
-    shape: {
-      type: String,
-      default: ''
     }
   },
   methods: {
