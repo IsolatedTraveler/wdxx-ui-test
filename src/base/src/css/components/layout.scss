@@ -58,4 +58,33 @@
 .wd_title{
   text-align: center;
   border-bottom: 1px solid #dcdcdc;
+  width: 100%;
+  color: #000;
+  height: 3em;
+  line-height: 3em;
+  font-weight: bolder;
+}
+// 正文设置
+.wd_content{
+  background-color: #fff;
+  width: 100%;
+}
+// 单个项目
+.wd_item{
+  position: relative;
+  text-align: center;
+}
+// 导航
+.wd_nav{
+  .wd_item{
+    &::after{
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 1px;
+      background: #679df6;
+    }
+  }
 }

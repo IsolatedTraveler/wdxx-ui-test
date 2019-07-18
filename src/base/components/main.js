@@ -18,6 +18,7 @@ import WdSwipe from './data/swipe'
 // 布局
 import WdTop from './layout/top'
 import WdGrid from './layout/grid'
+import WdNav from './layout/nav'
 let components = [
     WdInput,
     WdForm,
@@ -33,6 +34,7 @@ let components = [
     WdSwipe,
     WdTop,
     WdGrid,
+    WdNav,
     WdButton
   ], props = [
     WdMsg
