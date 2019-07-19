@@ -58,4 +58,7 @@
   &.wd_crumb::before{
     content: "\e724";
   }
+  &.wd_right::before{
+    content: "\e66c";
+  }
 }

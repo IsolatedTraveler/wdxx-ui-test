@@ -72,19 +72,34 @@
 // 单个项目
 .wd_item{
   position: relative;
+  padding: 0 0.5em;
   text-align: center;
 }
 // 导航
 .wd_nav{
   .wd_item{
-    &::after{
+    height: 100%;
+    &[disabled]::after{
       content: '';
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      width: 1px;
+      height: 3px;
       background: #679df6;
     }
   }
+}
+// 圆
+.wd_circle{
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.wd_circle.wd_right.wd_icon{
+  height: 1.2em;
+  line-height: 1.2em;
+  width: 1.2em;
+  text-align: center;
+  border: 1px solid #dcdcdc;
+  color: #dcdcdc;
 }

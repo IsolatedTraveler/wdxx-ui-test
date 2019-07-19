@@ -3,7 +3,10 @@ export default {
   fetch,
   get,
   address(data) {
-    return fetch('', data)
+    return fetch('/rest/queryDataBySql/080201/6', data)
+  },
+  getAddressParent(data) {
+    return fetch('/rest/queryDataBySql/080201/7', data)
   },
   getSystem(data) {
     return fetch('rest/queryDataBySql/120104/3', data)

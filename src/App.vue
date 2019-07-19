@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <wd-mask v-show="load" shape="loading"/>
+    <wd-mask id="mask" v-show="load" shape="loading"/>
     <wd-top :title="title">
       <span @click="menuShow=!menuShow" class="wd_icon wd_crumb"></span>
     </wd-top>
@@ -34,5 +34,8 @@ export default {
 .app_router{
   width: 100%;
   height: 100%;
+}
+#mask{
+  z-index: 999;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
-  <div class="wd_flex wd_address" row @click.stop="show=!show">
+  <div class="wd_flex wd_address" row @click.stop="show=!show,initData()">
     <slot></slot>
     <input class="wd_auto" autocomplete="off" type="text" :placeholder="placeholder" disabled :value="val">
     <span class="wd_icon wd_arrow"></span>
     <wd-pop mask v-show="show" @close="show=!show">
       <div class="wd_flex wd_content" @click.stop="">
         <div v-if="title" class="wd_title">{{title}}</div>
-        <wd-nav row :data="vals" :showId="showId"/>
-        <wd-list></wd-list>
+        <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="currentValue" @selected="resetAddress"/>
+        <wd-list scroll @selected="selectedAddress" :data="addressData" :value="currentValue" :valId="valId" :showId="showId"/>
       </div>
     </wd-pop>
   </div>
@@ -35,27 +35,104 @@ export default {
     valId: {
       type: String,
       default: 'id'
+    },
+    sjid: {
+      type: String,
+      default: 'sjid'
+    },
+    getData: {
+      type: Function,
+      default: null,
+      required: true
+    },
+    getParents: {
+      type: Function,
+      default: null,
+      required: true
     }
   },
   data() {
     return {
+      currentValue: '',
       val: '',
       vals: [],
-      show: false
+      currentItem: {},
+      show: false,
+      lastItem: {hide: true},
+      addressData: []
+    }
+  },
+  watch: {
+    addressData(val) {
+      if (val && val.length) {
+        this.lastItem.hide = false
+      } else {
+        this.lastItem.hide = true
+      }
+    },
+    value(val) {
+      if (val !== this.currentValue) {
+        this.init()
+      }
     }
   },
   mounted() {
+    this.lastItem[this.showId] = '请选择'
+    this.lastItem[this.valId] = ''
+    this.currentItem[this.valId] = this.value || ''
     this.init()
   },
   methods: {
     init() {
       if (this.value) {
-
-      } else {
-        let item = {}
-        item[this.showId] = '请选择'
-        this.vals = [item]
+        this.initVals()
       }
+    },
+    initVals() {
+      this.getParents(this.value).then(res => {
+        this.getVal(res)
+        this.currentItem = res.pop()
+        this.vals = res
+        this.currentValue = this.value
+      })
+    },
+    getVal(res) {
+      let str = '';
+      [].forEach.call(res, item => {
+        str += item[this.showId]
+      })
+      this.val = str
+    },
+    initData() {
+      this.getData(this.currentItem ? this.currentItem[this.sjid] : '').then(res => {
+        this.addressData = res
+        this.vals.push(this.lastItem)
+      })
+    },
+    resetAddress(item, i) {
+      this.vals.splice(i, this.vals.length - i - 1)
+      this.currentValue = item[this.id] || ''
+      this.getData(item[this.sjid]).then(res => {
+        this.addressData = res
+      })
+    },
+    selectedAddress(item) {
+      item = item || this.currentItem
+      this.currentItem = item
+      this.vals.splice(-1, 0, item)
+      this.currentValue = ''
+      this.getData(item[this.valId]).then(res => {
+        if (res.length) {
+          this.addressData = res
+        } else {
+          this.show = false
+          this.$emit('input', item[this.valId])
+          this.currentValue = item[this.valId]
+          this.vals.pop()
+          this.getVal(this.vals)
+          this.vals.pop()
+        }
+      })
     }
   }
 }
