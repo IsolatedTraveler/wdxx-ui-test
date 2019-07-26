@@ -16,6 +16,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: inline-block;
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
   &[right]{
     transform: rotate(90deg);
   }
