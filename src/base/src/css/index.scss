@@ -1,5 +1,9 @@
 
 // 去除默认样式
+html,body{
+  width: 100%;
+  height: 100%;
+}
 html{
   overflow: hidden;
   body,input,p,button,ul,li{

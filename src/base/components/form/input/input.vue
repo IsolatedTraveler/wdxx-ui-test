@@ -39,6 +39,7 @@ export default {
       this.$emit('click')
     },
     clearVal() {
+      alert(1)
       this.$emit('input', '')
     },
     msg(msg) {

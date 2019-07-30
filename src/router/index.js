@@ -14,9 +14,6 @@ router.beforeEach((to, from, next) => {
   } else {
     if (to.name !== 'login' && !store.getters.userInfo) {
       next()
-      // router.push({
-      //   name: 'login'
-      // })
     } else {
       next()
     }

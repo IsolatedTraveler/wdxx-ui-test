@@ -1,6 +1,5 @@
 <template>
-  <div class="wd_pop wd_flex">
-    <div v-if="mask" class="wd_mask" @click.stop="$emit('close')"></div>
+  <div class="wd_pop wd_flex" @click.stop="$emit('close')">
     <slot></slot>
   </div>
 </template>
