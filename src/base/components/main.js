@@ -1,8 +1,10 @@
 // form 表单
 import WdForm from './form/form'
 import WdInput from './form/input/input'
+import WdSearch from './form/input/search'
 import WdTreeSelect from './form/treeSelect'
-import WdSelect from './form/select'
+import WdSelect from './form/select/select'
+import WdSelectB from './form/select/select_b'
 import WdAddress from './form/select/address'
 import WdProgress from './form/progress'
 import WdSwitch from './form/switch'
@@ -19,12 +21,15 @@ import WdSwipe from './data/swipe'
 import WdTop from './layout/top'
 import WdGrid from './layout/grid'
 import WdNav from './layout/nav'
+import WdTabs from './layout/tabs'
 let components = [
     WdInput,
+    WdSearch,
     WdForm,
     WdTreeSelect,
     WdSelect,
     WdAddress,
+    WdSelectB,
     WdProgress,
     WdSwitch,
     WdPop,
@@ -35,6 +40,7 @@ let components = [
     WdTop,
     WdGrid,
     WdNav,
+    WdTabs,
     WdButton
   ], props = [
     WdMsg

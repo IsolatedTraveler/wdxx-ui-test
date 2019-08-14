@@ -64,4 +64,16 @@
   &.wd_right::before{
     content: "\e66c";
   }
+  &.wd_search::before{
+    content: "\e653";
+  }
+  &.wd_myCart::before{
+    content: "\e647";
+  }
+  &.wd_warr::before{
+    content: "\e649";
+  }
+  &.wd_del::before{
+    content: "\e6d8";
+  }
 }

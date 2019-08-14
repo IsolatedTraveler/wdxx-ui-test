@@ -1,9 +1,9 @@
 <template>
-  <div class="wd_flex wd_address" row @click.stop="show=!show,initData()">
+  <div class="wd_flex wd_address wd_select" :class="{wd_show: show}" row @click.stop="showPop(),initData()">
     <slot></slot>
     <input class="wd_auto" autocomplete="off" type="text" :placeholder="placeholder" disabled :value="val">
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop mask v-show="show" @close="show=!show">
+    <wd-pop mask v-show="show" @close="closePop()">
       <div class="wd_flex wd_content" @click.stop="">
         <div v-if="title" class="wd_title">{{title}}</div>
         <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="currentValue" @selected="resetAddress"/>
@@ -83,6 +83,21 @@ export default {
     this.init()
   },
   methods: {
+    showPop() {
+      if (this.show) {
+        this.closePop()
+      } else {
+        let elem = document.querySelector('.wd_show .wd_pop')
+        elem && (this.$store.getters.back())
+        this.show = true
+        this.fun = this.$store.getters.back
+        this.$store.commit('back', this.closePop)
+      }
+    },
+    closePop() {
+      this.show = false
+      this.$store.commit('back', this.fun || null)
+    },
     init() {
       if (this.value) {
         this.initVals()
@@ -125,7 +140,7 @@ export default {
         if (res.length) {
           this.addressData = res
         } else {
-          this.show = false
+          this.closePop()
           this.$emit('input', item[this.valId])
           this.currentValue = item[this.valId]
           this.vals.pop()

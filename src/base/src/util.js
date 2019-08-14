@@ -1,3 +1,23 @@
+Date.prototype.format = function(fmt) {
+  var o = {
+    'M+': this.getMonth() + 1,
+    'd+': this.getDate(),
+    'h+': this.getHours(),
+    'm+': this.getMinutes(),
+    's+': this.getSeconds(),
+    'q+': Math.floor((this.getMonth() + 3) / 3),
+    'S': this.getMilliseconds()
+  }
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
+  }
+  for (let k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+    }
+  }
+  return fmt
+}
 export default {
   /**
   * @description 数字格式话显示保留n位小数
@@ -7,7 +27,7 @@ export default {
   * @param {Number} n    保留小数位数
   */
   numberFormat(val, n) {
-    val = (val + '').split('.')
+    val = ((val || 0) + '').split('.')
     return val[0] + '.' + ((val[1] || '') + '000000').substr(0, n)
   },
   /**
@@ -26,5 +46,57 @@ export default {
         fun.apply(this, args)
       }, delay)
     }
+  },
+  /**
+  * @description 页面适应屏幕（屏幕自适应）
+  * @author 何波
+  * @date 2019-08-05 14:34:30
+  * @param {Number} width  最佳访问屏幕宽度
+  * @param {Number} type   适配方法
+  */
+  filterScreen(width, type) {
+    if (type) {
+
+    } else {
+      var body = document.documentElement, screenWidth = body.clientWidth, initialScale = screenWidth / width
+      document.getElementsByTagName('meta').viewport.content = 'width=' + width + ', minimum-scale=' + initialScale + ', maximum-scale=' + initialScale + ', user-scalable=no'
+    }
+  },
+  /**
+  * @description 浏览器类型识别
+  * @author 何波
+  * @date 2019-08-06 16:31:14
+  * @param {*} *
+  */
+  browserType() {
+    let ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      // 微信中打开
+      return 'weixin'
+    } else if (ua.match(/Alipay/i) == "alipay") {
+      // 支付宝中打开
+      return 'alipay'
+    } else {
+      let u = navigator.userAgent
+      if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+        return 'ios'
+      } else if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+        return 'android'
+      }
+    }
+  },
+  /**
+  * @description 获取URL参数
+  * @author 何波
+  * @date 2019-08-06 17:52:51
+  * @param {*} *
+  */
+  getUrlParams() {
+    var url = decodeURI(location.search.slice(1)), params = {}, datas = url.split('&')
+    for (let i = 0; i < datas.length; i++) {
+      let tempData = datas[i].split('=')
+      params[tempData[0]] = tempData[1]
+    }
+    return params
   }
 }

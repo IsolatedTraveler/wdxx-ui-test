@@ -22,10 +22,18 @@
     flex: 1;
   }
 }
-// 滚动样式
-[scroll]{
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+// tabs
+.wd_tab{
+  height: 100%;
+  justify-content: center;
+  &.wd_selected{
+    color: #00B678;
+    &::after{
+      width: 100%;
+      height: 2px;
+      background-color: #00B678;
+    }
+  }
 }
 // 层级设置
 .wd_abs{
@@ -91,10 +99,6 @@
   }
 }
 // 圆
-.wd_circle{
-  border-radius: 50%;
-  box-sizing: border-box;
-}
 .wd_circle.wd_right.wd_icon{
   height: 1.2em;
   line-height: 1.2em;

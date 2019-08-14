@@ -1,5 +1,5 @@
 <template>
-  <ul class="wd_list">
+  <ul class="wd_list" @click.stop="$emit('selected', '')">
     <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" row :class="{wd_selected:value==item[valId]}" @click.stop="selected(item)">
       <span class="wd_auto">
         {{item[showId]}}

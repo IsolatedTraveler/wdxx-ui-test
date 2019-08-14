@@ -1,4 +1,5 @@
 import {components, props} from '../components/main.js'
+import util from './util'
 let obj = {
   install(vue, config) {
     config = {}
@@ -9,6 +10,7 @@ let obj = {
       vue.prototype[item.propsName] = item
       obj[item.componentName] = item
     })
+    vue.prototype.$util = util
   }
 }
 export default obj
