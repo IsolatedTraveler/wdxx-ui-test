@@ -13,7 +13,7 @@ html{
   ul{
     list-style: none;
   }
-  button,input{
+  button,input,textarea{
     outline: none;
     border: none;
     color: inherit;
@@ -50,6 +50,10 @@ html{
   border-radius: 50%;
   box-sizing: border-box;
   border: 1px solid #dcdcdc;
+  &.wd_right.wd_icon{
+    border: 1px solid #dcdcdc;
+    color: #dcdcdc;
+  }
 }
 .wd_text{
   overflow: hidden;
@@ -66,3 +70,20 @@ html{
 @import './components/pop.scss';
 // 数据展示组件
 @import './components/data.scss';
+// 修改全局默认样式
+.wd_button{
+  height: 30px;
+  border-radius: 20px;
+  &[big]{
+    width: 90%;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 17px;
+  }
+}
+.item8{
+  background: #fff;
+  margin: 0 8px 8px;
+  padding: 8px;
+  border-radius: 5px;
+}

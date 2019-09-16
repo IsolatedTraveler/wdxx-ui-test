@@ -96,19 +96,24 @@ form{
 .wd_button{
   text-align: center;
   border-radius: 5px;
-  background-color: #679df6;
+  background: linear-gradient(to right,#61e18c, #01b678);
+  color: #fff;
   border: 1px solid transparent;
   box-sizing: border-box;
   padding: 0.1em 0.5em;
-  color: #fff;
   &[default]{
     border-color: #679df6;
-    background-color: transparent;
+    background-color: #fff;
     color: #679df6;
+  }
+  &[warn]{
+    background: #fff;
+    border: 1px solid #f78869;
+    color: #f78869;
   }
   &[blank]{
     border-color: #eee;
-    background-color: transparent;
+    background-color: #fff;
     color: #2ba245;
   }
   &[disabled]{

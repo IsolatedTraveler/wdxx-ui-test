@@ -1,20 +1,24 @@
 <template>
-  <div class="wd_flex wd_select" row @click.stop="showPop()" :class="{wd_show: show}">
-    <label>{{label}}</label>
-    <span class="wd_text wd_auto" :class="{wd_gray:!val}">{{val ? val : data.length ? '单击选择数据' : '当前选项为获取到数据'}}</span>
+  <div class="wd_flex wd_select" :class="{wd_error:error}" row @click.stop="disabled || showPop()">
+    <label :class="{wd_gray:val}">{{label}}</label>
+    <span class="wd_text wd_auto" :class="{wd_gray:!val}">{{val ? val : data.length ? '单击选择数据' : '当前选项未获取到数据'}}</span>
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop mask v-show="show" @close="closePop">
+    <wd-pop-up ref='pop' @close="closePop">
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="placeholder" v-model="searchVal"/>
         <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" :value="value" :valId="valId" :showId="showId"/>
       </div>
-    </wd-pop>
+    </wd-pop-up>
   </div>
 </template>
 <script>
 export default {
   name: 'WdSelect',
   props: {
+    label: {
+      type: String,
+      defalut: ''
+    },
     value: {
       type: String,
       defalut: ''
@@ -23,10 +27,6 @@ export default {
       type: String,
       default: 'mc'
     },
-    label: {
-      type: String,
-      defalut: ''
-    },
     valId: {
       type: String,
       default: 'id'
@@ -34,6 +34,14 @@ export default {
     placeholder: {
       type: String,
       default: '请输入关键字检索'
+    },
+    dataError: {
+      type: String,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     search: {
       type: Boolean,
@@ -45,6 +53,10 @@ export default {
         return []
       }
     },
+    isVerify: {
+      type: String,
+      default: ''
+    },
     filter: {
       type: Function,
       default: null
@@ -54,8 +66,8 @@ export default {
     return {
       val: '',
       valTemp: null,
-      show: false,
-      searchVal: ''
+      searchVal: '',
+      error: false
     }
   },
   computed: {
@@ -67,9 +79,6 @@ export default {
       } else {
         return this.data
       }
-    },
-    back() {
-      return this.$store.getters.back || this.closePop
     }
   },
   watch: {
@@ -85,19 +94,14 @@ export default {
   },
   methods: {
     showPop() {
-      if (this.show) {
-        this.closePop()
-      } else if (!this.data.length) {
-        this.$msg.toast('当前选项无数据').catch(e => {})
+      if (this.data.length) {
+        this.$refs.pop.show()
       } else {
-        let elem = document.querySelector('.wd_show .wd_pop')
-        elem && this.back()
-        this.show = true
-        this.$store.commit('back', this.closePop)
+        this.$msg.toast(this.dataError || '当前选项未获取到数据').catch(e => {})
       }
     },
     closePop() {
-      this.show = false
+      this.$refs.pop.back()
     },
     init() {
       this.val = (this.data.filter(item => {
@@ -110,7 +114,16 @@ export default {
         this.val = item[this.showId]
         this.$emit('input', item[this.valId])
       }
-      this.back()
+      this.closePop()
+    },
+    msg(msg) {
+      this.error = true
+      this.$msg.toast(msg, '警告').then(res => {
+        this.error = false
+        this.refs.input.onfoucs()
+      }).catch(e => {
+        this.error = false
+      })
     }
   }
 }

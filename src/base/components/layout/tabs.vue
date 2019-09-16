@@ -13,7 +13,9 @@ export default {
   props: {
     data: {
       type: Array,
-      default: []
+      default() {
+        return []
+      }
     },
     value: {
       type: String | Number,

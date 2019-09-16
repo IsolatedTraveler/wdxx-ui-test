@@ -76,4 +76,7 @@
   &.wd_del::before{
     content: "\e6d8";
   }
+  &.wd_star::before{
+    content: "\e64a";
+  }
 }

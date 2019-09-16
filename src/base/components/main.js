@@ -11,10 +11,12 @@ import WdSwitch from './form/switch'
 import WdButton from './form/button'
 // 弹出层
 import WdPop from './pop/pop'
+import WdPopUp from './pop/popUp'
 import WdMask from './pop/mask'
 import WdMsg from './pop/main'
 // 数据展示
 import WdList from './data/list'
+import WdListClick from './data/list/listClick'
 import WdTree from './data/tree'
 import WdSwipe from './data/swipe'
 // 布局
@@ -33,8 +35,10 @@ let components = [
     WdProgress,
     WdSwitch,
     WdPop,
+    WdPopUp,
     WdMask,
     WdList,
+    WdListClick,
     WdTree,
     WdSwipe,
     WdTop,

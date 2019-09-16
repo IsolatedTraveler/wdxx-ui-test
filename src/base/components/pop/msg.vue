@@ -73,7 +73,7 @@ export default {
       this.showJudge = true
       if (this.delary) {
         setTimeout(() => {
-          this.hide()
+          this.submit()
         }, this.delary)
       }
     },
