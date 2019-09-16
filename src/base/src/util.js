@@ -1,4 +1,4 @@
-Date.prototype.format = function(fmt) {
+window.Date.prototype.format = function(fmt) {
   var o = {
     'M+': this.getMonth() + 1,
     'd+': this.getDate(),
@@ -28,7 +28,7 @@ export default {
   */
   numberFormat(val, n) {
     val = ((val || 0) + '').split('.')
-    return val[0] + '.' + ((val[1] || '') + '000000').substr(0, n)
+    return val[0] + '.' + ((val[1] || '') + '000000').substr(0, n || 2)
   },
   /**
   * @description 防抖动
@@ -66,19 +66,18 @@ export default {
   * @description 浏览器类型识别
   * @author 何波
   * @date 2019-08-06 16:31:14
-  * @param {*} *
   */
   browserType() {
-    let ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+    let ua = navigator.userAgent.toLowerCase()
+    if (/MicroMessenger/i.test(ua)) {
       // 微信中打开
       return 'weixin'
-    } else if (ua.match(/Alipay/i) == "alipay") {
+    } else if (/Alipay/i.test(ua)) {
       // 支付宝中打开
       return 'alipay'
     } else {
       let u = navigator.userAgent
-      if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+      if (u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
         return 'ios'
       } else if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
         return 'android'
@@ -89,14 +88,59 @@ export default {
   * @description 获取URL参数
   * @author 何波
   * @date 2019-08-06 17:52:51
-  * @param {*} *
   */
   getUrlParams() {
-    var url = decodeURI(location.search.slice(1)), params = {}, datas = url.split('&')
+    var url = decodeURI((location.href + location.search).split('?').slice(1).join('&')), params = {}, datas = url.split('&')
     for (let i = 0; i < datas.length; i++) {
       let tempData = datas[i].split('=')
       params[tempData[0]] = tempData[1]
     }
     return params
+  },
+  /**
+  * @description 关闭浏览器
+  * @author 何波
+  * @date 2019-08-29 17:48:41
+  */
+  exit() {
+    if (window.AlipayJSBridge) {
+      window.AlipayJSBridge.call('closeWebview')
+      window.AlipayJSBridge.call('exitApp')
+      window.AlipayJSBridge.call('popWindow', {data: {}})
+    } else if (window.WeixinJSBridge) {
+      window.WeixinJSBridge.call('closeWindow')
+    } else {
+      window.close()
+    }
+  },
+  /**
+  * @description 通过身份证号获取用户基本信息
+  * @author 何波
+  * @date 2019-09-05 10:31:56
+  * @param {String} sfzh
+  */
+  getInfoByIDCard(sfzh) {
+    let birth = '', sex = '', now = new Date(), csrq = null, y = 0
+    if (sfzh.length === 15) {
+      birth = '19' + sfzh.slice(6, 12)
+      sex = sfzh.slice(-1)
+    } else if (sfzh.length === 18) {
+      birth = sfzh.slice(6, 14)
+      sex = sfzh.slice(-2, -1)
+    }
+    birth = birth.replace(/(.{4})(.{2})/, '$1-$2-')
+    sex = sex % 2 ? '男' : '女'
+    csrq = new Date(birth)
+    y = now.getFullYear() - csrq.getFullYear()
+    return {birth, sex, age: y, nl: y + '岁'}
+  },
+  /**
+  * @description 设置页面标题
+  * @author 何波
+  * @date 2019-09-05 15:01:06
+  * @param {String} title
+  */
+  setPageTitle(title) {
+    // document.title = title
   }
 }

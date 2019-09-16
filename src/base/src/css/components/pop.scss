@@ -1,4 +1,4 @@
-.wd_pop{
+.wd_pop,.wd_mask{
   left: 0;
   right: 0;
   top: 0;
@@ -6,6 +6,13 @@
   position: fixed;
   z-index: 99;
   background: rgba(0, 0, 0, 0.1);
+}
+.wd_pop{
+  .wd_mask{
+    background: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 0;
+  }
 }
 .wd_msg{
   justify-content: center;
@@ -58,6 +65,7 @@
     text-align: left;
     .wd_content{
       text-indent: 2em;
+      line-height: 2em;
     }
   }
   .wd_toast{

@@ -1,6 +1,6 @@
 <template>
   <ul class="wd_list" @click.stop="$emit('selected', '')">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" row :class="{wd_selected:value==item[valId]}" @click.stop="selected(item)">
+    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" :disabled="item.disabled" row :class="{wd_selected:value==item[valId]}" @click.stop="selected(item)">
       <span class="wd_auto">
         {{item[showId]}}
       </span>
@@ -32,10 +32,12 @@ export default {
   },
   methods: {
     selected(item) {
-      if (this.value === item[this.valId]) {
-        this.$emit('selected', '')
-      } else {
-        this.$emit('selected', item)
+      if (!item.disabled) {
+        if (this.value === item[this.valId]) {
+          this.$emit('selected', '')
+        } else {
+          this.$emit('selected', item)
+        }
       }
     }
   }

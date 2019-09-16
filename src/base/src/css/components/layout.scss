@@ -18,6 +18,9 @@
   &[wrap]{
     flex-wrap: wrap;
   }
+  &[bottom]{
+    justify-content: flex-end;
+  }
   >.wd_auto{
     flex: 1;
   }
@@ -97,13 +100,4 @@
       background: #679df6;
     }
   }
-}
-// 圆
-.wd_circle.wd_right.wd_icon{
-  height: 1.2em;
-  line-height: 1.2em;
-  width: 1.2em;
-  text-align: center;
-  border: 1px solid #dcdcdc;
-  color: #dcdcdc;
 }

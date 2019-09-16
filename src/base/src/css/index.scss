@@ -13,7 +13,7 @@ html{
   ul{
     list-style: none;
   }
-  button,input{
+  button,input,textarea{
     outline: none;
     border: none;
     color: inherit;
@@ -50,6 +50,10 @@ html{
   border-radius: 50%;
   box-sizing: border-box;
   border: 1px solid #dcdcdc;
+  &.wd_right.wd_icon{
+    border: 1px solid #dcdcdc;
+    color: #dcdcdc;
+  }
 }
 .wd_text{
   overflow: hidden;
