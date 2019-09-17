@@ -14,18 +14,25 @@ export default {
   },
   computed: {
     back() {
-      return this.$store.getters.back || this.close
+      return this.$store.getters.back
     }
   },
   methods: {
     close() {
       this.isShow = false
     },
-    show() {
+    show(fun) {
       let elem = document.querySelector('.wd_show.wd_pop')
-      elem && this.back()
+      elem && this.back && this.back()
       this.isShow = true
-      this.$store.commit('back', this.close)
+      if (fun) {
+        this.$store.commit('back', () => {
+          this.close()
+          fun()
+        })
+      } else {
+        this.$store.commit('back', this.close)
+      }
     }
   }
 }

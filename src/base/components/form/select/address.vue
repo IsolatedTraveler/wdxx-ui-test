@@ -1,7 +1,8 @@
 <template>
-  <div class="wd_flex wd_address wd_select" :class="{wd_show: show}" row @click.stop="showPop(),initData()">
+  <div class="wd_flex wd_address wd_select" :class="{wd_show: show,wd_error: error}" row @click.stop="showPop(),initData()">
     <slot></slot>
-    <input class="wd_auto" autocomplete="off" type="text" :placeholder="placeholder" disabled :value="val">
+    <div class="wd_auto" v-show="val">{{val}}</div>
+    <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" disabled :value="val">
     <span class="wd_icon wd_arrow"></span>
     <wd-pop mask v-show="show" @close="closePop()">
       <div class="wd_flex wd_content" @click.stop="">
@@ -40,6 +41,10 @@ export default {
       type: String,
       default: 'sjid'
     },
+    isVerify: {
+      type: String,
+      default: ''
+    },
     getData: {
       type: Function,
       default: null,
@@ -59,7 +64,8 @@ export default {
       currentItem: {},
       show: false,
       lastItem: {hide: true},
-      addressData: []
+      addressData: [],
+      error: false
     }
   },
   watch: {
@@ -147,6 +153,15 @@ export default {
           this.getVal(this.vals)
           this.vals.pop()
         }
+      })
+    },
+    msg(msg) {
+      this.error = true
+      this.$msg.toast(msg, '警告').then(res => {
+        this.error = false
+        this.refs.input.onfoucs()
+      }).catch(e => {
+        this.error = false
       })
     }
   }
