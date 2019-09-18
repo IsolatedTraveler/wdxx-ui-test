@@ -1,5 +1,5 @@
 <template>
-  <div class="wd_pop wd_flex" v-show="isShow" :class="{wd_show: isShow}">
+  <div class="wd_pop wd_flex" ref="pop" v-show="isShow" :class="{wd_show: isShow}">
     <div class="wd_mask" @click.stop="back()"></div>
     <slot></slot>
   </div>

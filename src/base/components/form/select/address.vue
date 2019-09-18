@@ -4,7 +4,7 @@
     <div class="wd_auto" v-show="val">{{val}}</div>
     <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" disabled :value="val">
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop mask v-show="show" @close="closePop()">
+    <wd-pop mask v-show="show" ref="pop" @close="closePop()">
       <div class="wd_flex wd_content" @click.stop="">
         <div v-if="title" class="wd_title">{{title}}</div>
         <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="currentValue" @selected="resetAddress"/>
@@ -96,8 +96,8 @@ export default {
         let elem = document.querySelector('.wd_show .wd_pop')
         elem && (this.$store.getters.back())
         this.show = true
+        document.body.append(this.$refs.pop)
         this.fun = this.$store.getters.back
-        this.$store.commit('back', this.closePop)
       }
     },
     closePop() {
@@ -127,7 +127,10 @@ export default {
     initData() {
       this.getData(this.currentItem ? this.currentItem[this.sjid] : '').then(res => {
         this.addressData = res
-        this.vals.push(this.lastItem)
+        let val = this.vals.slice(-1)[0] || {}
+        if (val[this.valId] !== this.lastItem[this.valId] || val[this.showId] !== this.lastItem[this.showId]) {
+          this.vals.push(this.lastItem)
+        }
       })
     },
     resetAddress(item, i) {
