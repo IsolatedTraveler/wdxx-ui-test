@@ -70,3 +70,33 @@ html{
 @import './components/pop.scss';
 // 数据展示组件
 @import './components/data.scss';
+// 修改全局默认样式
+.wd_button{
+  height: 30px;
+  border-radius: 20px;
+  &[big]{
+    width: 90%;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 17px;
+  }
+}
+.item8{
+  background: #fff;
+  margin: 0 8px 8px;
+  padding: 8px;
+  border-radius: 5px;
+}
+.gray{
+  background: #f1f0f6;
+}
+.wd_address{
+  min-height: 40px;
+  border-bottom: 1px solid #dcdcdc;
+  padding-left: 8px;
+}
+.wd_icon.wd_address{
+  min-height: unset;
+  border: none;
+  padding: 0;
+}

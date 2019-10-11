@@ -59,13 +59,14 @@ export default {
 
     } else {
       var body = document.documentElement, screenWidth = body.clientWidth, initialScale = screenWidth / width
-      document.getElementsByTagName('meta').viewport.content = 'width=' + width + ', minimum-scale=' + initialScale + ', maximum-scale=' + initialScale + ', user-scalable=no'
+      document.getElementsByTagName('meta').viewport.content = 'width=' + width + ', minimum-scale=' + initialScale + ', maximum-scale=' + initialScale + ',initial-scale=' + initialScale + ', user-scalable=no'
     }
   },
   /**
   * @description 浏览器类型识别
   * @author 何波
   * @date 2019-08-06 16:31:14
+  * @param {*} *
   */
   browserType() {
     let ua = navigator.userAgent.toLowerCase()
@@ -88,6 +89,7 @@ export default {
   * @description 获取URL参数
   * @author 何波
   * @date 2019-08-06 17:52:51
+  * @param {*} *
   */
   getUrlParams() {
     var url = decodeURI((location.href + location.search).split('?').slice(1).join('&')), params = {}, datas = url.split('&')
@@ -101,6 +103,7 @@ export default {
   * @description 关闭浏览器
   * @author 何波
   * @date 2019-08-29 17:48:41
+  * @param {}
   */
   exit() {
     if (window.AlipayJSBridge) {
@@ -141,6 +144,6 @@ export default {
   * @param {String} title
   */
   setPageTitle(title) {
-    // document.title = title
+    document.title = title
   }
 }

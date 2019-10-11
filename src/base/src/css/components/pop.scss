@@ -4,7 +4,7 @@
   top: 0;
   bottom: 0;
   position: fixed;
-  z-index: 99;
+  z-index: 999;
   background: rgba(0, 0, 0, 0.1);
 }
 .wd_pop{
@@ -32,6 +32,7 @@
       font-size: 16px;
       border: none;
       padding-top: 15px;
+      color: #333;
     }
     .wd_content {
       padding: 10px;
@@ -64,8 +65,8 @@
     align-items: flex-start;
     text-align: left;
     .wd_content{
-      text-indent: 2em;
       line-height: 2em;
+      color: #999;
     }
   }
   .wd_toast{
