@@ -1,21 +1,30 @@
 <template>
-  <div class="wd_flex wd_select" :class="{wd_error:error}" row @click.stop="disabled || showPop()">
-    <label :class="{wd_gray:val}">{{label}}</label>
-    <span class="wd_text wd_auto" :class="{wd_gray:!val}">{{val ? val : data.length ? '单击选择数据' : '当前选项未获取到数据'}}</span>
+  <div class="wd_flex wd_select wd_select_m" :class="{wd_error:error}" row @click.stop="disabled || showPop()">
+    <label :class="{wd_gray:val.length}">{{label}}</label>
+    <span class="wd_auto wd_flex wd_val" row :class="{wd_gray:!value}">
+      {{val.length ? '' : data.length ? '单击选择数据' : '当前选项未获取到数据'}}
+      <span v-for="(it,i) in val" :key="i" class="wd_item3">
+        {{it[showId]}}
+      </span>
+    </span>
     <span class="wd_icon wd_arrow"></span>
     <slot>
     </slot>
     <wd-pop-up ref='pop' @close="closePop">
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="placeholder" v-model="searchVal"/>
-        <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" :value="value" :valId="valId" :showId="showId"/>
+        <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" :value="old" :valId="valId" :showId="showId"/>
+        <div class="wd_flex wd_btn" row>
+          <button class="wd_button" warn @click.stop="cancel">取消</button>
+          <button class="wd_button" @click.stop="submit">确定</button>
+        </div>
       </div>
     </wd-pop-up>
   </div>
 </template>
 <script>
 export default {
-  name: 'WdSelect',
+  name: 'WdSelectMulti',
   props: {
     label: {
       type: String,
@@ -63,14 +72,14 @@ export default {
       type: Function,
       default: null
     },
-    isNull: {
-      type: Boolean,
-      defalut: false
+    split: {
+      type: String,
+      default: ','
     }
   },
   data() {
     return {
-      val: '',
+      val: [],
       old: null,
       searchVal: '',
       error: false
@@ -113,22 +122,31 @@ export default {
       this.back()
     },
     init() {
-      this.val = (this.data.filter(item => {
-        return this.value === item[this.valId]
-      })[0] || {})[this.showId]
+      let value = this.value || '', val = value + this.split, split = this.split, id = this.valId
+      this.val = this.data.filter(item => {
+        return val.indexOf(item[id] + split) !== -1
+      })
+      this.oldVal = [].concat(this.val)
+      this.old = value
     },
     selecteVal(item) {
       if (item) {
-        let id = item[this.valId], val = item[this.showId]
-        if (id === this.value && !this.isNull) {
-          id = ''
-          val = ''
+        let id = item[this.valId], split = this.split, value = this.old
+        if (value) {
+          value += ','
         }
-        this.val = val
-        this.old = id
-        this.$emit('input', id)
+        if (value.indexOf(id) === -1) {
+          value += id
+          this.oldVal.push(item)
+        } else {
+          value = value.replace(id + split, '')
+          value = value.replace(new RegExp(split + '$'), '')
+          this.oldVal = this.oldVal.filter(it => {
+            return it[this.valId] === id
+          })
+        }
+        this.old = value
       }
-      this.closePop()
     },
     msg(msg) {
       this.error = true
@@ -138,6 +156,16 @@ export default {
       }).catch(e => {
         this.error = false
       })
+    },
+    cancel() {
+      this.old = this.value || ''
+      this.oldVal = [].concat(this.val)
+      this.closePop()
+    },
+    submit() {
+      this.val = this.oldVal
+      this.$emit('input', this.old)
+      this.closePop()
     }
   }
 }

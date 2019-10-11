@@ -1,15 +1,15 @@
 <template>
   <div class="wd_flex wd_select wd_select_b" row @click.stop="showPop()" :class="{wd_show: show}">
-    <span class="wd_text">{{val}}</span>
+    <span class="wd_auto wd_text">{{val}}</span>
     <slot>
       <span class="wd_icon wd_arrow"></span>
     </slot>
-    <wd-pop mask v-show="show" @close="closePop">
+    <wd-pop-up ref="pop">
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="placeholder" v-model="searchVal"/>
         <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" :value="value" :valId="valId" :showId="showId"/>
       </div>
-    </wd-pop>
+    </wd-pop-up>
   </div>
 </template>
 <script>
@@ -66,7 +66,7 @@ export default {
       }
     },
     back() {
-      return this.$store.getters.back || this.closePop
+      return this.$store.getters.back
     }
   },
   watch: {
@@ -82,17 +82,7 @@ export default {
   },
   methods: {
     showPop() {
-      if (this.show) {
-        this.back()
-      } else {
-        let elem = document.querySelector('.wd_show .wd_pop')
-        elem && this.back()
-        this.show = true
-        this.$store.commit('back', this.closePop)
-      }
-    },
-    closePop() {
-      this.show = false
+      this.$refs.pop.show()
     },
     init() {
       this.val = (this.data.filter(item => {

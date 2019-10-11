@@ -3,9 +3,9 @@
   text-align: left;
   .wd_list_item{
     width: 100%;
-    padding: 0 1em;
+    padding: 0.5em 1em;
     border-bottom: 1px solid #dcdcdc;
-    height: 2.4em;
+    min-height: 2.4em;
     &.wd_selected{
       color: #679df6;
       .wd_right.wd_icon{
@@ -16,12 +16,23 @@
     &[disabled]{
       color: #ccc;
     }
+    &.wd_gray{
+      text-align: center;
+      font-size: 1.8em;
+      line-height: 6em;
+      height: auto;
+      padding: 0;
+    }
+    .wd_arrow{
+      font-size: 1.2em;
+    }
   }
 }
 // 轮播插件
 .wd_swipe{
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
   .wd_swipe_item{
     width: 100%;
     height: 100%;

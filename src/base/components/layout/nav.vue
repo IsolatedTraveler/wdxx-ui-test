@@ -1,6 +1,6 @@
 <template>
   <div class="wd_flex wd_nav">
-    <button class="wd_item" v-for="(item,i) in data" :disabled="item[valId]==value" @click.stop="$emit('selected', item, i)" v-show="!item.hide" :key="i">
+    <button class="wd_item" v-for="(item,i) in data" :disabled="item[valId]==value" @click.stop="$emit('input', item[valId], i)" v-show="!item.hide" :key="i">
       {{item[showId]}}
     </button>
   </div>

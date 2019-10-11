@@ -55,7 +55,6 @@ export default {
             }
           }
         }
-        console.log(msg)
         msg ? reject(new Error()) : resolve()
       })
     },

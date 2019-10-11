@@ -2,6 +2,7 @@
 html,body{
   width: 100%;
   height: 100%;
+  background: #fff;
 }
 html{
   overflow: hidden;
@@ -31,6 +32,9 @@ html{
 // 布局设置
 @import './components/layout.scss';
 // 自定义默认样式
+input[disabled]{
+  color: #999;
+}
 [before]::before,[after]::after{
   position: absolute;
   content: '';
@@ -60,8 +64,36 @@ html{
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.wd_text2,.wd_text3{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wd_text2{
+  -webkit-line-clamp: 2;
+}
+.wd_text3{
+  -webkit-line-clamp: 3;
+}
 .wd_gray{
   color: #999;
+}
+.wd_btn{
+  width: 100%;
+  justify-content: space-around;
+}
+.wd_item8,.wd_item3{
+  background: #fff;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.wd_item8{
+  margin: 0 8px 8px;
+  padding: 8px;
+}
+.wd_item3{
+  margin: 0 3px 3px;
+  padding: 3px;
 }
 @import './font/font.scss';
 // Form 组件
@@ -81,17 +113,18 @@ html{
     font-size: 17px;
   }
 }
-.item8{
-  background: #fff;
-  margin: 0 8px 8px;
-  padding: 8px;
-  border-radius: 5px;
+.wd_input{
+  padding: 0 8px;
+  border-bottom: 1px solid #dcdcdc;
+  height: 40px;
 }
-.gray{
-  background: #f1f0f6;
+.wd_nav[row]{
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  font-size: 14px;
 }
 .wd_address{
-  min-height: 40px;
   border-bottom: 1px solid #dcdcdc;
   padding-left: 8px;
 }
@@ -99,4 +132,15 @@ html{
   min-height: unset;
   border: none;
   padding: 0;
+}
+.wd_select{
+  height: 40px;
+  padding: 0 8px;
+}
+.wd_select_m,.wd_address{
+  min-height: 40px;
+  height: auto;
+}
+.wd_list .wd_list_item{
+  font-size: 14px;
 }

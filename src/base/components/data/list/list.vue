@@ -1,6 +1,6 @@
 <template>
   <ul class="wd_list" @click.stop="$emit('selected', '')">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" :disabled="item.disabled" row :class="{wd_selected:value==item[valId]}" @click.stop="selected(item)">
+    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" :disabled="item.disabled" row :class="{wd_selected:(value || '').indexOf(item[valId])!==-1}" @click.stop="$emit('selected', item, i)">
       <span class="wd_auto">
         {{item[showId]}}
       </span>
@@ -18,7 +18,7 @@ export default {
       required: true
     },
     value: {
-      type: String,
+      type: String || Array,
       default: ''
     },
     showId: {
@@ -28,17 +28,6 @@ export default {
     valId: {
       type: String,
       default: 'id'
-    }
-  },
-  methods: {
-    selected(item) {
-      if (!item.disabled) {
-        if (this.value === item[this.valId]) {
-          this.$emit('selected', '')
-        } else {
-          this.$emit('selected', item)
-        }
-      }
     }
   }
 }

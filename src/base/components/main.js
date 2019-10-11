@@ -4,6 +4,7 @@ import WdInput from './form/input/input'
 import WdSearch from './form/input/search'
 import WdTreeSelect from './form/treeSelect'
 import WdSelect from './form/select/select'
+import WdSelectM from './form/select/select_m'
 import WdSelectB from './form/select/select_b'
 import WdAddress from './form/select/address'
 import WdProgress from './form/progress'
@@ -15,7 +16,7 @@ import WdPopUp from './pop/popUp'
 import WdMask from './pop/mask'
 import WdMsg from './pop/main'
 // 数据展示
-import WdList from './data/list'
+import WdList from './data/list/list'
 import WdListClick from './data/list/listClick'
 import WdTree from './data/tree'
 import WdSwipe from './data/swipe'
@@ -32,6 +33,7 @@ let components = [
     WdSelect,
     WdAddress,
     WdSelectB,
+    WdSelectM,
     WdProgress,
     WdSwitch,
     WdPop,

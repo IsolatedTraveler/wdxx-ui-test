@@ -39,46 +39,59 @@ export default {
       setTimeout(() => {
         this.next = (val + 1) % this.len
       }, 300)
+    },
+    len(v, o) {
+      if (v < 2) {
+        let elem = this.$refs.swipe
+        elem.removeEventListener('touchstart', this.touchstart, false)
+        elem.removeEventListener('touchmove', this.touchmove, false)
+        elem.removeEventListener('touchend', this.touchend, false)
+        clearInterval(this.time)
+      } else if (o < 2) {
+        this.init()
+      }
     }
-  },
-  created() {
-    this.start()
   },
   mounted() {
-    if (this.len > 1) {
-      let elem = this.$refs.swipe
-      this.width = elem.clientWidth
-      elem.addEventListener('touchstart', (event) => {
-        clearInterval(this.time)
-        let touch = event.touches[0], elems = elem.getElementsByClassName('wd_swipe_item'), i = this.i, len = this.len
-        this.startLeft = touch.pageX
-        this.selectElem = elems[i]
-        this.nextElem = elems[this.next]
-        this.oldElem = elems[(i - 1 + len) % this.len]
-      }, false)
-      elem.addEventListener('touchmove', (event) => {
-        let touch = event.touches[0], offsetLeft = touch.pageX - this.startLeft
-        this.offsetLeft = offsetLeft
-        this.selectElem.style = `transform: translateX(${offsetLeft}px);transition:unset;`
-        if (this.offsetLeft < 0) {
-          this.nextElem.style = `transform: translateX(${this.width + offsetLeft}px);transition:unset;`
-        } else {
-          this.oldElem.style = `transform: translateX(${-this.width + offsetLeft}px);transition:unset;`
-        }
-      }, false)
-      elem.addEventListener('touchend', (event) => {
-        let offsetLeft = this.offsetLeft, distinctX = Math.abs(offsetLeft)
-        if (distinctX > this.width / 2) {
-          this.i = this.next
-        }
-        this.selectElem.style = ''
-        this.oldElem.style = ''
-        this.nextElem.style = ''
-        this.start()
-      }, false)
-    }
+    this.init()
   },
   methods: {
+    init() {
+      let elem = this.$refs.swipe
+      this.width = elem.clientWidth
+      elem.addEventListener('touchstart', this.touchstart, false)
+      elem.addEventListener('touchmove', this.touchmove, false)
+      elem.addEventListener('touchend', this.touchend, false)
+      this.start()
+    },
+    touchstart(event) {
+      clearInterval(this.time)
+      let touch = event.touches[0], elems = this.$refs.swipe.getElementsByClassName('wd_swipe_item'), i = this.i, len = this.len
+      this.startLeft = touch.pageX
+      this.selectElem = elems[i]
+      this.nextElem = elems[this.next]
+      this.oldElem = elems[(i - 1 + len) % this.len]
+    },
+    touchmove(event) {
+      let touch = event.touches[0], offsetLeft = touch.pageX - this.startLeft
+      this.offsetLeft = offsetLeft
+      this.selectElem.style = `transform: translateX(${offsetLeft}px);transition:unset;`
+      if (this.offsetLeft < 0) {
+        this.nextElem.style = `transform: translateX(${this.width + offsetLeft}px);transition:unset;`
+      } else {
+        this.oldElem.style = `transform: translateX(${-this.width + offsetLeft}px);transition:unset;`
+      }
+    },
+    touchend(event) {
+      let offsetLeft = this.offsetLeft, distinctX = Math.abs(offsetLeft)
+      if (distinctX > this.width / 2) {
+        this.i = this.next
+      }
+      this.selectElem.style = ''
+      this.oldElem.style = ''
+      this.nextElem.style = ''
+      this.start()
+    },
     selected(i) {
       clearInterval(this.time)
       this.i = i
