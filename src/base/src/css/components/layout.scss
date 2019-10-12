@@ -67,13 +67,16 @@
 }
 // 标题栏设置
 .wd_title{
-  text-align: center;
-  border-bottom: 1px solid #dcdcdc;
   width: 100%;
-  color: #000;
-  height: 3em;
-  line-height: 3em;
+  min-height: 3em;
+  line-height: 1.6em;
+  text-align: center;
+  font-size: 1.5em;
   font-weight: bolder;
+  box-sizing: border-box;
+  border-bottom: 1px solid #dcdcdc;
+  color: #333;
+  padding: 0.7em;
 }
 // 正文设置
 .wd_content{
