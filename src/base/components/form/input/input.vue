@@ -1,10 +1,8 @@
 <template>
   <div class="wd_flex wd_input" row :class="{wd_error:error}" @click.stop="clickEvent()">
     <slot>
-      <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
     </slot>
-    <slot name='right'>
-    </slot>
+    <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
     <input class="wd_auto" autocomplete="off" type="text" ref="input" :placeholder="placeholder" :disabled="disabled" :value="value" @blur.stop="blur" @input="$emit('input',$event.target.value)">
     <span @click.stop="$emit('input','')" class="wd_icon wd_close" v-show="value && judge"></span>
   </div>

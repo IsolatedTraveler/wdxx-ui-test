@@ -1,7 +1,7 @@
 <template>
   <div class="wd_flex wd_tabs" row>
     <slot>
-      <div class="wd_flex wd_tab" :class="{wd_selected: index==value}" after v-for="(item,index) in data" :key="index" @click="$emit('input', index)">
+      <div class="wd_flex wd_tab" :selected="index==value" after v-for="(item,index) in data" :key="index" @click="$emit('input', index)">
         <span>{{item}}</span>
       </div>
     </slot>

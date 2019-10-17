@@ -12,11 +12,7 @@ router.beforeEach((to, from, next) => {
     back()
     next(false)
   } else {
-    if (to.name !== 'login' && !store.getters.userInfo) {
-      next()
-    } else {
-      next()
-    }
+    next()
   }
 })
 export default router

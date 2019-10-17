@@ -1,17 +1,41 @@
-.wd_pop,.wd_mask{
+.wd_pop{
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   position: fixed;
-  z-index: 999;
+  z-index: 9;
   background: rgba(0, 0, 0, 0.1);
 }
-.wd_pop{
-  .wd_mask{
-    background: rgba(0, 0, 0, 0.1);
-    position: absolute;
-    z-index: 0;
+.wd_mask{
+  justify-content: center;
+  z-index: 99;
+  .loading span{
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    border-radius: 4px;
+    background: lightgreen;
+    animation: load 1s ease infinite;
+  }
+  @keyframes load{
+    50%{
+      height: 70px;
+      margin: -15px 0;
+      background: lightblue;
+    }
+  }
+  .loading span:nth-child(2){
+    animation-delay:0.2s;
+  }
+  .loading span:nth-child(3){
+    animation-delay:0.4s;
+  }
+  .loading span:nth-child(4){
+    animation-delay:0.6s;
+  }
+  .loading span:nth-child(5){
+    animation-delay:0.8s;
   }
 }
 .wd_msg{
@@ -63,43 +87,5 @@
   .wd_toast{
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
-  }
-}
-.wd_mask{
-  justify-content: center;
-  .loading{
-    width: 80px;
-    height: 40px;
-  }
-  .loading span{
-    display: inline-block;
-    width: 8px;
-    height: 100%;
-    border-radius: 4px;
-    background: lightgreen;
-    animation: load 1s ease infinite;
-  }
-  @keyframes load{
-    0%,100%{
-      height: 40px;
-      background: lightgreen;
-    }
-    50%{
-      height: 70px;
-      margin: -15px 0;
-      background: lightblue;
-    }
-  }
-  .loading span:nth-child(2){
-    animation-delay:0.2s;
-  }
-  .loading span:nth-child(3){
-    animation-delay:0.4s;
-  }
-  .loading span:nth-child(4){
-    animation-delay:0.6s;
-  }
-  .loading span:nth-child(5){
-    animation-delay:0.8s;
   }
 }

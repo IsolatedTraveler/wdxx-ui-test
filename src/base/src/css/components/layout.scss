@@ -50,16 +50,13 @@
 // 顶部设置
 .wd_top{
   width: 100%;
-  padding-top: 25px;
-  height: 55px;
+  line-height: 3em;
   background: linear-gradient(to right, #5c8bff, #9a95f3);
   color: #fff;
-  .wd_icon{
-    height: 30px;
-    width: 30px;
-    font-size: 28px;
+  box-sizing: content-box;
+  .wd_arrow{
     transform: rotate(180deg);
-    line-height: 30px;
+    padding-left: 0.2em;
   }
   .wd_auto{
     text-align: center;
@@ -92,7 +89,7 @@
 // 导航
 .wd_nav{
   .wd_item{
-    height: 100%;
+    line-height: 3em;
     &[disabled]::after{
       content: '';
       position: absolute;

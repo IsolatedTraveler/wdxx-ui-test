@@ -1,36 +1,31 @@
 form{
   width: 100%;
 }
-// input
-.wd_input{
+// form表单公用样式
+.wd_input,.wd_select{
+  height: 3em;
   width: 100%;
   &.wd_error{
     outline: 1px solid red;
     font-size: red;
   }
-  >[right]{
-    order: 10;
-  }
-  >[left]{
-    order: -1;
-  }
-  >.wd_icon{
-    text-align: center;
-    border-radius: 50%;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    box-sizing: content-box;
-    padding: 3px;
-    background-color: #ccc;
-    color: #fff;
-  }
 }
-.wd_input,.wd_select{
-  [disabled]{
+// input
+.wd_pwd{
+  .wd_password{
+    color: #679df6;
+  }
+  .wd_eye{
     color: #ccc;
   }
 }
+.wd_search{
+  .wd_icon{
+    color: #ccc;
+    font-size: 2em;
+  }
+}
+// address
 .wd_address{
   text-align: right;
   .wd_pop{
@@ -38,58 +33,26 @@ form{
   }
   .wd_nav{
     width: 100%;
-    height: 3em;
-    line-height: 3em;
   }
   .wd_list{
     height: 45vh;
   }
-  .wd_arrow{
-    font-size: 1.4em;
-  }
 }
-.wd_select_b{
-  justify-content: center;
-}
-.wd_input.wd_search{
-  .wd_icon.wd_search{
-    background: transparent;
-    color: #ccc;
-    font-size: 1.9em;
-  }
-}
+// select
 .wd_select{
-  width: 100%;
-  &.wd_error{
-    outline: 1px solid red;
-    font-size: red;
-  }
-  >[right]{
-    order: 10;
-  }
-  >[left]{
-    order: -1;
-  }
-  >.wd_icon{
-    text-align: center;
-    border-radius: 50%;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    box-sizing: content-box;
-    padding: 3px;
-  }
   .wd_pop{
     .wd_input{
-      width: 90%;
-      border-radius: 1em;
       border: 1px solid #ccc;
-      line-height: 2em;
-      height: 2em;
+      width: calc(100% - 1em);
       margin: 0.5em 0;
-      .wd_icon {
-        font-size: 1.5em;
-      }
+    }
+  }
+  &.wd_select_auto{
+    justify-content: space-around;
+  }
+  .wd_btn{
+    button{
+      width: 45%;
     }
   }
 }
@@ -106,20 +69,16 @@ form{
     }
   }
 }
-// old
 // button
 .wd_button{
   text-align: center;
   border-radius: 5px;
-  background: linear-gradient(to right,#61e18c, #01b678);
-  color: #fff;
   border: 1px solid transparent;
   box-sizing: border-box;
   padding: 0.1em 0.5em;
   &[default]{
-    border-color: #679df6;
-    background: #fff;
-    color: #679df6;
+    background: linear-gradient(to right,#61e18c, #01b678);
+    color: #fff;
   }
   &[warn]{
     background: #fff;
@@ -137,24 +96,29 @@ form{
     color: #fff;
   }
 }
+.wd_btn{
+  width: 100%;
+  justify-content: space-around;
+}
 // progress
 .wd_progress{
   width: 100%;
   .wd_bar{
     width: 100%;
-    height: 12px;
-    border-radius: 6px;
+    height: 1em;
+    border-radius: 0.5em;
     background: #ccc;
     margin: 0.8em 0;
     .wd_fill{
       background: #177fcb;
       width: 0%;
       height: 100%;
-      border-radius: 6px;
+      border-radius: 0.5em;
       transition: width 0.2s linear 0;
     }
   }
 }
+// switch
 .wd_switch{
   color: #ccc;
   >.switch{
@@ -177,27 +141,6 @@ form{
       box-shadow: 0 1px 3px rgba(0,0,0,.4);
       left: 0;
       transition: all 0.20s;
-    }
-  }
-  &[selected]{
-    color: #6b8eff;
-    >.switch{
-      background-color: #6b8eff;
-      &::before{
-        transform: translateX(100%)
-      }
-    }
-  }
-}
-.wd_select{
-  >.wd_pop{
-    .wd_buttons{
-      width: 100%;
-      justify-content: space-around;
-    }
-    .wd_button{
-      width: 45%;
-      margin: 0.5em 0;
     }
   }
 }

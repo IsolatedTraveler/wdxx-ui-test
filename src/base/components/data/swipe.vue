@@ -1,10 +1,10 @@
 <template>
   <div class="wd_swipe" ref="swipe">
-    <div class="wd_swipe_item" v-for="(item,index) in data" :key="index" :class="{wd_selected: i === index,wd_next: next===index}">
+    <div class="wd_swipe_item" v-for="(item,index) in data" :key="index" :selected="i === index" :next="next===index">
       <slot :data="item"></slot>
     </div>
     <div class="wd_swipe_signal wd_flex" row>
-      <span v-for="(item,index) in data" :key="index" :class="{wd_selected: i === index}" @click="selected(index)"></span>
+      <span v-for="(item,index) in data" :key="index" :selected="i === index" @click="selected(index)"></span>
     </div>
   </div>
 </template>

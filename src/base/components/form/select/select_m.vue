@@ -1,5 +1,7 @@
 <template>
   <div class="wd_flex wd_select wd_select_m" :class="{wd_error:error}" row @click.stop="disabled || showPop()">
+    <slot>
+    </slot>
     <label :class="{wd_gray:val.length}">{{label}}</label>
     <span class="wd_auto wd_flex wd_val" row :class="{wd_gray:!value}">
       {{val.length ? '' : data.length ? '单击选择数据' : '当前选项未获取到数据'}}
@@ -8,8 +10,6 @@
       </span>
     </span>
     <span class="wd_icon wd_arrow"></span>
-    <slot>
-    </slot>
     <wd-pop-up ref='pop' @close="closePop">
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="placeholder" v-model="searchVal"/>

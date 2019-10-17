@@ -3,16 +3,9 @@
   text-align: left;
   .wd_list_item{
     width: 100%;
-    padding: 0.5em 1em;
-    border-bottom: 1px solid #dcdcdc;
-    min-height: 2.4em;
-    &.wd_selected{
-      color: #679df6;
-      .wd_right.wd_icon{
-        background: #679df6;
-        color: #fff;
-      }
-    }
+    padding: 0.5em;
+    min-height: 3em;
+    line-height: 1.6em;
     &[disabled]{
       color: #ccc;
     }
@@ -71,5 +64,11 @@
         background: #fff;
       }
     }
+  }
+}
+// 树形插件
+.wd_tree .wd_tree_list{
+  [child] .wd_icon{
+    display: none;
   }
 }

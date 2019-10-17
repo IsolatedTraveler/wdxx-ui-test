@@ -17,9 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
   display: inline-block;
   box-sizing: content-box;
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
+  font-size: 1.6em;
   &[right]{
     transform: rotate(90deg);
   }
@@ -28,6 +26,9 @@
   }
   &[left]{
     transform: rotate(270deg);
+  }
+  &.wd_right{
+    font-size: 1.2em;
   }
   &.wd_close::before {
     content: "\e65c";

@@ -1,8 +1,6 @@
 <template>
   <div class="wd_flex wd_top" row>
-    <div class="left" @click.stop="$router.go(-1)">
-      <span class="wd_icon wd_arrow"></span>
-    </div>
+    <span class="wd_icon wd_arrow" @click.stop="$router.go(-1)"></span>
     <span class="wd_auto">{{title}}</span>
     <slot></slot>
   </div>

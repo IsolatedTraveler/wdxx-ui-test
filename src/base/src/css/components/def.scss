@@ -1,0 +1,98 @@
+// 去除默认样式
+html,body{
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+html{
+  overflow: hidden;
+  body,input,p,button,ul,li{
+    padding: 0;
+    margin: 0;
+    font-family: "Microsoft YaHei";
+  }
+  ul{
+    list-style: none;
+  }
+  button,input,textarea{
+    outline: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    background: transparent;
+  }
+  input{
+    border-radius: 0;
+    min-width: 0;
+    box-sizing: content-box;
+    line-height: 1.4em;
+    text-align: inherit;
+  }
+}
+// 自定义默认样式
+.wd_circle{
+  border-radius: 50%;
+  box-sizing: content-box;
+  border: 1px solid #dcdcdc;
+  height: 1em;
+  line-height: 1em;
+  &.wd_icon{
+    border: 1px solid #dcdcdc;
+    color: #dcdcdc;
+  }
+}
+.wd_item8,.wd_item3{
+  background: #fff;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.wd_item8{
+  margin: 0 8px 8px;
+  padding: 8px;
+}
+.wd_item3{
+  margin: 0 3px 3px;
+  padding: 3px;
+}
+[before]::before,[after]::after{
+  position: absolute;
+  content: '';
+  left: 0;
+}
+[before]::before{
+  top: 0;
+}
+[after]::after{
+  bottom: 0;
+}
+[scroll]{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+// 字体通用样式
+.wd_text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wd_text2,.wd_text3{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.wd_text2{
+  -webkit-line-clamp: 2;
+}
+.wd_text3{
+  -webkit-line-clamp: 3;
+}
+// 颜色设置
+.wd_gray{
+  color: #999;
+}
+[selected]{
+  color: #6b8eff;
+}
+[disabled]{
+  color: #999;
+}

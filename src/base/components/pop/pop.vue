@@ -1,5 +1,5 @@
 <template>
-  <div class="wd_pop wd_flex" @click.stop="$emit('close')">
+  <div class="wd_pop wd_flex" ref="pop" v-show="isShow" :class="{wd_show: isShow}" @click.stop="shadeClose && back()">
     <slot></slot>
   </div>
 </template>
@@ -7,14 +7,37 @@
 export default {
   name: 'WdPop',
   props: {
-    mask: {
+    shadeClose: {
       type: Boolean,
       default: false
     }
   },
+  data() {
+    return {
+      isShow: false
+    }
+  },
+  computed: {
+    back() {
+      return this.$store.getters.back
+    }
+  },
   methods: {
     close() {
-      this.$emit('close')
+      this.isShow = false
+    },
+    show(fun) {
+      let elem = document.querySelector('.wd_show.wd_pop')
+      elem && this.back && this.back()
+      this.isShow = true
+      if (fun) {
+        this.$store.commit('back', () => {
+          this.close()
+          fun()
+        })
+      } else {
+        this.$store.commit('back', this.close)
+      }
     }
   }
 }
