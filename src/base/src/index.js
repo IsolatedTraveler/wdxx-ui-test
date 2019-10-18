@@ -1,8 +1,7 @@
 import {components, props} from '../components/main.js'
 import util from './util'
 let obj = {
-  install(vue, config) {
-    config = {}
+  install(vue) {
     components.forEach(item => {
       vue.component(item.name, item)
     })

@@ -1,5 +1,5 @@
 <template>
-  <div class="wd_flex wd_address wd_select" :class="{wd_error: error}" row @click.stop="showPop()">
+  <div class="wd_flex wd_address wd_select" :class="{wd_error: error}" row @click.stop="$refs.pop.show()">
     <slot></slot>
     <div class="wd_auto" v-show="val">{{val}}</div>
     <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" disabled :value="val">
@@ -88,9 +88,6 @@ export default {
     this.value && this.init()
   },
   methods: {
-    showPop() {
-      this.$refs.pop.show()
-    },
     init() {
       this.vals = [this.lastItem]
       if (this.value) {

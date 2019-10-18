@@ -1,37 +1,24 @@
 <template>
-  <component class="wd_tree" :is="skin" :data="list" :valId="valId" :showId="showId" :value="val" :icon="icon" :parentDisable="parentDisable"/>
+  <component class="wd_tree" :is="skin" :data="list" :valId="valId" :showId="showId" :value="val" :icon="icon" :parentDisable="parentDisable" @selected="$emit('selected', $event)"/>
 </template>
 <script>
-import list from './components/treeList'
+import listjs from './list.js'
 export default {
   name: 'wdTree',
   components: {
-    list
+    list() {
+      return import('./components/treeList')
+    }
   },
+  extends: listjs,
   props: {
-    data: Array,
-    default() {
-      return []
-    },
     value: {
-      type: String || [],
+      type: String,
       default: ''
-    },
-    valId: {
-      type: String,
-      default: 'id'
-    },
-    showId: {
-      type: String,
-      default: 'mc'
     },
     parentDisable: {
       type: Boolean,
       default: false
-    },
-    icon: {
-      type: String,
-      default: 'wd_arrow'
     },
     pId: {
       type: String,
@@ -49,11 +36,15 @@ export default {
     skin: {
       type: String,
       default: 'list'
+    },
+    split: {
+      type: String,
+      default: ','
     }
   },
   computed: {
     val() {
-      return this.value || ''
+      return (this.value || '').split(this.split)
     },
     list() {
       let data = this.data
@@ -75,13 +66,6 @@ export default {
         data = a[this.rootId]
       }
       return data
-    }
-  },
-  methods: {
-    selected(item, i) {
-      if (!item.diabled && (!item.child || !this.parentDisable)) {
-
-      }
     }
   }
 }

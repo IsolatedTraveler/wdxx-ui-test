@@ -1,11 +1,18 @@
-import index from '@/view/index'
 export default [
   {
     path: '',
-    redirect: '/index'
+    redirect: '/overview'
   }, {
-    path: '/index',
-    name: 'index',
-    component: index
+    path: '/overview',
+    name: 'overview',
+    component: () => import('@/view/overview')
+  }, {
+    path: '/quickstart',
+    name: 'quickstart',
+    component: () => import('@/view/quickstart')
+  }, {
+    path: '/list',
+    name: 'list',
+    component: () => import('@/view/data/list')
   }
 ]

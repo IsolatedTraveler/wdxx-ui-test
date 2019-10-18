@@ -1,12 +1,9 @@
 <template>
-  <div>
+  <div class="list">
   </div>
 </template>
 <script>
 export default {
-  name: 'index'
+  name: 'list'
 }
 </script>
-<style lang="scss">
-
-</style>

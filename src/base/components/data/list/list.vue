@@ -1,38 +1,23 @@
 <template>
-  <ul class="wd_list" @click.stop="$emit('selected', '')">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" :disabled="item.disabled" :selected="val.indexOf(item[valId])!==-1" @click.stop="item.disabled || $emit('selected', item)">
+  <ul class="wd_list">
+    <li v-for="(item,i) in data" :key="i" class="wd_flex" row @click.stop="selected(item,i)" before :disabled="item.disabled" :selected="value.indexOf(item[valId])!==-1">
       <span class="wd_auto">
         {{item[showId]}}
       </span>
-      <span class="wd_icon wd_circle wd_right"></span>
+      <span class="wd_icon" :class="icon"></span>
     </li>
   </ul>
 </template>
 <script>
+import list from './list.js'
 export default {
   name: 'WdList',
-  props: {
-    data: {
-      type: Array,
-      default: null,
-      required: true
-    },
-    value: {
-      type: String || Array,
-      default: ''
-    },
-    showId: {
-      type: String,
-      default: 'mc'
-    },
-    valId: {
-      type: String,
-      default: 'id'
-    }
-  },
-  computed: {
-    val() {
-      return this.value || ''
+  extends: list,
+  methods: {
+    selected(item, i) {
+      if (!item.disabled) {
+        this.$emit('selected', item)
+      }
     }
   }
 }

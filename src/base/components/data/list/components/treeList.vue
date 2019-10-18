@@ -1,46 +1,41 @@
 <template>
   <ul class="wd_list wd_tree_list">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex" :disabled="item.disabled" :child="!(item.child && item.child.length)">
-      <div class="wd_list_item wd_flex" row>
+    <li v-for="(item,i) in data" :key="i" class="wd_flex" :child="!judge(item)" :parent="judge(item)" @click.stop="selected(item,i)" before>
+      <div class="wd_list_item wd_flex" row :disabled="item.disabled" :unfold="unfold[i]" :selected="value.indexOf(item[valId])!==-1">
         <span class="wd_auto">
           {{item[showId]}}
         </span>
         <span class="wd_icon" :class="icon"></span>
       </div>
-      <wd-tree-list :data="item.child" :valId="valId" :showId="showId" :value="value" :icon="icon" :parentDisable="parentDisable"/>
+      <wd-tree-list v-if="judge(item)" v-show="unfold[i]" :data="item.child" :valId="valId" :showId="showId" :value="value" :icon="icon" :parentDisable="parentDisable" @selected="$emit('selected',$event)"/>
     </li>
   </ul>
 </template>
 <script>
+import list from '../list.js'
 export default {
   name: 'WdTreeList',
+  extends: list,
   props: {
-    data: {
-      type: Array,
-      default() {
-        return []
-      },
-      required: true
-    },
-    value: {
-      type: String || Array,
-      default: ''
-    },
-    showId: {
-      type: String,
-      default: ''
-    },
-    valId: {
-      type: String,
-      default: ''
-    },
     parentDisable: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      unfold: []
+    }
+  },
+  methods: {
+    judge(it) {
+      return (it.child || '').length
     },
-    icon: {
-      type: String,
-      default: ''
+    selected(item, i) {
+      this.$set(this.unfold, i, !this.unfold[i])
+      if (!item.disabled && (!this.judge(item) || this.parentDisable)) {
+        this.$emit('selected', item)
+      }
     }
   }
 }

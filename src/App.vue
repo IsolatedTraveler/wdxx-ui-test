@@ -1,16 +1,13 @@
 <template>
-  <div id="app" class="main">
+  <div id="app" class="main wd_flex">
     <wd-mask id="mask" v-show="load"/>
     <wd-top :title="title">
       <span @click="$refs.pop.show()" class="wd_icon wd_crumb"></span>
       <wd-pop ref='pop' shadeClose>
-        <wd-tree class="wd_content wd_auto" scroll :data="menuData" rootId='0' showId='name'>
-        </wd-tree>
+        <wd-tree class="wd_content wd_auto" scroll :data="menuData" rootId='0' :value="$route.name" format @selected="go"/>
       </wd-pop>
     </wd-top>
-    <div class="wd_auto">
-      <router-view class="wd_flex app_router"/>
-    </div>
+    <router-view class="wd_auto wd_flex app_router" scroll/>
   </div>
 </template>
 <script>
@@ -20,22 +17,52 @@ export default {
     load() {
       return this.$store.getters.load
     },
+    back() {
+      return this.$store.getters.back
+    },
     title() {
-      return this.$store.getters.title || 'wdxx-ui-text'
+      return this.$route.query.title || '概述'
     }
   },
   data() {
     return {
       menuShow: false,
       menuData: [
+        {
+          id: 'overview',
+          mc: '概述'
+        }, {
+          id: 'quickstart',
+          mc: '快速上手'
+        }, {
+          id: 'data',
+          mc: '数据展示',
+          disabled: true,
+          child: [
+            {
+              id: 'list',
+              mc: '单级列表'
+            },
+            {
+              id: 'tree',
+              mc: '多级列表'
+            }
+          ]
+        }
       ]
     }
   },
   mounted() {
     this.$util.filterScreen(320)
-    this.api.default.getTree({}).then(res => {
-      this.menuData = res.data
-    })
+  },
+  methods: {
+    go(item) {
+      this.back()
+      this.$router.push({
+        name: item.id,
+        query: {title: item.mc}
+      })
+    }
   }
 }
 </script>
@@ -50,7 +77,12 @@ export default {
         width: 60%;
         align-self: flex-end;
         color: #333;
+        text-align: left;
       }
+    }
+    >[scroll]{
+      overflow-x: hidden;
+      width: 100%;
     }
   }
 </style>

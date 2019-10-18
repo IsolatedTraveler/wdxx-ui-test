@@ -1,23 +1,47 @@
+// 列表
 .wd_list{
   width: 100%;
+  box-sizing: border-box;
   text-align: left;
+  [before]::before{
+    height: 1px;
+    width: 100vw;
+    right: 0;
+    background: #dcdcdc;
+  }
   .wd_list_item{
     width: 100%;
     padding: 0.5em;
     min-height: 3em;
-    line-height: 1.6em;
-    &[disabled]{
-      color: #ccc;
+  }
+  .wd_list{
+    padding-left: 0.5em;
+  }
+}
+// 树形插件
+.wd_tree{
+  overflow-x: hidden;
+  &.wd_tree_list{
+    >[before]::before{
+      top: unset;
+      bottom: 0;
     }
-    &.wd_gray{
-      text-align: center;
-      font-size: 1.8em;
-      line-height: 6em;
-      height: auto;
-      padding: 0;
+    [before]{
+      overflow: visible;
     }
-    .wd_arrow{
-      font-size: 1.2em;
+    [parent]>[disabled]{
+      color: inherit;
+    }
+    .wd_icon{
+      transform: rotate(270deg);
+    }
+    [child] .wd_icon{
+      display: none;
+    }
+    [unfold]{
+      .wd_icon{
+        transform: rotate(90deg);
+      }
     }
   }
 }
@@ -64,11 +88,5 @@
         background: #fff;
       }
     }
-  }
-}
-// 树形插件
-.wd_tree .wd_tree_list{
-  [child] .wd_icon{
-    display: none;
   }
 }
