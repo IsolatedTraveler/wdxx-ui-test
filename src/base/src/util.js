@@ -55,11 +55,11 @@ export default {
   * @param {Number} type   适配方法
   */
   filterScreen(width, type) {
-    if (type) {
-
+    var body = document.documentElement, screenWidth = body.clientWidth, initialScale = screenWidth / width
+    if (type === 'rem') {
+      document.documentElement.style = 'font-size:' + initialScale * 100 + 'px;'
     } else {
-      var body = document.documentElement, screenWidth = body.clientWidth, initialScale = screenWidth / width
-      document.getElementsByTagName('meta').viewport.content = 'width=' + width + ', minimum-scale=' + initialScale + ', maximum-scale=' + initialScale + ',initial-scale=' + initialScale + ', user-scalable=no'
+      document.getElementsByTagName('meta').viewport.content = 'width=' + width + ', minimum-scale=' + initialScale + ', maximum-scale=' + initialScale + ', user-scalable=no'
     }
   },
   /**
@@ -145,5 +145,31 @@ export default {
   */
   setPageTitle(title) {
     document.title = title
+  },
+  /**
+  * @description 解析请求参数
+  * @author 何波
+  * @date 2019-10-12 10:59:16
+  * @param {Object} param 请求参数
+  * @param {Object} val 参数值
+  * @param {Object} add 附加参数值
+  */
+  analysisParams(param, val, add) {
+    let value = {}
+    try {
+      param = JSON.parse(param)
+    } catch (e) {}
+    if (Object.prototype.toString.call(param) === '[object Object]') {
+      value.name = param.name
+      let q = {to: JSON.stringify(param.to)}, qs = param.query || [], ad = param.add
+      qs.forEach(it => {
+        q[it] = val[it] || add[it] || ''
+      })
+      value.query = Object.assign(q, ad)
+    } else {
+      value.name = param
+      value.query = Object.assign({}, val, add)
+    }
+    return value
   }
 }
