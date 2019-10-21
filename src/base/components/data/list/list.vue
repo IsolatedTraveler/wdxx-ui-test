@@ -9,7 +9,7 @@
   </ul>
 </template>
 <script>
-import list from './list.js'
+import list from './common.js'
 export default {
   name: 'WdList',
   extends: list,

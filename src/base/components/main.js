@@ -14,7 +14,7 @@ import WdPop from './pop/pop'
 import WdMask from './pop/mask'
 import WdMsg from './pop/main'
 // 数据展示
-import WdList from './data/list/list'
+import WdList from './data/list/list.vue'
 import WdTree from './data/list/tree'
 import WdSwipe from './data/swipe'
 // 布局

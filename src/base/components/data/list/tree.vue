@@ -2,7 +2,7 @@
   <component class="wd_tree" :is="skin" :data="list" :valId="valId" :showId="showId" :value="val" :icon="icon" :parentDisable="parentDisable" @selected="$emit('selected', $event)"/>
 </template>
 <script>
-import listjs from './list.js'
+import listjs from './common.js'
 export default {
   name: 'wdTree',
   components: {
