@@ -78,6 +78,7 @@ export default {
         align-self: flex-end;
         color: #333;
         text-align: left;
+        line-height: 1.5em;
       }
     }
     >[scroll]{

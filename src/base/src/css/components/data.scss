@@ -3,7 +3,7 @@
   width: 100%;
   box-sizing: border-box;
   text-align: left;
-  [before]::before{
+  [after]::after{
     height: 1px;
     width: 100vw;
     right: 0;
@@ -13,6 +13,7 @@
     width: 100%;
     padding: 0.5em;
     min-height: 3em;
+    box-sizing: border-box;
   }
   .wd_list{
     padding-left: 0.5em;
@@ -22,11 +23,11 @@
 .wd_tree{
   overflow-x: hidden;
   &.wd_tree_list{
-    >[before]::before{
-      top: unset;
-      bottom: 0;
+    .wd_list [after]::after{
+      bottom: unset;
+      top: 0;
     }
-    [before]{
+    [after]{
       overflow: visible;
     }
     [parent]>[disabled]{

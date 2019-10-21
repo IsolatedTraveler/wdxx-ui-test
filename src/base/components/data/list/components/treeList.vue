@@ -1,6 +1,6 @@
 <template>
   <ul class="wd_list wd_tree_list">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex" :child="!judge(item)" :parent="judge(item)" @click.stop="selected(item,i)" before>
+    <li v-for="(item,i) in data" :key="i" class="wd_flex" :child="!judge(item)" :parent="judge(item)" @click.stop="selected(item,i)" after>
       <div class="wd_list_item wd_flex" row :disabled="item.disabled" :unfold="unfold[i]" :selected="value.indexOf(item[valId])!==-1">
         <span class="wd_auto">
           {{item[showId]}}

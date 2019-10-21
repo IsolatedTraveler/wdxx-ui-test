@@ -1,5 +1,13 @@
 <template>
-  <div class="quickstare">
+  <div class="quickstare" v-html="html">
+  </div>
+</template>
+<script>
+export default {
+  name: 'quickstare',
+  data() {
+    return {
+      html: `
     <p class="fg">本部分将引导您完成在Webpack vue项目中使用wdxx UI的过程。</p>
     <p>1.使用vue-cli建立项目</p>
     <pre>
@@ -78,11 +86,8 @@
       components: { App },
       template: '<App/>'
     })</pre>
-    <p>以上代码实现了ui完整引入，从现在开始，尽情地拥抱 wdxx ui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！</p>
-  </div>
-</template>
-<script>
-export default {
-  name: 'quickstare'
+    <p>以上代码实现了ui完整引入，从现在开始，尽情地拥抱 wdxx ui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！</p>`
+    }
+  }
 }
 </script>

@@ -8,7 +8,7 @@ html{
 .fg{
   border-bottom: 1px solid #dcdcdc;
 }
-.fg,p,ul,code{
+.fg,p,code{
   padding: 0.5em;
   width: 100%;
   box-sizing: border-box;
@@ -16,10 +16,16 @@ html{
 .sj{
   text-indent: 2em;
 }
-pre{
+pre,.sl{
   background: #f1f0f6;
   margin: 0;
   width: 100%;
   overflow: auto;
   max-height: 40vh;
+}
+.sl{
+  margin: 0.5em 0;
+}
+.none{
+  padding: 0 0;
 }

@@ -1,6 +1,6 @@
 <template>
   <ul class="wd_list">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex" row @click.stop="selected(item,i)" before :disabled="item.disabled" :selected="value.indexOf(item[valId])!==-1">
+    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" row @click.stop="selected(item,i)" after :disabled="item.disabled" :selected="value.indexOf(item[valId])!==-1">
       <span class="wd_auto">
         {{item[showId]}}
       </span>
