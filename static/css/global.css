@@ -25,6 +25,7 @@ pre,.sl{
 }
 .sl{
   margin: 0.5em 0;
+  line-height: 3em;
 }
 .none{
   padding: 0 0;

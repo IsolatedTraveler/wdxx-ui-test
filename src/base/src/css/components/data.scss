@@ -60,11 +60,11 @@
     left: 0;
     transform: translateX(-100%);
     z-index: 1;
-    &.wd_next{
+    &[next]{
       transform: translateX(100%);
       z-index: 0;
     }
-    &.wd_selected{
+    &[selected]{
       transform: none;
       z-index: 2;
     }
@@ -85,7 +85,7 @@
       background: #000;
       opacity: 0.2;
       margin: 0 3px;
-      &.wd_selected{
+      &[selected]{
         background: #fff;
       }
     }
