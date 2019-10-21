@@ -10,7 +10,7 @@
       </span>
     </span>
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop-up ref='pop' @close="closePop">
+    <wd-pop ref='pop' @close="closePop">
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="placeholder" v-model="searchVal"/>
         <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" :value="old" :valId="valId" :showId="showId"/>
@@ -19,7 +19,7 @@
           <button class="wd_button" @click.stop="submit">确定</button>
         </div>
       </div>
-    </wd-pop-up>
+    </wd-pop>
   </div>
 </template>
 <script>

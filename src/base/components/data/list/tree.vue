@@ -12,10 +12,6 @@ export default {
   },
   extends: listjs,
   props: {
-    value: {
-      type: String,
-      default: ''
-    },
     parentDisable: {
       type: Boolean,
       default: false

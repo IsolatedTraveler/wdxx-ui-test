@@ -1,5 +1,5 @@
 <template>
-  <div class="wd_pop wd_flex" ref="pop" v-show="isShow" :class="{wd_show: isShow}" @click.stop="shadeClose && back()">
+  <div class="wd_pop wd_flex" ref="pop" v-show="isShow" scroll :class="{wd_show: isShow}" @click.stop="shadeClose && back()">
     <slot></slot>
   </div>
 </template>

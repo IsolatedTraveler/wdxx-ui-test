@@ -161,14 +161,14 @@ export default {
     } catch (e) {}
     if (Object.prototype.toString.call(param) === '[object Object]') {
       value.name = param.name
-      let q = {to: JSON.stringify(param.to)}, qs = param.query || [], ad = param.add
+      let q = {to: JSON.stringify(param.to)}, qs = param.query || []
       qs.forEach(it => {
-        q[it] = val[it] || add[it] || ''
+        q[it] = val[it] || ''
       })
-      value.query = Object.assign(q, ad)
+      value.query = Object.assign(q, add)
     } else {
       value.name = param
-      value.query = Object.assign({}, val, add)
+      value.query = Object.assign({}, add)
     }
     return value
   }

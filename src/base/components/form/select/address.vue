@@ -1,16 +1,15 @@
 <template>
   <div class="wd_flex wd_address wd_select" :class="{wd_error: error}" row @click.stop="$refs.pop.show()">
-    <slot></slot>
     <div class="wd_auto" v-show="val">{{val}}</div>
     <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" disabled :value="val">
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop-up mask ref="pop">
+    <wd-pop ref="pop">
       <div class="wd_flex wd_content" @click.stop="">
         <div v-if="title" class="wd_title">{{title}}</div>
         <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="old" @input="resetAddress"/>
         <wd-list scroll @selected="selectedAddress" :data="addressData" :value="old" :valId="valId" :showId="showId"/>
       </div>
-    </wd-pop-up>
+    </wd-pop>
   </div>
 </template>
 <script>

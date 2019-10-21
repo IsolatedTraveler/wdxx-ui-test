@@ -5,12 +5,12 @@
     <label :class="{wd_gray:val}" v-if="label">{{label}}</label>
     <span class="wd_text wd_auto" :class="{wd_gray:!val}">{{val ? val : data.length ? '单击选择数据' : '当前选项未获取到数据'}}</span>
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop-up ref='pop' @close="closePop">
+    <wd-pop ref='pop' @close="closePop">
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="placeholder" v-model="searchVal"/>
         <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" :value="value" :valId="valId" :showId="showId"/>
       </div>
-    </wd-pop-up>
+    </wd-pop>
   </div>
 </template>
 <script>

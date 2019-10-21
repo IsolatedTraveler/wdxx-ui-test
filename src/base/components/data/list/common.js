@@ -8,7 +8,7 @@ export default {
       required: true
     },
     value: {
-      type: Array,
+      type: String | Array,
       default() {
         return []
       }
