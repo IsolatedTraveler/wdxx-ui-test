@@ -49,6 +49,15 @@ msg.toast = (option) => {
   option = setOption(option, {delary: 1500, type: 'toast'})
   return msg(option, true)
 }
+msg.prompt = (option) => {
+  if (typeof option === 'string') {
+    option = {
+      title: option
+    }
+  }
+  option = setOption(option, {title: option, button: ['确认', '取消'], content: true})
+  return msg(option, true)
+}
 msg.propsName = '$msg'
 msg.componentName = 'Msg'
 export default msg

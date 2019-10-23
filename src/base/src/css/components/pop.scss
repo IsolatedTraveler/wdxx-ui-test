@@ -45,9 +45,17 @@
     border-radius: 5px;
     text-align: center;
     transition: opacity .3s linear;
-    font-size: 14px;
     .wd_title{
+      font-size: 1.2em;
       border: none;
+    }
+    input.wd_content{
+      width: 90%;
+      line-height: 2em;
+      border: 1px solid #dcdcdc;
+      padding: 0 0.5em;
+      margin: 1em auto;
+      color: #333 !important;
     }
     .wd_content {
       padding: 10px;

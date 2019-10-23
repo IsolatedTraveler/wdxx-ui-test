@@ -4,6 +4,7 @@ html,body{
   height: 100%;
   background: #fff;
   overflow: hidden;
+  font-size: 12px;
 }
 body,input,p,button,ul,li,fieldset{
   padding: 0;
@@ -45,19 +46,25 @@ legend{
   &.wd_icon{
     border: 1px solid #dcdcdc;
     color: #dcdcdc;
+    &[selected] {
+      color: #fff;
+      background: #6b8eff;
+      border-color: #6b8eff;
+    }
   }
 }
 .wd_item8,.wd_item3{
   background: #fff;
   border-radius: 5px;
   box-sizing: border-box;
+  width: 100%;
 }
 .wd_item8{
-  margin: 0 8px 8px;
+  margin: 0 0 8px;
   padding: 8px;
 }
 .wd_item3{
-  margin: 0 3px 3px;
+  margin: 0 0 3px;
   padding: 3px;
 }
 [before],[after]{
@@ -103,5 +110,5 @@ legend{
   color: #6b8eff;
 }
 [disabled]{
-  color: #999;
+  color: #555;
 }

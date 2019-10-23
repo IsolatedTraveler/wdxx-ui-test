@@ -161,7 +161,7 @@ export default {
     } catch (e) {}
     if (Object.prototype.toString.call(param) === '[object Object]') {
       value.name = param.name
-      let q = {to: JSON.stringify(param.to)}, qs = param.query || []
+      let q = {to: JSON.stringify(param.to), event: param.event || ''}, qs = param.query || []
       qs.forEach(it => {
         q[it] = val[it] || ''
       })

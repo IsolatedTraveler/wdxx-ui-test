@@ -1,10 +1,11 @@
 <template>
   <div v-show="showJudge" class="wd_msg wd_pop wd_flex" @click.stop="shadeClose && $emit('close')">
-    <div class="wd_flex" :class="'wd_'+type" v-if="content">
+    <div class="wd_flex" :class="'wd_'+type">
       <div v-show="title" class="wd_title">
         {{title}}
       </div>
-      <div class="wd_content">
+      <input type="text" v-if="content" class="wd_content" v-model="value"/>
+      <div class="wd_content" v-else>
         {{message}}
       </div>
       <div v-show="button" row class="wd_bottom wd_flex">
@@ -38,7 +39,7 @@ export default {
     },
     content: {
       type: Boolean,
-      default: true
+      default: false
     },
     resolve: {
       type: Function,
@@ -61,12 +62,14 @@ export default {
   },
   data() {
     return {
-      showJudge: false
+      showJudge: false,
+      value: ''
     }
   },
   methods: {
     hide() {
       this.showJudge = false
+      this.value = ''
       this.reject && this.reject()
     },
     show() {
@@ -79,7 +82,8 @@ export default {
     },
     submit(i) {
       this.showJudge = false
-      i ? this.reject(true) : this.resolve()
+      i ? this.reject(true) : this.resolve(this.value)
+      this.value = ''
     }
   }
 }
