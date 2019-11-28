@@ -53,6 +53,14 @@ legend{
     }
   }
 }
+.wd_btn.wd_flex{
+  width: 100%;
+  justify-content: space-between;
+  button{
+    width: 45%;
+    height: 2.5em;
+  }
+}
 .wd_item8,.wd_item3{
   background: #fff;
   border-radius: 5px;
@@ -106,9 +114,9 @@ legend{
 .wd_gray{
   color: #999;
 }
-[selected]{
-  color: #6b8eff;
-}
 [disabled]{
   color: #555;
+}
+[selected]{
+  color: #6b8eff;
 }

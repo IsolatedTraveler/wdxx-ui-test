@@ -1,3 +1,9 @@
+/**
+* @description 日期格式化
+* @author 何波
+* @date 2019-11-11 16:30:14
+* @param {}
+*/
 window.Date.prototype.format = function(fmt) {
   var o = {
     'M+': this.getMonth() + 1,
@@ -18,6 +24,12 @@ window.Date.prototype.format = function(fmt) {
   }
   return fmt
 }
+/**
+* @description 常用方法集合
+* @author 何波
+* @date 2019-11-11 16:31:11
+* @param {}
+*/
 export default {
   /**
   * @description 数字格式话显示保留n位小数

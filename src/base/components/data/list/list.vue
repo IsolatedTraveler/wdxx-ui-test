@@ -1,6 +1,6 @@
 <template>
   <ul class="wd_list">
-    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" row @click.stop="selected(item)" after :disabled="item.disabled" :selected="value.indexOf(item[valId])!==-1">
+    <li v-for="(item,i) in data" :key="i" class="wd_flex wd_list_item" row @click.stop="selected(item)" after :disabled="item.disabled" :selected="val.indexOf(item[valId])!==-1">
       <slot :data="item">
         <span class="wd_auto wd_text">
           {{item[showId]}}
@@ -8,13 +8,12 @@
       </slot>
       <span class="wd_icon" :class="icon"></span>
     </li>
+    <li class="wd_gray" v-if="!data.length">{{placeholder}}</li>
   </ul>
 </template>
 <script>
-import list from './common.js'
 export default {
   name: 'WdList',
-  extends: list,
   methods: {
     selected(item) {
       if (!item.disabled) {

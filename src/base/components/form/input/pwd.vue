@@ -1,17 +1,21 @@
 <template>
   <div class="wd_flex wd_input wd_pwd" row :class="{wd_error:error}" @click.stop="disabled || focus()">
-    <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
     <slot>
     </slot>
-    <input class="wd_auto" autocomplete="off" :judge="judge?'password':'text'" ref="input" :placeholder="placeholder" :value="value" @input="$emit('input',$event.target.value)">
-    <span class="wd_icon" :class="judge ? 'wd_password' : 'wd_eye'" @click.stop="judge=!judge"></span>
+    <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
+    <input class="wd_auto" autocomplete="new-password" order1 :type="judge?'text':'password'" ref="input" :placeholder="placeholder" :value="value" @input="$emit('input',$event.target.value)">
+    <span class="wd_icon" :class="judge ? 'wd_password' : 'wd_eye'" order2 @click.stop="judge=!pwd && !judge"></span>
   </div>
 </template>
 <script>
-import common from './common.js'
 export default {
   name: 'wdPwd',
-  extends: common,
+  props: {
+    pwd: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     focus() {
       let elem = this.$refs.input

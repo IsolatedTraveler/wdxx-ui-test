@@ -3,15 +3,13 @@
     <slot>
     </slot>
     <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
-    <input class="wd_auto" autocomplete="off" type="text" ref="input" :placeholder="placeholder" :disabled="disabled" :value="value" @blur.stop="blur" @input="$emit('input',$event.target.value)">
-    <span @click.stop="$emit('input','')" class="wd_icon wd_close" v-show="value && judge"></span>
+    <input class="wd_auto" autocomplete="off" order1 type="text" ref="input" :placeholder="placeholder" :disabled="disabled" :value="value" @blur.stop="blur" @input="$emit('input',$event.target.value)">
+    <span @click.stop="$emit('input','')" order2 class="wd_icon wd_close" v-show="value && judge"></span>
   </div>
 </template>
 <script>
-import common from './common.js'
 export default {
   name: 'WdInput',
-  extends: common,
   methods: {
     blur() {
       setTimeout(() => {

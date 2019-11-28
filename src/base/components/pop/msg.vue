@@ -80,9 +80,9 @@ export default {
         }, this.delary)
       }
     },
-    submit(i) {
+    submit(index) {
       this.showJudge = false
-      i ? this.reject(true) : this.resolve(this.value)
+      index ? this.reject(true) : this.resolve(this.value)
       this.value = ''
     }
   }

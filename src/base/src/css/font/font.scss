@@ -55,7 +55,7 @@
     content: "\e63f";
   }
   &.wd_tel::before{
-    content: "\e63e";
+    content: "\e654";
   }
   &.wd_address::before{
     content: "\e656";
@@ -80,5 +80,8 @@
   }
   &.wd_star::before{
     content: "\e64a";
+  }
+  &.wd_reduce::before{
+    content: "\e655";
   }
 }

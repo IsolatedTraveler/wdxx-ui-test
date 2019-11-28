@@ -5,7 +5,7 @@
     <span class="wd_icon wd_arrow"></span>
     <wd-pop ref="pop">
       <div class="wd_flex wd_content" @click.stop="">
-        <div v-if="title" class="wd_title">{{title}}</div>
+        <div v-if="label" class="wd_label">{{label}}</div>
         <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="old" @input="resetAddress"/>
         <wd-list scroll @selected="selectedAddress" :data="addressData" :value="old" :valId="valId" :showId="showId"/>
       </div>
@@ -16,33 +16,9 @@
 export default {
   name: 'WdAddress',
   props: {
-    value: {
-      type: String,
-      defalut: ''
-    },
-    placeholder: {
-      type: String,
-      defalut: ''
-    },
-    title: {
-      type: String,
-      defalut: ''
-    },
-    showId: {
-      type: String,
-      default: 'mc'
-    },
-    valId: {
-      type: String,
-      default: 'id'
-    },
     sjid: {
       type: String,
       default: 'sjid'
-    },
-    isVerify: {
-      type: String,
-      default: ''
     },
     getData: {
       type: Function,
@@ -59,15 +35,10 @@ export default {
     return {
       lastItem: {},
       addressData: [],
-      vals: [],
-      old: '',
-      error: false
+      vals: []
     }
   },
   computed: {
-    back() {
-      return this.$store.getters.back
-    },
     val() {
       let val = this.vals.map(item => {
         return item[this.showId]
@@ -129,15 +100,6 @@ export default {
       this.vals.pop()
       this.vals.push(item)
       this.initData(item.id, true)
-    },
-    msg(msg) {
-      this.error = true
-      this.$msg.toast(msg, '警告').then(res => {
-        this.error = false
-        this.refs.input.onfoucs()
-      }).catch(e => {
-        this.error = false
-      })
     }
   }
 }

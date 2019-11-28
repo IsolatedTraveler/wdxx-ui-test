@@ -2,15 +2,15 @@
   <component class="wd_tree" :is="skin" :data="list" :valId="valId" :showId="showId" :value="val" :icon="icon" :parentDisable="parentDisable" @selected="$emit('selected', $event)"/>
 </template>
 <script>
-import listjs from './common.js'
 export default {
   name: 'wdTree',
   components: {
     list() {
-      return import('./components/treeList')
+      let list = import('./components/treeList')
+      list.mixins = this.mixins
+      return list
     }
   },
-  extends: listjs,
   props: {
     parentDisable: {
       type: Boolean,
@@ -32,16 +32,9 @@ export default {
     skin: {
       type: String,
       default: 'list'
-    },
-    split: {
-      type: String,
-      default: ','
     }
   },
   computed: {
-    val() {
-      return (this.value || '').split(this.split)
-    },
     list() {
       let data = this.data
       if (!this.format) {

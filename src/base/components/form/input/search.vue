@@ -8,11 +8,11 @@
 export default {
   name: 'WdSearch',
   props: {
-    value: {
+    placeholder: {
       type: String,
       default: ''
     },
-    placeholder: {
+    value: {
       type: String,
       default: ''
     }

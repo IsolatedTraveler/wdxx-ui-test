@@ -12,10 +12,8 @@
   </ul>
 </template>
 <script>
-import list from '../common.js'
 export default {
   name: 'WdTreeList',
-  extends: list,
   props: {
     parentDisable: {
       type: Boolean,

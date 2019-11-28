@@ -2,7 +2,6 @@
   <span @click="change" class="wd_flex wd_switch" row :style="{height: height}" :selected="value">
     <span ref="switch" class="switch" :style="{fontSize: height}" row></span>
     <slot>
-      {{text}}
     </slot>
   </span>
 </template>
@@ -10,7 +9,6 @@
 export default {
   name: 'WdSwitch',
   props: {
-    text: String,
     value: Boolean,
     height: {
       type: String,

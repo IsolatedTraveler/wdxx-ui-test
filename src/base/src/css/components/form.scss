@@ -10,6 +10,11 @@ form{
     outline: 1px solid red;
     font-size: red;
   }
+  .wd_list [selected] .wd_right{
+    background: #6b8eff;
+    border-color: #6b8eff;
+    color: #fff;
+  }
 }
 // input
 .wd_pwd{
@@ -50,11 +55,6 @@ form{
   }
   &.wd_select_auto{
     justify-content: space-around;
-  }
-  .wd_btn{
-    button{
-      width: 45%;
-    }
   }
 }
 .wd_select_m{
@@ -97,10 +97,6 @@ form{
     color: #fff;
   }
 }
-.wd_btn{
-  width: 100%;
-  justify-content: space-around;
-}
 // progress
 .wd_progress{
   width: 100%;
@@ -142,6 +138,16 @@ form{
       box-shadow: 0 1px 3px rgba(0,0,0,.4);
       left: 0;
       transition: all 0.20s;
+    }
+  }
+  &[selected]{
+    color: #6b8eff;
+    .switch{
+      background: #6b8eff;
+      &::before{
+        right: 0;
+        left: unset;
+      }
     }
   }
 }
