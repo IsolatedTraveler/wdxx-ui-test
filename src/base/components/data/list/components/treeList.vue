@@ -12,8 +12,10 @@
   </ul>
 </template>
 <script>
+import list from '../../../mixins/list'
 export default {
   name: 'WdTreeList',
+  mixins: [list],
   props: {
     parentDisable: {
       type: Boolean,

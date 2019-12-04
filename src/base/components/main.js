@@ -1,6 +1,6 @@
 // 公共参数
-import {formBase, formInput, formSelectBase, formSelect} from './common/form'
-import list from './common/list'
+import {formBase, formInput, formSelectBase, formSelect} from './mixins/form'
+import list from './mixins/list'
 // form 表单
 import WdForm from './form/form'
 import WdInput from './form/input/input'

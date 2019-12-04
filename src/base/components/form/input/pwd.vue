@@ -3,8 +3,8 @@
     <slot>
     </slot>
     <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
-    <input class="wd_auto" autocomplete="new-password" order1 :type="judge?'text':'password'" ref="input" :placeholder="placeholder" :value="value" @input="$emit('input',$event.target.value)">
-    <span class="wd_icon" :class="judge ? 'wd_password' : 'wd_eye'" order2 @click.stop="judge=!pwd && !judge"></span>
+    <input class="wd_auto" autocomplete="new-password" order='1' :type="judge?'text':'password'" ref="input" :placeholder="placeholder" :value="value" @input="$emit('input',$event.target.value)">
+    <span class="wd_icon" :class="judge ? 'wd_password' : 'wd_eye'" order='2' @click.stop="judge=!pwd && !judge"></span>
   </div>
 </template>
 <script>

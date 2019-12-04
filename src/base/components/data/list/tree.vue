@@ -6,9 +6,7 @@ export default {
   name: 'wdTree',
   components: {
     list() {
-      let list = import('./components/treeList')
-      list.mixins = this.mixins
-      return list
+      return import('./components/treeList')
     }
   },
   props: {

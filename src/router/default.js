@@ -14,5 +14,9 @@ export default [
     path: '/list',
     name: 'list',
     component: () => import('@/view/data/list')
+  }, {
+    path: '/input',
+    name: 'input',
+    component: () => import('@/view/form/input')
   }
 ]
