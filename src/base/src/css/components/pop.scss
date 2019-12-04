@@ -12,16 +12,17 @@
   z-index: 99;
   .loading span{
     display: inline-block;
-    width: 8px;
-    height: 40px;
-    border-radius: 4px;
+    width: 1em;
+    height: 5em;
+    border-radius: 0.5em;
     background: lightgreen;
     animation: load 1s ease infinite;
+    margin: 0 0.1em;
   }
   @keyframes load{
     50%{
-      height: 70px;
-      margin: -15px 0;
+      height: 9em;
+      margin: -2em 0.1em;
       background: lightblue;
     }
   }
@@ -58,7 +59,7 @@
       color: #333 !important;
     }
     .wd_content {
-      padding: 10px;
+      padding: 0.5em;
       width: auto;
       align-self: center;
       box-sizing: border-box;
@@ -70,7 +71,6 @@
       font-weight: 400;
       .wd_button{
         flex: 1;
-        height: 40px;
         border-radius: unset;
         background: transparent;
         color: #888888;
@@ -85,6 +85,7 @@
   }
   .wd_modal{
     width:80%;
+    font-size: 1.3em;
     background: #fff;
     align-items: flex-start;
     text-align: left;
@@ -96,5 +97,6 @@
   .wd_toast{
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
+    font-size: 1.3em;
   }
 }

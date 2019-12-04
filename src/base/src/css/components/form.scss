@@ -10,6 +10,9 @@ form{
     outline: 1px solid red;
     font-size: red;
   }
+  label{
+    font-size: 1.2em;
+  }
   .wd_list [selected] .wd_right{
     background: #6b8eff;
     border-color: #6b8eff;
@@ -77,24 +80,25 @@ form{
   border: 1px solid transparent;
   box-sizing: border-box;
   padding: 0.1em 0.5em;
+  min-height: 2em;
   &[default]{
     background: linear-gradient(to right,#61e18c, #01b678);
     color: #fff;
   }
   &[warn]{
-    background: #fff;
+    background: transparent;
     border: 1px solid #f78869;
     color: #f78869;
   }
   &[blank]{
     border-color: #eee;
-    background: #fff;
+    background: transparent;
     color: #2ba245;
   }
   &[disabled]{
     border-color: #ccc;
     background: #ccc;
-    color: #fff;
+    color: transparent;
   }
 }
 // progress
@@ -118,22 +122,27 @@ form{
 // switch
 .wd_switch{
   color: #ccc;
-  >.switch{
-    height: 1em;
-    width: 2em;
+  height: 3em;
+  line-height: 3em;
+  transition: all 0.20s;
+  >.wd-switch{
+    height: 1.2em;
+    width: 2.2em;
     display: inline-block;
-    border-radius: 0.5em;
+    border-radius: 0.6em;
     background-color: #ccc;
-    margin-right: 5px;
+    margin-right: 0.3em;
+    margin-top: 0.1em;
     position: relative;
-    &::before{
+    transition: all 0.20s;
+    .wd_remove{
       display: inline-block;
-      content: '';
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 1em;
-      border-radius: 0.5em;
+      width: 1.2em;
+      height: 1.2em;
+      border-radius: 0.6em;
       background-color: #fdfdfd;
       box-shadow: 0 1px 3px rgba(0,0,0,.4);
       left: 0;
@@ -142,11 +151,10 @@ form{
   }
   &[selected]{
     color: #6b8eff;
-    .switch{
+    .wd-switch{
       background: #6b8eff;
-      &::before{
-        right: 0;
-        left: unset;
+      .wd_remove{
+        left: 1em;
       }
     }
   }

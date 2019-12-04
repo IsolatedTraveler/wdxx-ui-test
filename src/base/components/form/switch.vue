@@ -1,6 +1,8 @@
 <template>
-  <span @click="change" class="wd_flex wd_switch" row :style="{height: height}" :selected="value">
-    <span ref="switch" class="switch" :style="{fontSize: height}" row></span>
+  <span @click="change" class="wd_flex wd_switch" row :selected="value">
+    <span ref="switch" class="wd-switch" row>
+      <span class="wd_remove"></span>
+    </span>
     <slot>
     </slot>
   </span>
@@ -9,11 +11,7 @@
 export default {
   name: 'WdSwitch',
   props: {
-    value: Boolean,
-    height: {
-      type: String,
-      default: '20px'
-    }
+    value: Boolean
   },
   methods: {
     change() {
