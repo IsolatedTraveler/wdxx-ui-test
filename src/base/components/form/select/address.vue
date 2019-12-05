@@ -1,11 +1,14 @@
 <template>
-  <div class="wd_flex wd_address wd_select" :class="{wd_error: error}" row @click.stop="$refs.pop.show()">
+  <div class="wd_flex wd_address wd_select" :class="{wd_error: error, wd_gray:disabled}" row @click.stop="disabled || $refs.pop.show()">
+    <slot>
+    </slot>
+    <label :class="{wd_gray:val}" v-if="label">{{label}}</label>
     <div class="wd_auto" v-show="val">{{val}}</div>
-    <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" disabled :value="val">
+    <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" :value="val">
     <span class="wd_icon wd_arrow"></span>
-    <wd-pop ref="pop">
+    <wd-pop ref="pop" :shadeClose="shadeClose">
       <div class="wd_flex wd_content" @click.stop="">
-        <div v-if="label" class="wd_label">{{label}}</div>
+        <div v-if="label" class="wd_label">{{label.replace(/[:：]/, '')}}</div>
         <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="old" @input="resetAddress"/>
         <wd-list scroll @selected="selectedAddress" :data="addressData" :value="old" :valId="valId" :showId="showId"/>
       </div>
@@ -19,6 +22,10 @@ export default {
     sjid: {
       type: String,
       default: 'sjid'
+    },
+    shadeClose: {
+      type: Boolean,
+      default: false
     },
     getData: {
       type: Function,

@@ -3,9 +3,9 @@ form{
 }
 // form表单公用样式
 .wd_input,.wd_select{
-  height: 3em;
+  min-height: 3em;
   width: 100%;
-  padding: 0 0.5em;
+  padding: 0.5em;
   &.wd_error{
     outline: 1px solid red;
     font-size: red;
