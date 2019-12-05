@@ -62,12 +62,10 @@ export default {
     },
     confirm() {
       this.$emit('input', this.$refs.ctx.toDataURL('image/jpeg', 0.5))
-      this.$store.getters.back()
     },
     clear() {
       this.$emit('input', '')
       this.initCtx()
-      this.$store.getters.back()
     },
     initCtx() {
       let ctx = this.ctx, elem = this.$refs.ctx
