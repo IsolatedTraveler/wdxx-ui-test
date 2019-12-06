@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       i: 0,
-      next: 1
+      next: 1,
+      width: 0
     }
   },
   computed: {
