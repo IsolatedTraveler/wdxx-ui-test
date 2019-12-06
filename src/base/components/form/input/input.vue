@@ -4,7 +4,7 @@
     </slot>
     <label :class="{wd_gray:value}" v-if="label">{{label}}</label>
     <input class="wd_auto" autocomplete="off" order='1' type="text" ref="input" :placeholder="placeholder" :disabled="disabled" :value="value" @blur.stop="blur" @input="$emit('input',$event.target.value)">
-    <span @click.stop="$emit('input','')" order='2' class="wd_icon wd_close" v-show="value && judge"></span>
+    <span @click.stop="$emit('input','')" order='2' class="wd_icon wd_icon_close" v-show="value && judge"></span>
   </div>
 </template>
 <script>

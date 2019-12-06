@@ -9,7 +9,7 @@
         {{it[showId]}}
       </span>
     </span>
-    <span class="wd_icon wd_arrow"></span>
+    <span class="wd_icon wd_icon_arrow"></span>
     <wd-pop ref='pop'>
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="searchPlaceholder" v-model="searchVal"/>

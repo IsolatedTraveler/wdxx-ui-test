@@ -4,7 +4,7 @@
     </slot>
     <label :class="{wd_gray:val}" v-if="label">{{label}}</label>
     <span class="wd_text wd_auto" order='1' :class="{wd_gray:!val}">{{val ? val : data.length ? placeholder : dataError}}</span>
-    <span class="wd_icon wd_arrow" order="2"></span>
+    <span class="wd_icon wd_icon_arrow" order="2"></span>
     <wd-pop ref='pop'>
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="searchPlaceholder" v-model="searchVal"/>

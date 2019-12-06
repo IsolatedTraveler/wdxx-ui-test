@@ -5,7 +5,7 @@
     <label :class="{wd_gray:val}" v-if="label">{{label}}</label>
     <div class="wd_auto" v-show="val">{{val}}</div>
     <input class="wd_auto" autocomplete="off" v-show="!val" type="text" :placeholder="placeholder" :value="val">
-    <span class="wd_icon wd_arrow"></span>
+    <span class="wd_icon wd_icon_arrow"></span>
     <wd-pop ref="pop" :shadeClose="shadeClose">
       <div class="wd_flex wd_content" @click.stop="">
         <div v-if="label" class="wd_label">{{label.replace(/[:：]/, '')}}</div>

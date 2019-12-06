@@ -1,7 +1,7 @@
 <template>
   <div class="wd_flex wd_input wd_search" row>
     <input class="wd_auto" autocomplete="off" type="text" ref="input" :placeholder="placeholder" :value="value" @input="setVal">
-    <span class="wd_icon wd_search"></span>
+    <span class="wd_icon wd_icon_search"></span>
   </div>
 </template>
 <script>
