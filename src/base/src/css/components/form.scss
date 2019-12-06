@@ -13,7 +13,7 @@ form{
   label{
     font-size: 1.2em;
   }
-  .wd_list [selected] .wd_right{
+  .wd_list [selected] .wd_icon_right{
     background: #6b8eff;
     border-color: #6b8eff;
     color: #fff;
@@ -21,10 +21,10 @@ form{
 }
 // input
 .wd_pwd{
-  .wd_password{
+  .wd_icon_password{
     color: #679df6;
   }
-  .wd_eye{
+  .wd_icon_eye{
     color: #ccc;
   }
 }

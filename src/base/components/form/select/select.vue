@@ -8,7 +8,7 @@
     <wd-pop ref='pop'>
       <div class="wd_flex wd_auto wd_content" @click.stop="">
         <wd-search v-if="search" :placeholder="searchPlaceholder" v-model="searchVal"/>
-        <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" icon="wd_right wd_circle" :value="value" :valId="valId" :showId="showId"/>
+        <wd-list scroll class="wd_auto" @selected="selecteVal" :data="datas" icon="wd_icon_right wd_circle" :value="value" :valId="valId" :showId="showId"/>
       </div>
     </wd-pop>
   </div>

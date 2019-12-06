@@ -32,67 +32,67 @@
   &.wd_icon_right{
     font-size: 1.2em;
   }
-  &.wd_icon_close::before {
+  &.wd_icon_address::before {
     content: "\e601";
   }
-  &.wd_icon_arrow::before {
+  &.wd_icon_close::before {
     content: "\e602";
   }
-  &.wd_icon_password::before{
+  &.wd_icon_arrow::before{
     content: "\e603";
   }
-  &.wd_icon_eye::before{
+  &.wd_icon_del::before{
     content: "\e604";
   }
-  &.wd_icon_wx::before{
+  &.wd_icon_crumb::before{
     content: "\e605";
   }
-  &.wd_icon_user::before{
+  &.wd_icon_email::before{
     content: "\e606";
   }
-  &.wd_icon_pwd::before{
+  &.wd_icon_form::before{
     content: "\e607";
   }
-  &.wd_icon_yzm::before{
+  &.wd_icon_eye::before{
     content: "\e608";
   }
-  &.wd_icon_address::before{
+  &.wd_icon_reduce::before{
     content: "\e609";
   }
-  &.wd_icon_crumb::before{
+  &.wd_icon_star::before{
     content: "\e60a";
   }
-  &.wd_icon_right::before{
+  &.wd_icon_tell::before{
     content: "\e60b";
   }
-  &.wd_icon_search::before{
+  &.wd_icon_offline::before{
     content: "\e60c";
   }
   &.wd_icon_myCart::before{
     content: "\e60d";
   }
-  &.wd_icon_warr::before{
+  &.wd_icon_user::before{
+    content: "\e60e";
+  }
+  &.wd_icon_search::before{
     content: "\e60f";
   }
-  &.wd_icon_del::before{
+  &.wd_icon_yzm::before{
     content: "\e610";
   }
-  &.wd_icon_star::before{
+  &.wd_icon_wx::before{
     content: "\e611";
   }
-  &.wd_icon_tel::before{
+  &.wd_icon_right::before{
     content: "\e612";
   }
-  &.wd_icon_reduce::before{
+  &.wd_icon_warr::before{
     content: "\e613";
   }
-  &.wd_icon_form::before{
+  &.wd_icon_password::before{
     content: "\e614";
   }
-  &.wd_icon_email::before{
+  &.wd_icon_pawd::before{
     content: "\e615";
-  }
-  &.wd_icon_offline::before{
-    content: "\e616";
   }
 }
