@@ -33,57 +33,66 @@
     font-size: 1.2em;
   }
   &.wd_close::before {
-    content: "\e65c";
-  }
-  &.wd_arrow::before {
-    content: "\e639";
-  }
-  &.wd_password::before{
     content: "\e601";
   }
-  &.wd_eye::before{
-    content: "\e723";
+  &.wd_arrow::before {
+    content: "\e602";
   }
-  &.wd_user::before{
-    content: "\e63c";
+  &.wd_password::before{
+    content: "\e603";
+  }
+  &.wd_eye::before{
+    content: "\e604";
   }
   &.wd_wx::before{
-    content: "\e63b";
+    content: "\e605";
+  }
+  &.wd_user::before{
+    content: "\e606";
   }
   &.wd_pwd::before{
-    content: "\e63d";
+    content: "\e607";
   }
   &.wd_yzm::before{
-    content: "\e63f";
-  }
-  &.wd_tel::before{
-    content: "\e654";
+    content: "\e608";
   }
   &.wd_address::before{
-    content: "\e656";
+    content: "\e609";
   }
   &.wd_crumb::before{
-    content: "\e724";
+    content: "\e60a";
   }
   &.wd_right::before{
-    content: "\e66c";
+    content: "\e60b";
   }
   &.wd_search::before{
-    content: "\e653";
+    content: "\e60c";
   }
   &.wd_myCart::before{
-    content: "\e647";
+    content: "\e60d";
   }
   &.wd_warr::before{
-    content: "\e649";
+    content: "\e60f";
   }
   &.wd_del::before{
-    content: "\e6d8";
+    content: "\e610";
   }
   &.wd_star::before{
-    content: "\e64a";
+    content: "\e611";
+  }
+  &.wd_tel::before{
+    content: "\e612";
   }
   &.wd_reduce::before{
-    content: "\e655";
+    content: "\e613";
+  }
+  &.wd_form::before{
+    content: "\e614";
+  }
+  &.wd_email::before{
+    content: "\e615";
+  }
+  &.wd_offline::before{
+    content: "\e616";
   }
 }
