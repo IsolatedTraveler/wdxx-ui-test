@@ -27,7 +27,7 @@ export default {
     },
     icon: {
       type: String,
-      default: 'wd_arrow'
+      default: 'wd_icon_arrow'
     },
     split: {
       type: String,
