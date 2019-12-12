@@ -16,7 +16,8 @@ var MsgBox = Vue.extend(msgVue), instance = null,
       title: '',
       delary: 0,
       type: 'modal',
-      shadeClose: false
+      shadeClose: false,
+      content: false
     }
     if (typeof option === 'string') {
       option = {

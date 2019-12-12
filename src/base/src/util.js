@@ -171,10 +171,13 @@ export default {
     try {
       param = JSON.parse(param)
     } catch (e) {}
+    // Object.prototype.toString.call(param)检验对象类型，为一个纯粹的object对象
     if (Object.prototype.toString.call(param) === '[object Object]') {
       value.name = param.name
+      value.wz = param.wz
       let q = {to: JSON.stringify(param.to), event: param.event || ''}, qs = param.query || []
       qs.forEach(it => {
+        // 添加jgid
         q[it] = val[it] || ''
       })
       value.query = Object.assign(q, add)
