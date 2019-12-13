@@ -95,4 +95,10 @@
   &.wd_icon_pwd::before{
     content: "\e615";
   }
+  &.wd_icon_add::before{
+    content: "\e616";
+  }
+  &.wd_icon_scan::before{
+    content: "\e617";
+  }
 }
