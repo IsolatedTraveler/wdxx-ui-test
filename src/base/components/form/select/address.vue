@@ -10,7 +10,7 @@
       <div class="wd_flex wd_content" @click.stop="">
         <div v-if="label" class="wd_label">{{label.replace(/[:：]/, '')}}</div>
         <wd-nav scroll row :data="vals" :valId="valId" :showId="showId" :value="old" @input="resetAddress"/>
-        <wd-list scroll @selected="selectedAddress" :data="addressData" :value="old" :valId="valId" :showId="showId"/>
+        <wd-list scroll @selected="selectedAddress" :data="addressData" :value="old || ''" :valId="valId" :showId="showId"/>
       </div>
     </wd-pop>
   </div>
@@ -62,7 +62,7 @@ export default {
     this.lastItem[this.showId] = '请选择'
     this.lastItem[this.valId] = ''
     this.vals.push(this.lastItem)
-    this.value && this.init()
+    this.init()
   },
   methods: {
     init() {

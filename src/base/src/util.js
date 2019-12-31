@@ -104,7 +104,7 @@ export default {
   * @param {*} *
   */
   getUrlParams() {
-    var url = decodeURI((location.href + location.search).split('?').slice(1).join('&')), params = {}, datas = url.split('&')
+    var datas = decodeURI(location.hash.split('?')[1] + '&' + location.search.split('?')[1]).split('&'), params = {}
     for (let i = 0; i < datas.length; i++) {
       let tempData = datas[i].split('=')
       params[tempData[0]] = tempData[1]
