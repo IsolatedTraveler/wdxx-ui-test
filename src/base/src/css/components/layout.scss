@@ -52,7 +52,7 @@
   }
   &[row]{
     flex-direction: row;
-    >.wd_auto,.wd_grow2{
+    >.wd_auto,.wd_grow2,.wd_grow3,.wd_grow4{
       height: 100%;
       width: unset;
     }
