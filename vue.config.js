@@ -18,7 +18,7 @@ Date.prototype.format = function(fmt) {
   }
   return fmt
 }
-const dev = process.env.NODE_ENV === 'development', a = new Date().format('yyyy-MM-dd')
+const dev = process.env.NODE_ENV === 'development', a = new Date().format('yyyy-MM-dd'), path = require('path')
 module.exports = {
   // publicPath: '解决打包后部分静态资源获取失败',
   publicPath: './',
@@ -31,6 +31,11 @@ module.exports = {
   productionSourceMap: dev,
   chainWebpack(config) {
     config.entry('app').clear().add('./example/main.js')
+    config.resolve.alias
+      .set('@c', path.join(__dirname, './src/components'))
+      .set('@m', path.join(__dirname, './src/mixins'))
+      .set('@s', path.join(__dirname, './src/style'))
+      .set('@v', path.join(__dirname, './example/view'))
   },
   devServer: {
     proxy: {
