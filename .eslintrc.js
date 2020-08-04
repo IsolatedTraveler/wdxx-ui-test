@@ -1,36 +1,27 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
+  env: {
+    node: true
+  },
+  extends: [
+    'plugin:vue/essential',
+    '@vue/standard'
+  ],
   parserOptions: {
     parser: 'babel-eslint'
   },
-  env: {
-    browser: true,
-  },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
-  // add your custom rules here
   rules: {
     // allow async-await
-    'generator-star-spacing': 'off',
+    'generator-star-spacing': 'off', // 生成器函数*的前后空格
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 禁止使用debugger
     'space-before-function-paren': ['error', {
-      'anonymous': 'never',
-      'named': 'never',
-      'asyncArrow': 'always'
-    }],
-    'one-var': ['error', 'always'],
-    'no-unused-expressions': 0
+      anonymous: 'never',
+      named: 'never',
+      asyncArrow: 'always'
+    }], // 函数定义时括号前面要不要有空格
+    'one-var': ['error', 'always'], // 连续声明
+    'no-unused-expressions': 0, // 禁止无用的表达式
+    'prefer-promise-reject-errors': 0 // 禁止promise -> reject 传参为非Error类型的数据报错
   }
 }
