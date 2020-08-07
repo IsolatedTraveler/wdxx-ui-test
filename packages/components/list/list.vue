@@ -11,27 +11,15 @@
   </div>
 </template>
 <script>
+import list from '@m/list.js'
 import listItem from './listItem'
 export default {
   name: 'wdList',
+  mixins: [list],
   components: {
     listItem
   },
   props: {
-    showId: {
-      type: String,
-      default: 'mc'
-    },
-    valId: {
-      type: String,
-      default: 'id'
-    },
-    value: {
-      type: [String, Array],
-      default: ''
-    },
-    accordion: Boolean,
-    multi: Boolean,
     data: {
       type: Array,
       require: true
@@ -44,8 +32,7 @@ export default {
   },
   data() {
     return {
-      newVal: [],
-      selectedI: ''
+      newVal: []
     }
   },
   computed: {
@@ -85,15 +72,6 @@ export default {
         this.newVal = JSON.parse(JSON.stringify(this.oldVal))
       } else {
         this.newVal = this.oldVal
-      }
-    },
-    judgeParaentIsShow(isSelected, index) {
-      if (this.accordion) {
-        if (isSelected) {
-          this.selectedI = index
-        } else {
-          this.selectedI = ''
-        }
       }
     },
     selectedEvent(it, add, isSelected, index) {

@@ -1,0 +1,17 @@
+.wd-list{
+  width: 100%;
+  >li{
+    width: 100%;
+    padding: 0 .5em;
+    border-bottom: 1px solid $colorBorder;
+    &.wd-list-parent{
+      border-bottom: none;
+    }
+  }
+}
+.wd-list-item{
+  padding: .5em 0;
+  &.wd-selected{
+    color: $colorRemark;
+  }
+}

@@ -3,6 +3,7 @@ import '@s/index.scss'
 const components = [
     ...list
   ], install = function(Vue, opts = {}) {
+    if (install.installed) return
     // 注册组件
     components.forEach(it => {
       Vue.component(it.name, it)

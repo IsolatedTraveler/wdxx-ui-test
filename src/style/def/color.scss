@@ -1,0 +1,22 @@
+%bgPop{
+  background-color: $colorBgAlpha;
+}
+%bgAlpha{
+  background-color: $colorBgAlphaBlack;
+}
+%bgWhite{
+  background-color: $colorBgWhite;
+}
+%bgGray{
+  background-color: $colorBg;
+}
+
+.wd-bg-white{
+  @extend %bgWhite;
+}
+.wd-bg-gray{
+  @extend %bgGray;
+}
+.wd-bg-alpha{
+  @extend %bgAlpha;
+}

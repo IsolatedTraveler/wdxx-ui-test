@@ -1,6 +1,6 @@
 <template>
-  <div class='list'>
-    <wd-list :data='list' showId="xm"></wd-list>
+  <div class='list' style="padding: 50px 0">
+    <wd-list :data='list' showId="xm" ref="li"></wd-list>
   </div>
 </template>
 <script>
@@ -13,7 +13,3 @@ export default {
   }
 }
 </script>
-<style lang='scss'>
-.list{
-}
-</style>

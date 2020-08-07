@@ -9,8 +9,6 @@ export default {
 }
 </script>
 <style lang="scss">
-.App{
-}
 html{
   font-size: calc(100vw / 320);
 }
