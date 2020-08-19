@@ -6,11 +6,22 @@ module.exports = {
   outputDir: 'dist',
   productionSourceMap: dev,
   chainWebpack(config) {
-    config.resolve.alias
-      .set('@c', path.join(__dirname, './src/components'))
-      .set('@m', path.join(__dirname, './src/mixins'))
-      .set('@s', path.join(__dirname, './src/style'))
-      .set('@v', path.join(__dirname, './example/view'))
+    if (dev) {
+      config.resolve.alias
+        .set('@', path.join(__dirname, './src'))
+        .set('@c', path.join(__dirname, './src/components'))
+        .set('@s', path.join(__dirname, './src/style'))
+        .set('@u', path.join(__dirname, './src/utils'))
+        .set('@v', path.join(__dirname, './example/view'))
+    } else {
+      config.resolve.alias
+        .set('@', path.join(__dirname, './packages'))
+        .set('@c', path.join(__dirname, './packages/components'))
+        .set('@m', path.join(__dirname, './packages/mixins'))
+        .set('@s', path.join(__dirname, './src/style'))
+        .set('@u', path.join(__dirname, './src/utils'))
+        .set('@v', path.join(__dirname, './example/view'))
+    }
   },
   devServer: {
     proxy: {
