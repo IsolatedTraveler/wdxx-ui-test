@@ -6,23 +6,15 @@ module.exports = {
   outputDir: 'dist',
   productionSourceMap: dev,
   chainWebpack(config) {
-    if (dev) {
-      config.resolve.alias
-        .set('@', path.join(__dirname, './src'))
-        .set('@c', path.join(__dirname, './src/components'))
-        .set('@m', path.join(__dirname, './packages/mixins'))
-        .set('@s', path.join(__dirname, './src/style'))
-        .set('@u', path.join(__dirname, './src/utils'))
-        .set('@v', path.join(__dirname, './example/view'))
-    } else {
-      config.resolve.alias
-        .set('@', path.join(__dirname, './packages'))
-        .set('@c', path.join(__dirname, './packages/components'))
-        .set('@m', path.join(__dirname, './packages/mixins'))
-        .set('@s', path.join(__dirname, './src/style'))
-        .set('@u', path.join(__dirname, './src/utils'))
-        .set('@v', path.join(__dirname, './example/view'))
-    }
+    config.resolve.alias
+      .set('@', path.join(__dirname, './src'))
+      .set('@c', path.join(__dirname, './src/components'))
+      .set('@m', path.join(__dirname, './packages/mixins'))
+      .set('@s', path.join(__dirname, './src/style'))
+      .set('@u', path.join(__dirname, './src/utils'))
+      .set('@v', path.join(__dirname, './example/view'))
+      .set('@p', path.join(__dirname, './packages'))
+      .set('@pc', path.join(__dirname, './packages/components'))
   },
   devServer: {
     proxy: {

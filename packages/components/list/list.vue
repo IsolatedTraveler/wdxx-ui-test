@@ -41,7 +41,7 @@ export default {
         if (split) {
           v = v.split(split).filter(it => it)
         } else {
-          console.warn('多选列表值缺少分割字符')
+          console.error('多选列表值缺少分割字符')
         }
       }
       return v

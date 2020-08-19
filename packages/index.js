@@ -1,6 +1,6 @@
 require('@s/index.scss')
 const util = require('@u/index.js'),
-  list = require('@c/list/index.js').default,
+  list = require('@pc/list/index.js').default,
   components = [
     ...list
   ],
