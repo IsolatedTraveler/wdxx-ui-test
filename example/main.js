@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import wd from '@'
+import wd from '@/index.js'
 Vue.use(wd)
-
-new Vue({
+// import { wdSelect } from '@/index.js'
+// Vue.use(wdSelect)
+window.app = new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')

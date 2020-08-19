@@ -12,4 +12,9 @@ export default {
 html{
   font-size: calc(100vw / 320);
 }
+.App{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
 </style>

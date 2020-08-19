@@ -9,6 +9,10 @@ const routes = [
     path: '/listView',
     name: 'listView',
     component: r => require(['@v/listView.vue'], r)
+  }, {
+    path: '/selectView',
+    name: 'selectView',
+    component: r => require(['@v/selectView.vue'], r)
   }
 ]
 export default new VueRouter({
