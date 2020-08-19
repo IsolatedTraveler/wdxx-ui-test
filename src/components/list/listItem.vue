@@ -1,6 +1,6 @@
 <template>
-  <li class="wd-col" :class="{'wd-list-parent': data.child}">
-    <div class="wd-row wd-list-item" :class="{'wd-selected': isSelected}" @click.stop="clickEvent">
+  <li class="wd-col">
+    <div class="wd-row wd-list-item" :class="{'wd-selected': isSelected, 'wd-disabled': disabled}" @click.stop="clickEvent">
       <span class="wd-auto">
         {{data[showId]}}
       </span>
@@ -9,8 +9,8 @@
       </slot>
     </div>
       <ul class="wd-list wd-col" v-if="data.child" v-show="isShowChild">
-        <list-item v-for="(it,i) in data.child" :key="i" :data="it" :showChild='i===selectedI' v-bind="{showId, valId, value, multi, index: i}" @selected="selectedEvent" @showChild="showChildEvent">
-        </list-item>
+        <wd-list-item v-for="(it,i) in data.child" :key="i" v-bind="{data: it, showId, valId, value, multi, notParent, index: i, showChild: i===selectedI}" @selected="selectedEvent" @showChild="showChildEvent">
+        </wd-list-item>
      </ul>
   </li>
 </template>
@@ -30,71 +30,76 @@ export default {
       type: [String, Array],
       default: ''
     },
-    accordion: Boolean,
     multi: Boolean,
     data: {
       type: Object,
       require: true
     },
+    notParent: Boolean,
     showChild: Boolean,
     index: Number
   },
   data() {
     return {
-      add: [],
       isShowChild: false,
-      newIsSelected: false,
-      selectedI: ''
+      selectedI: '',
+      judge: false
     }
   },
   computed: {
     isSelected() {
       const v = this.value, data = this.data || {}, id = data[this.valId] || ''
       let j = false
-      j = (this.multi ? this.initMulti : this.initSignle)(v, id, data.$def)
+      j = (this.multi ? this.initMulti : this.initSignle)(v, id, data.$def || data.$only)
+      this.initVal(j, true)
       return j
+    },
+    disabled() {
+      return this.data.disabled || (this.data.child && this.notParent)
     }
   },
   watch: {
     showChild(v) {
       this.isShowChild = v
-    },
-    isSelected(v) {
-      if (this.newIsSelected !== v && this.newIsSelected && !this.isShowChild) {
-        this.$emit('showChild', this.index)
-      }
     }
   },
   methods: {
     initMulti(v, id, def) {
       return !!(v.filter(it => {
-        return it[0] === id
-      })[0] || ((!v[0] || !v[0][0]) && def))
+        return it === id
+      })[0] || (!v[0] && def))
     },
     initSignle(v, id) {
       return (v || '') === id
     },
-    selectedEvent(it, add, isSelected, index) {
-      this.judgeParaentIsShow(isSelected, index)
-      this.$emit('selected', it, add, isSelected, this.index)
+    initVal(j, judge) {
+      this.judge !== j && this.$emit('selected', this.data, j, this.index, judge)
+      this.judge = j
     },
-    judgeParaentIsShow(isSelected, index) {
-      if (this.accordion) {
-        if (isSelected) {
-          this.selectedI = index
-        } else {
-          this.selectedI = ''
-        }
-      }
+    init() {
+      this.$children.forEach(it => {
+        it.init()
+      })
+      this.isSelected && this.$emit('showChild', this.index, true)
     },
     clickEvent() {
-      this.newIsSelected = !this.newIsSelected
-      this.$emit('selected', this.data, this.add, this.newIsSelected, this.index)
+      if (this.multi) {
+        this.isShowChild = this.disabled ? !this.isShowChild : !this.isShowChild || !this.isSelected
+      } else {
+        this.data.child && this.$emit('showChild', this.index)
+      }
+      !this.disabled && this.$emit('selected', this.data, !this.isSelected, this.index)
     },
-    showChildEvent(i) {
-      this.judgeParaentIsShow(true, i)
-      this.isShowChild = true
-      this.$emit('showChild', this.index)
+    selectedEvent(data, judge, index, init) {
+      this.$emit('selected', data, judge, index, init)
+    },
+    showChildEvent(i, judge) {
+      judge && this.$emit('showChild', this.index, true)
+      if (this.multi) {
+        this.isShowChild = true
+      } else {
+        this.selectedI = i
+      }
     }
   }
 }

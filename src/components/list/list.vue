@@ -1,12 +1,12 @@
 <template>
-  <div class="wd-list-box">
-    <ul class="wd-list wd-col wd-scroll">
-      <list-item v-for="(it,i) in data" ref="item" :key="i" :data="it" :showChild='i===selectedI' v-bind="{showId, valId, value: newVal, multi, index: i}" @selected="selectedEvent" @showChild="showChildEvent">
+  <div class="wd-list-box wd-col">
+    <ul class="wd-list wd-col wd-auto wd-scroll">
+      <list-item v-for="(it,i) in data" ref="item" :key="i" v-bind="{data: it, showId, valId, value: newVal, multi, notParent, index: i, showChild: i===selectedI}" @selected="selectedEvent" @showChild="showChildEvent">
       </list-item>
     </ul>
     <div class="wd-row wd-btns" v-if="button || multi">
       <button>{{button ? button[0] : '取消'}}</button>
-      <button>{{button ? button[1] : '确定'}}</button>
+      <button @click.stop="$emit('selected', newVal)">{{button ? button[1] : '确定'}}</button>
     </div>
   </div>
 </template>
@@ -30,13 +30,16 @@ export default {
       type: [String, Array],
       default: ''
     },
-    accordion: Boolean,
     multi: Boolean,
+    notParent: Boolean,
     data: {
       type: Array,
       require: true
     },
-    split: [String, Array],
+    split: {
+      type: String,
+      defalut: ','
+    },
     button: {
       type: Array,
       default: null
@@ -45,7 +48,8 @@ export default {
   data() {
     return {
       newVal: [],
-      selectedI: ''
+      selectedI: '',
+      selectedItems: []
     }
   },
   computed: {
@@ -54,14 +58,7 @@ export default {
       if (this.multi) {
         const split = this.split
         if (split) {
-          if (typeof split === 'string') {
-            v = v.split(split).map(it => [it])
-          } else {
-            v = v.split(split[0]).map(it => {
-              it = it.split(split[1])
-              return [it.shift(), it]
-            })
-          }
+          v = v.split(split).filter(it => it)
         } else {
           console.warn('多选列表值缺少分割字符')
         }
@@ -76,10 +73,20 @@ export default {
       })
     }
   },
-  mounted() {
+  created() {
     this.initVal()
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    init() {
+      setTimeout(() => {
+        this.$children.forEach(it => {
+          it.init()
+        })
+      }, 200)
+    },
     initVal() {
       if (this.multi) {
         this.newVal = JSON.parse(JSON.stringify(this.oldVal))
@@ -87,42 +94,34 @@ export default {
         this.newVal = this.oldVal
       }
     },
-    judgeParaentIsShow(isSelected, index) {
-      if (this.accordion) {
-        if (isSelected) {
-          this.selectedI = index
-        } else {
-          this.selectedI = ''
-        }
+    setVal(def, v, judge) {
+      let val = []
+      if (def) {
+        val = this.newVal.filter(it => it !== v)
       }
+      judge && val.push(v)
+      return val
     },
-    selectedEvent(it, add, isSelected, index) {
-      const v1 = it[this.valId]
-      this.judgeParaentIsShow(isSelected, index)
+    selectedEvent(it, judge, i, init) {
+      const v = it[this.valId]
       if (this.multi) {
-        const v = [v1, add]
-        if (it.$def) {
-          this.newVal = v
-        } else if (it.$only) {
-          if (isSelected) {
-            this.newVal = v
-          } else {
-            this.newVal = []
-          }
-        } else {
-          if (isSelected) {
-            this.newVal.push(v)
-          } else {
-            this.newVal = this.newVal.filter(it => it[0] !== v1)
-          }
+        if (!init) {
+          this.newVal = this.setVal(!it.$def && !it.$only, v, judge)
         }
+        this.selectedItems.filter(it => it[this.showId] !== v)
+        judge && this.selectedItems.push(it)
       } else {
-        this.newVal = v1
-        this.button || this.$emit('selected', it)
+        if (!init) {
+          this.newVal = v
+        }
+        this.selectedItems = [it]
+        this.button || this.$emit('selected', v, it)
       }
     },
     showChildEvent(i) {
-      this.judgeParaentIsShow(true, i)
+      if (!this.multi) {
+        this.selectedI = i
+      }
     }
   }
 }

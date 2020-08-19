@@ -10,6 +10,7 @@ module.exports = {
       config.resolve.alias
         .set('@', path.join(__dirname, './src'))
         .set('@c', path.join(__dirname, './src/components'))
+        .set('@m', path.join(__dirname, './packages/mixins'))
         .set('@s', path.join(__dirname, './src/style'))
         .set('@u', path.join(__dirname, './src/utils'))
         .set('@v', path.join(__dirname, './example/view'))
