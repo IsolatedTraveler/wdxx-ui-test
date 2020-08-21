@@ -31,17 +31,11 @@ export default {
   data() {
     return {
       isShowChild: false,
-      judge: false
+      judge: false,
+      isSelected: false
     }
   },
   computed: {
-    isSelected() {
-      const v = this.value, data = this.data || {}, id = data[this.valId] || ''
-      let j = false
-      j = (this.multi ? this.initMulti : this.initSignle)(v, id, data.$def || data.$only)
-      this.initVal(j, true)
-      return j
-    },
     disabled() {
       return this.data.disabled || (this.data.child && this.notParent)
     }
@@ -49,7 +43,13 @@ export default {
   watch: {
     showChild(v) {
       this.isShowChild = v
+    },
+    value(v) {
+      this.initVal(v)
     }
+  },
+  created() {
+    this.initVal(this.value)
   },
   methods: {
     initMulti(v, id, def) {
@@ -60,15 +60,22 @@ export default {
     initSignle(v, id) {
       return (v || '') === id
     },
-    initVal(j, judge) {
-      this.judge !== j && this.$emit('selected', this.data, j, this.index, judge)
-      this.judge = j
+    initVal(v) {
+      const data = this.data || {}, id = data[this.valId] || '', j = (this.multi ? this.initMulti : this.initSignle)(v, id, data.$def || data.$only)
+      if (j !== this.judge) {
+        (j || this.multi) && this.$emit('selected', this.data, j, this.index, true)
+        this.judge = j
+      }
+      this.isSelected = j
     },
     init() {
       this.$children.forEach(it => {
         it.init()
       })
-      this.isSelected && this.$emit('showChild', this.index, true)
+      if (!this.disabled) {
+        this.judge = !this.isSelected
+        this.$emit('selected', this.data, !this.isSelected, this.index)
+      }
     },
     clickEvent() {
       if (this.multi) {
