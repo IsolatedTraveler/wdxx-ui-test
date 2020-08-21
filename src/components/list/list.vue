@@ -1,14 +1,14 @@
 <template>
   <ul class="wd-list wd-col wd-scroll">
+    <li class="wd-row wd-btns wd-abs" v-if="butShow" @click.stop>
+      <button @click.stop="$emit('cancel')">{{button ? button[0] : '取消'}}</button>
+      <button @click.stop="selected()">{{button ? button[1] : '确定'}}</button>
+    </li>
     <list-item v-for="(it,i) in data" ref="item" :key="i" v-bind="{data: it, showId, valId, value: newVal, multi, notParent, index: i, showChild: i===selectedI}" @selected="selectedEvent" @showChild="showChildEvent">
       <slot>
         <i class="wd-icon wd-icon-arrow"></i>
       </slot>
     </list-item>
-    <li class="wd-row wd-btns wd-abs" v-if="butShow" @click.stop>
-      <button @click.stop="$emit('cancel')">{{button ? button[0] : '取消'}}</button>
-      <button @click.stop="selected()">{{button ? button[1] : '确定'}}</button>
-    </li>
   </ul>
 </template>
 <script>
@@ -127,7 +127,7 @@ export default {
       }
     },
     selected(init) {
-      this.$emit('selected', this.split ? this.newVal.join(this.split) : this.newVal, this.selectedItems, init)
+      this.$emit('selected', this.split && this.multi ? this.newVal.join(this.split) : this.newVal, this.selectedItems, init)
     }
   }
 }

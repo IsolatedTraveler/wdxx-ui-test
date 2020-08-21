@@ -2,7 +2,7 @@
   <div class='list wd-col'>
     <!-- <wd-list :data='list' showId="xm" ref="li" :value="val" multi split=","></wd-list>
     <wd-list :data='list | tree' showId="xm" ref="li" :value="val" multi split=","></wd-list> -->
-    <wd-list :data='list | tree' showId="xm" ref="li" :value="val" notParent split=","></wd-list>
+    <wd-list :data='list | tree' showId="xm" ref="li" :value="val" notParent></wd-list>
   </div>
 </template>
 <script>
