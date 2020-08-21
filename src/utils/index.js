@@ -1,4 +1,3 @@
-require('./pop.js')
 const util = {
   /**
   * @description 生成唯一标识符
@@ -19,7 +18,7 @@ const util = {
   * @param {Function} fun
   * @param {Number} delay
   */
-  debounce(fun, delay = 500) {
+  debounce(fun, delay = 100) {
     if (fun) {
       let time = null
       return function() {

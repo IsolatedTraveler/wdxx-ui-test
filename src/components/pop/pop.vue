@@ -1,9 +1,7 @@
 <template>
-  <div class="wd-pop" v-show="show" @click.stop="closePage">
-    <div class="wd-col wd-content" @click.stop>
-      <slot>
-      </slot>
-    </div>
+  <div class="wd-pop" v-show="show" @click.stop="shadeClose && closePage()">
+    <slot>
+    </slot>
   </div>
 </template>
 <script>
@@ -22,15 +20,18 @@ export default {
   },
   watch: {
     show(v) {
-      v ? this.bind() : this.unbind()
+      v ? this.bind() : this.closePage()
     }
   },
   mounted() {
+    [].forEach.call(this.$el.children, (el) => {
+      el.addEventListener('click', e => e.stopPropagation())
+    })
     this.show && this.bind()
   },
   methods: {
     bind() {
-      history.onWdPopstate({ only: !this.notOnly, key: this.key })
+      history.$wdPopOpen({ only: !this.notOnly, key: this.key })
       window.addEventListener('wd-popstate', this.close, false)
     },
     unbind() {
@@ -47,7 +48,7 @@ export default {
       }
     },
     closePage() {
-      this.shadeClose && history.onWdPopClose(this.key)
+      history.$wdPopClose(this.key)
     }
   }
 }

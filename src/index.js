@@ -1,4 +1,5 @@
 require('@s/index.scss')
+require('@u/pop.js')
 const util = require('@u/index.js'),
   list = require('@c/list/index.js').default,
   pop = require('@c/pop/index.js').default,
