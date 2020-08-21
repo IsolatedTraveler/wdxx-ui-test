@@ -1,6 +1,7 @@
 <template>
   <div class="select">
-    <wd-select :data="list" :value="val"></wd-select>
+    <wd-select class="wd-border-ciclre" label="测试" showId="xm" :data="list" v-model="val" multi split=","></wd-select>
+    <wd-select class="wd-border-ciclre" :data="list" v-model="val"></wd-select>
   </div>
 </template>
 <script>
