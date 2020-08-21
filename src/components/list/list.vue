@@ -1,14 +1,15 @@
 <template>
-  <div class="wd-list-box wd-col">
-    <ul class="wd-list wd-col wd-auto wd-scroll">
-      <list-item v-for="(it,i) in data" ref="item" :key="i" v-bind="{data: it, showId, valId, value: newVal, multi, notParent, index: i, showChild: i===selectedI}" @selected="selectedEvent" @showChild="showChildEvent">
-      </list-item>
-    </ul>
-    <div class="wd-row wd-btns" v-if="button || multi">
+  <ul class="wd-list wd-col wd-scroll">
+    <list-item v-for="(it,i) in data" ref="item" :key="i" v-bind="{data: it, showId, valId, value: newVal, multi, notParent, index: i, showChild: i===selectedI}" @selected="selectedEvent" @showChild="showChildEvent">
+      <slot>
+        <i class="wd-icon wd-icon-arrow"></i>
+      </slot>
+    </list-item>
+    <li class="wd-row wd-btns wd-abs" v-if="button || multi">
       <button>{{button ? button[0] : '取消'}}</button>
       <button @click.stop="$emit('selected', newVal)">{{button ? button[1] : '确定'}}</button>
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 <script>
 import listItem from './listItem'

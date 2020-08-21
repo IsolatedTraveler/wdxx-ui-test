@@ -62,8 +62,18 @@ history.$wdPopOpen = function(it) {
   his.unshift(it)
 }
 history.$wdPopClose = function(key) {
-  his = his.filter(it => it.key !== key)
-  popClose('back', [key])
+  his = his.filter(it => {
+    if (it.key === key) {
+      popClose('back', [key])
+      return false
+    } else {
+      return true
+    }
+  })
+  if (!his.length) {
+    judge = true
+    history.$wdGo(-1)
+  }
 }
 history.$wdPushState = history.pushState
 history.$wdGo = history.go

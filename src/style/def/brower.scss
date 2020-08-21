@@ -30,7 +30,7 @@ ul,li{
 }
 button,input,textarea{
   @extend %button;
-  padding: 0 0.5em;
+  padding: 0;
   line-height: inherit;
  }
 input{

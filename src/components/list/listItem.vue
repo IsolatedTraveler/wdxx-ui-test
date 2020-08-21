@@ -10,6 +10,9 @@
     </div>
       <ul class="wd-list wd-col" v-if="data.child" v-show="isShowChild">
         <wd-list-item v-for="(it,i) in data.child" :key="i" v-bind="{data: it, showId, valId, value, multi, notParent, index: i, showChild: i===selectedI}" @selected="selectedEvent" @showChild="showChildEvent">
+          <slot>
+            <i class="wd-icon wd-icon-arrow"></i>
+          </slot>
         </wd-list-item>
      </ul>
   </li>

@@ -1,5 +1,8 @@
 .wd-form-item{
+  width: 100%;
+  line-height: $inputHeight;
   .wd-form-label{
+    margin: 0 $jg;
     &.wd-selectd{
       color: $colorPlaceholder;
     }

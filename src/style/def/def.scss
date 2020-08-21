@@ -2,3 +2,11 @@
   overflow: scroll !important;
   -webkit-overflow-scrolling: touch;
 }
+.wd-border-ciclre{
+  border: 1px solid $colorBorder;
+  border-radius: $jg;
+}
+.wd-panel{
+  max-width: 100%;
+  max-height: 100%;
+}
