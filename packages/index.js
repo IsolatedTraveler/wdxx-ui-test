@@ -1,8 +1,8 @@
 require('@s/index.scss')
 const util = require('@u/index.js'),
-  list = require('@pc/list/index.js').default,
   components = [
-    ...list
+    ...require('@pc/list/index.js').default,
+    ...require('@pc/form/index.js').default
   ],
   def = Object.fromEntries(components.map(item => [item.name, item])),
   install = function(Vue, opts = {}) {
