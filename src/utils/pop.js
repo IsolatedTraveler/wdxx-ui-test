@@ -58,13 +58,15 @@ history.$wdPopOpen = function(it) {
   if (history.state !== 'wd-pop') {
     history.$wdPushState('wd-pop', '')
   }
-  it.only && his.length && popClose('back', [his.shift().key])
+  if (it.only && his.length) {
+    popClose('back', [his.shift().key])
+  }
   his.unshift(it)
 }
-history.$wdPopClose = function(key) {
+history.$wdPopClose = function(key, show) {
   his = his.filter(it => {
     if (it.key === key) {
-      popClose('back', [key])
+      show && popClose('back', [key])
       return false
     } else {
       return true

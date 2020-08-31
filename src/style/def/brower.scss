@@ -28,6 +28,9 @@ ul,li{
   width: 100%;
   @extend %p;
 }
+p{
+  @extend %p;
+}
 button,input,textarea{
   @extend %button;
   padding: 0;

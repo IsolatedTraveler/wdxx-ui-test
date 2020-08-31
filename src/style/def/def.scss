@@ -10,3 +10,9 @@
   max-width: 100%;
   max-height: 100%;
 }
+.wd-btns.wd-row{
+  justify-content: space-between;
+  button,.wd-btn{
+    flex: 1 0 0;
+  }
+}

@@ -16,23 +16,6 @@ module.exports = {
       .set('@p', path.join(__dirname, './packages'))
       .set('@pc', path.join(__dirname, './packages/components'))
   },
-  devServer: {
-    proxy: {
-      '/server1.json': {
-        target: 'http://mobile.wonderscd.com/APK/ydgw',
-        changeOrigin: true,
-        ws: true
-      },
-      '/kf/rest/': {
-        target: 'http://172.16.110.40:8080/testapi',
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-          '^/kf': '/'
-        }
-      }
-    }
-  },
   pages: {
     index: {
       entry: 'example/main.js',

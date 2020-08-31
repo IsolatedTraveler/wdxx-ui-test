@@ -1,3 +1,4 @@
+@import './button.scss';
 .wd-form-item{
   width: 100%;
   line-height: $inputHeight;
@@ -5,6 +6,27 @@
     margin: 0 $jg;
     &.wd-selectd{
       color: $colorPlaceholder;
+    }
+  }
+  >.wd-input,>input{
+    margin-left: $jg;
+    &:nth-child(2){
+      margin-left: 0;
+    }
+  }
+}
+.wd-input{
+  >p{
+    margin-right: $jg;
+    line-height: 1.2em;
+    padding-left:.6em;
+    border: 1px solid $colorBorder;
+    border-radius: .6em;
+    .wd-icon{
+      padding: 0 .1em;
+    }
+    &[def]{
+      padding-right: .6em;
     }
   }
 }
