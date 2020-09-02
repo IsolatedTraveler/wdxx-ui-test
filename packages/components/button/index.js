@@ -1,3 +1,5 @@
-import button from './button.vue'
+const button = require('./button.vue').default
 button.install = Vue => Vue.component(button.name, button)
-export default [button]
+module.exports = {
+  button
+}

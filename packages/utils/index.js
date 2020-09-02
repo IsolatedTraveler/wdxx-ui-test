@@ -33,4 +33,4 @@ const util = {
     }
   }
 }
-module.exports = util
+module.exports.default = module.exports = util

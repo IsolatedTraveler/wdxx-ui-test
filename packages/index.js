@@ -1,13 +1,13 @@
 require('@s/index.scss')
 const util = require('@u/index.js'),
-  components = [
-    ...require('@pc/list/index.js').default,
-    ...require('@pc/form/index.js').default
-  ],
-  def = Object.fromEntries(components.map(item => [item.name, item])),
+  components = {
+    ...require('@pc/list/index.js'),
+    ...require('@pc/form/index.js'),
+    ...require('@pc/qt/index.js')
+  },
   install = function(Vue, opts = {}) {
     // 注册组件
-    components.forEach(it => {
+    Object.values(components).forEach(it => {
       Vue.component(it.name, it)
     })
     // 注册props
@@ -17,5 +17,7 @@ const util = require('@u/index.js'),
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
-def.install = install
-module.exports.default = module.exports = def
+module.exports.default = module.exports = {
+  ...components,
+  install
+}

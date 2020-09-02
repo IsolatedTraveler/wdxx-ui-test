@@ -12,13 +12,9 @@
   </ul>
 </template>
 <script>
-import { debounce } from '@u/index.js'
-import listItem from './listItem'
+const debounce = require('@u/index.js').debounce
 export default {
   name: 'wdList',
-  components: {
-    listItem
-  },
   props: {
     split: String,
     button: {

@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import wd from '@/index.js'
-import wd1 from '@p/index.js'
+import wd3 from '@p/index'
 if (location.search) {
-  Vue.use(wd1)
+  Vue.use(wd3)
 } else {
   Vue.use(wd)
 }

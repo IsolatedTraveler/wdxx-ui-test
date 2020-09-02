@@ -2,8 +2,9 @@
   <div class="select">
     <wd-select class="wd-border-ciclre" label="测试" showId="xm" :data="list" v-model="val" multi split=","></wd-select>
     <wd-select class="wd-border-ciclre" :data="list" v-model="val1" showId="xm"></wd-select>
-    <wd-input type="password" label="密码：" v-model="pwd"></wd-input>
-    <wd-input label="账号：" v-model="zh"></wd-input>
+    <wd-input type="password" class=" wd-border-ciclre" label="密码：" v-model="pwd"></wd-input>
+    <wd-input label="账号：" class=" wd-border-ciclre" v-model="zh"></wd-input>
+    <wd-icon name="svg"></wd-icon>
   </div>
 </template>
 <script>
