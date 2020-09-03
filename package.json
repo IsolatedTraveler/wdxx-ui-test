@@ -1,10 +1,10 @@
 {
   "name": "wdxx-ui",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "private": false,
   "description": "自定义组件测试",
   "lisence": "MIT",
-  "main": "lib/wd.umd.min.js",
+  "main": "index.js",
   "author": {
     "name": "tbydmi",
     "email": "tbydmi@gmail.com"

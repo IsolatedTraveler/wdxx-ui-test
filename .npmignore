@@ -6,6 +6,14 @@ src/
 #editor directories and files
 .idea
 .git
+.eslintignore
+.browserslistrc
+.editorconfig
+.eslintrc.js
+.gitignore
+babel.config.js
+package-lock.json
+vue.config.js
 .vscode
 *.suo
 *.ntvs*

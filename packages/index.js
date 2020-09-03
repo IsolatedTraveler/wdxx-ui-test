@@ -2,6 +2,7 @@ require('@s/index.scss')
 const util = require('@u/index.js'),
   components = {
     ...require('@pc/list/index.js'),
+    ...require('@pc/pop/index.js'),
     ...require('@pc/form/index.js'),
     ...require('@pc/qt/index.js')
   },

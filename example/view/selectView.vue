@@ -4,7 +4,8 @@
     <wd-select class="wd-border-ciclre" :data="list" v-model="val1" showId="xm"></wd-select>
     <wd-input type="password" class=" wd-border-ciclre" label="密码：" v-model="pwd"></wd-input>
     <wd-input label="账号：" class=" wd-border-ciclre" v-model="zh"></wd-input>
-    <wd-icon name="svg"></wd-icon>
+    <wd-icon name="svg1"></wd-icon>
+    <wd-form></wd-form>
   </div>
 </template>
 <script>

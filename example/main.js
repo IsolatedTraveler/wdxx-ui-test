@@ -2,9 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import wd from '@/index.js'
-import wd3 from '@p/index'
-if (location.search) {
-  Vue.use(wd3)
+import wd1 from '@p/'
+import wd2 from '../index'
+console.log(wd1, wd2)
+if (location.search === '?cs') {
+  Vue.use(wd1)
+} else if (location.search === '?zs') {
+  Vue.use(wd2)
 } else {
   Vue.use(wd)
 }

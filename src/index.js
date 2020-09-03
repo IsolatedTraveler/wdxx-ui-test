@@ -4,10 +4,12 @@ const util = require('@u/index.js'),
   list = require('@c/list/index.js').default,
   pop = require('@c/pop/index.js').default,
   form = require('@c/form/index.js').default,
+  qt = require('@c/qt/index.js').default,
   components = [
     ...list,
     ...pop,
-    ...form
+    ...form,
+    ...qt
   ],
   def = Object.fromEntries(components.map(item => [item.name, item])),
   install = function(Vue, opts = {}) {

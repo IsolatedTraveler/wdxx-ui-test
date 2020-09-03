@@ -17,7 +17,7 @@ export default {
     svg() {
       const t = this.name
       try {
-        const svg = require(`!xml-loader!../../../src/svg/${t}.svg`).svg, attr = svg.$
+        const svg = require(`!xml-loader!../../src/svg/${t}.svg`).svg, attr = svg.$
         return {
           path: svg.path.map(it => {
             return it.$
